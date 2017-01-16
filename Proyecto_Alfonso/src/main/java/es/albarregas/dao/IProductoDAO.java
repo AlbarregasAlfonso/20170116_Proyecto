@@ -1,0 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package es.albarregas.dao;
+
+
+import es.albarregas.beans.Producto;
+import es.albarregas.beans.ProductoCaracteristicas;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author AlfonsoTerrones
+ */
+public interface IProductoDAO {
+    
+    public ArrayList<Producto> getProductos(String where);
+    
+    public ArrayList<ProductoCaracteristicas> getProductosCaracteristicas(String idProducto); 
+    
+    public String getSacarNombreProducto(String idProducto);
+    
+    public String getSacarDescripcionProducto(String idProducto);
+    
+    public void closeConnection();
+    
+}

@@ -1,0 +1,102 @@
+
+package es.albarregas.dao;
+
+import es.albarregas.beans.Cliente;
+
+import es.albarregas.dao.ConnectionFactory;
+import java.io.PrintStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import es.albarregas.beans.Cliente;
+import es.albarregas.dao.IClienteDAO;
+
+public class MysqlClienteDAO
+implements IClienteDAO {
+  
+
+    @Override
+    public ArrayList<Cliente> getCliente(String where) {
+        ArrayList<Cliente> lista;
+        if (where == null) {
+            where = "";
+        }
+        lista = new ArrayList<Cliente>();
+        String consulta = "SELECT * FROM clientes " + where;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {
+                    Cliente cliente = new Cliente();
+                    //cliente.setIdCliente(resultado.getString("idCliente"));
+                    System.out.println(resultado.getString("nombre"));
+                    cliente.setNombre(resultado.getString("nombre"));
+                    cliente.setApellidos(resultado.getString("apellidos"));
+                    cliente.setEmail(resultado.getString("email"));
+                    cliente.setNif(resultado.getString("nif"));
+                    cliente.setFechaNacimiento(resultado.getString("fechaNacimiento"));
+                    lista.add(cliente);
+                }
+            }
+            catch (Throwable cliente) {
+                throwable = cliente;
+                throw cliente;
+            }
+            finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        }
+                        catch (Throwable registro) {
+                            throwable.addSuppressed(registro);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+    
+    public void addCliente(Cliente cliente) {
+        try {
+            String sql = "insert into clientes (IdCliente,Nombre,Apellidos,Email,NIF,FechaNacimiento,FechaAlta) values (?,?,?,?,?,?,now())";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.setInt(1, 0);
+            preparada.setString(2, cliente.getNombre());
+            preparada.setString(3, cliente.getApellidos());
+            preparada.setString(4, cliente.getEmail());
+            preparada.setString(5, cliente.getNif());
+            preparada.setString(6, cliente.getFechaNacimiento());
+            preparada.executeUpdate();
+        }
+        catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar");
+            Logger.getLogger(MysqlClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+ 
+   
+
+
+
+    @Override
+    public void closeConnection() {
+        ConnectionFactory.closeConnection();
+    }
+
+
+}
