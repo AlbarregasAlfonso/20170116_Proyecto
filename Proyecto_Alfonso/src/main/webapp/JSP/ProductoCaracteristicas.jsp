@@ -79,43 +79,36 @@
     <c:out value="${DescripcionProducto}"/>
   </div>
   
-    <a href="${pageContext.request.contextPath}/ControllersCarrito"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Enviar</button></a>
+    
+  
+  <c:if test="${sessionScope.usuario==null}">
+        
+        <a href="" data-toggle="modal" data-target="#inicioSesion"><button type="button" class="btn btn-info">Añadir al carrito</button></a>
 
+    </c:if>
+    <c:if test="${sessionScope.usuario!=null}">
+        
+        
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#comprar">Añadir al carrito</button>
+        <div id="comprar" class="collapse">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">¿Cuantos quieres?
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <c:forEach items="${Stock}" var="s">
+                        <li><a href="${pageContext.request.contextPath}/ControllersCarrito?cantidad=${s}&idProducto=${idProducto}"><c:out  value="${s}"/></a></li>
+                    </c:forEach>
+
+                </ul>
+            </div>
+        </div>
+    </c:if>
  
   
 </div>
               
 
-        <script>
-            $(document).ready(function () {
-                // Initialize Tooltip
-                $('[data-toggle="tooltip"]').tooltip();
-
-                // Add smooth scrolling to all links in navbar + footer link
-                $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
-
-                    // Make sure this.hash has a value before overriding default behavior
-                    if (this.hash !== "") {
-
-                        // Prevent default anchor click behavior
-                        event.preventDefault();
-
-                        // Store hash
-                        var hash = this.hash;
-
-                        // Using jQuery's animate() method to add smooth page scroll
-                        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                        $('html, body').animate({
-                            scrollTop: $(hash).offset().top
-                        }, 900, function () {
-
-                            // Add hash (#) to URL when done scrolling (default click behavior)
-                            window.location.hash = hash;
-                        });
-                    } // End if
-                });
-            })
-        </script>
+        
 
     </body>
 </html>

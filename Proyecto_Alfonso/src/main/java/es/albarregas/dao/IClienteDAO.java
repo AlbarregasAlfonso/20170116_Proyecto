@@ -10,6 +10,5 @@ public interface IClienteDAO {
 
     public void addCliente(Cliente cliente);
     
-
     public void closeConnection();
 }

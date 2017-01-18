@@ -16,6 +16,8 @@ import es.albarregas.dao.ICaracyprodsDAO;
 import es.albarregas.daofactory.MySQLDAOFactory;
 import es.albarregas.dao.IClienteDAO;
 import es.albarregas.dao.IImagenesDAO;
+import es.albarregas.dao.ILineasPedidosDAO;
+import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 
@@ -29,6 +31,10 @@ public abstract class DAOFactory {
     public abstract IUsuarioDAO getUsuarioDAO();
     
     public abstract IImagenesDAO getImagenDAO();
+    
+    public abstract IPedidosDAO getPedidosDAO();
+    
+    public abstract ILineasPedidosDAO getLineaPedidosDAO();
     
     public abstract ICaracyprodsDAO getCaracyprodsDAO();
     

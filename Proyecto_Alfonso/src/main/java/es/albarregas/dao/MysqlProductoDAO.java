@@ -202,5 +202,45 @@ public class MysqlProductoDAO implements IProductoDAO {
         }
         return re;
     }
+
+    @Override
+    public String getSacarStock(String idProducto) {
+        String re=null;
+        if (idProducto == null) {
+            idProducto = "";
+        }
+        
+        String consulta = "select Stock from productos where IdProducto=" + idProducto;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                 while (resultado.next()) {
+                    re=resultado.getString("Stock"); 
+                 }
+               
+            } catch (Exception e) {
+                
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Exception e) {
+                           
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        return re;
+        
+    }
 }
    

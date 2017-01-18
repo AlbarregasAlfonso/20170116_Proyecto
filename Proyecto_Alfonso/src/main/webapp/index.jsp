@@ -2,7 +2,9 @@
 
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="INI/Cabecera.jsp"/>
+<jsp:include page="INI/InicioSesion.jsp"/>
 
 
 
@@ -54,14 +56,6 @@
       <span class="sr-only">Next</span>
     </a>
 </div>
-<img src="17128_1_lenovo_idea_pad_z5070_silver__2_.jpg" onmouseover="this.width=500;this.height=400;" onmouseout="this.width=100;this.height=80;" width="100" height="80" alt="" />
-
-
-
-
-
-
-<!-- Container (Contact Section) -->
 <div id="contact" class="container">
   <h3 class="text-center">Contacto</h3>
  
@@ -97,12 +91,9 @@
 
 <c:out value="${usuario}"/>
 
-<!-- Footer -->
-<footer class="text-center">
-  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a><br><br>
-</footer>
+<jsp:include page="INI/Pie.jsp"/>
 
-</body>
-</html>
+
+
+
+

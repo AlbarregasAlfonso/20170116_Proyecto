@@ -5,26 +5,24 @@
  */
 package es.albarregas.controllers;
 
-import es.albarregas.beans.LineasPedidos;
-import es.albarregas.beans.Pedidos;
-import es.albarregas.dao.ILineasPedidosDAO;
-import es.albarregas.dao.IPedidosDAO;
+import es.albarregas.beans.Usuario;
+import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author AlfonsoTerrones
  */
-@WebServlet(name = "ControllersCarrito", urlPatterns = {"/ControllersCarrito"})
-public class ControllersCarrito extends HttpServlet {
+@WebServlet(name = "ControllersAdministrador", urlPatterns = {"/ControllersAdministrador"})
+public class ControllersAdministrador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,25 +41,25 @@ public class ControllersCarrito extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControllersCarrito</title>");
+            out.println("<title>Servlet ControllersAdministrador</title>");
             out.println("</head>");
             out.println("<body>");
 
-            DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
-            IPedidosDAO pedao = daof.getPedidosDAO();
-            Pedidos p = new Pedidos("p", (String) request.getSession().getAttribute("usuario"));
-            pedao.insertarCarrito(p);
-            
-           ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
-            
-            //LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(),3,request.getParameter("idProducto"),request.getParameter("cantidad"), );
-            
-            LineasPedidos lp;
-            lp = new LineasPedidos(pedao.idPedidoMax(),"3",request.getParameter("idProducto"),request.getParameter("cantidad"));
-            out.println("<h1>Servletsesion idProducto = " + request.getParameter("idProducto") + "</h1>");
-         // out.println("<h1>Servletsesion at " + (String) request.getSession().getAttribute("usuario") + "</h1>");
+            if (request.getParameter("menu") != null) {
+                
+                DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
+                IUsuarioDAO udao = daof.getUsuarioDAO();
+                ArrayList<Usuario> usuarios;
+                usuarios = udao.getUsuarios();
+                request.setAttribute("usuarios", usuarios);
+                request.getRequestDispatcher("/JSP/MenuAdministrador.jsp").forward(request, response);
+                
+            }
+            if (request.getParameter("cambiar") != null) {
+                
+            }
 
-            out.println("<h1>Servlet ControllersCarrito at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControllersAdministrador at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

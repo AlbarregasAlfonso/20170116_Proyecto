@@ -24,6 +24,8 @@ public interface IProductoDAO {
     
     public String getSacarDescripcionProducto(String idProducto);
     
+    public String getSacarStock(String idProducto);
+    
     public void closeConnection();
     
 }

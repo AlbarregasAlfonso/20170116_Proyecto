@@ -64,13 +64,38 @@ public class Controllers extends HttpServlet {
                 IProductoDAO pdao = daof.getProductoDAO();
                 ArrayList<ProductoCaracteristicas> productoYCaracteristica;
                 String IdProducto = request.getParameter("imagen");
+                
+                
+               
+                
+                
                 productoYCaracteristica = pdao.getProductosCaracteristicas(IdProducto);
                 request.setAttribute("ProductoCaracteristicas", productoYCaracteristica);
 
                 request.setAttribute("DescripcionProducto", pdao.getSacarDescripcionProducto(IdProducto));
 
                 request.setAttribute("NombreProducto", pdao.getSacarNombreProducto(IdProducto));
+                
+                request.setAttribute("idProducto",request.getParameter("imagen"));
 
+                
+                int numEntero = Integer.parseInt(pdao.getSacarStock(IdProducto));
+                //hacemos un array con la misma dimesion que productos en stock tengamos
+                 
+                int[] stock = new int[numEntero];
+                for (int i = 1; i < stock.length + 1; i++) {
+                    stock[i - 1] = i;
+                }
+                
+                for(Integer i:stock){
+                    System.out.println("Este es el vector "+i);
+                }
+          
+                request.setAttribute("Stock", stock);
+                
+                
+                
+                
                 request.setAttribute("imagen", request.getParameter("imagen"));
                 request.getRequestDispatcher("/JSP/ProductoCaracteristicas.jsp").forward(request, response);
             }
@@ -122,8 +147,9 @@ public class Controllers extends HttpServlet {
                     request.getRequestDispatcher("INI/InicioSesion.jsp").forward(request, response);
                 } else {
                     request.getSession().setAttribute("usuario", udao.getSacarIdUsuario(request.getParameter("user")));
+
+                    request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
                     request.getRequestDispatcher("index.jsp").forward(request, response);
-                    System.out.println("Estamos en el controlador iniciar sesion" + request.getSession().getAttribute("usuario"));
                     udao.closeConnection();
                 }
             }

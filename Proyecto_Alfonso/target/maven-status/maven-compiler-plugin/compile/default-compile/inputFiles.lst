@@ -1,24 +1,31 @@
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ConnectionFactory.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracyprods.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\daofactory\MySQLDAOFactory.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlCaracyprodsDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IImagenesDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Usuario.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracteristicas.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IProductoDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlImagenDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Cliente.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlUsuarioDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\ControllersCarrito.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ICaracyprodsDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Imagen.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IUsuarioDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IClienteDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Categorias.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\Controllers.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\daofactory\DAOFactory.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlProductoDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Producto.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlClienteDAO.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Lineapedidos.java
-C:\OneDrive\Documentos\DAW2\Desarrollo web en entorno servidor\proyectosWeb\Proyecto_Alfonso\src\main\java\es\albarregas\beans\ProductoCaracteristicas.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Imagen.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracteristicas.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Categorias.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlUsuarioDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\daofactory\MySQLDAOFactory.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Cliente.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Producto.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Usuario.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IPedidosDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ICaracyprodsDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ILineasPedidosDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\ProductoCaracteristicas.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\Controllers.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IProductoDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\daofactory\DAOFactory.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\ControllersCarrito.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ConnectionFactory.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Lineapedidos.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\ControllersAdministrador.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracyprods.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\LineasPedidos.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IUsuarioDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IClienteDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlCaracyprodsDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IImagenesDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlImagenDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Pedidos.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlClienteDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlPedidosDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlProductoDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlLineasPedidosDAO.java

@@ -11,14 +11,48 @@ package es.albarregas.beans;
  */
 public class Usuario {
     
-
+private String idUsuario;
 private String userName;
 private String clave;
+private String bloqueado;
 
     public Usuario(String userName, String clave) {
         this.userName = userName;
         this.clave = clave;
     }
+    
+    public Usuario() {
+    }
+
+    public Usuario(String idUsuario, String userName, String bloqueado) {
+        this.idUsuario = idUsuario;
+        this.userName = userName;
+        this.bloqueado = bloqueado;
+    }
+
+    
+    
+    
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
+
+    public String getBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(String bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    
+    
 
     public String getUserName() {
         return userName;
