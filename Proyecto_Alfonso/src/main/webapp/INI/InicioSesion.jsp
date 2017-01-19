@@ -1,5 +1,5 @@
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>z
 
 <div class="modal fade" id="inicioSesion" role="dialog">
     <div class="modal-dialog">

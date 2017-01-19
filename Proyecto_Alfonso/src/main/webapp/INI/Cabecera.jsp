@@ -22,9 +22,16 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="CSS/Style.css" rel="stylesheet" type="text/css"/>
         <script src="JS/JS.js" type="text/javascript"></script>
-
-
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="../jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $(".content").fadeOut(1500);
+                },3000);
+            });
+</script>
 
 
 
@@ -44,9 +51,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
+                      
+                        <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
+                        <li><a href="Controllers?valor=0">Productos</a></li>  
+              
+                        
 
-                        <li><a href="Controllers?valor=0">Productos</a></li>
-
+                        
                         <c:if test="${sessionScope.usuario==null}">
 
                             <li><a href="" data-toggle="modal" data-target="#Registro">Registro</a></li>
@@ -56,13 +67,16 @@
 
                         <c:if test="${sessionScope.usuario!=null}">
 
-                            <c:if  test="${TipoUsuario=='a'}">
+                            <li><a href="${pageContext.request.contextPath}/Controllers?cerrarsesion=cerrar" style="font-size:24px" class="fa" >&#xf011;</a></li>
+
+                            
+                            <c:if  test="${usuario.tipo=='a'}">
 
                                  <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?menu=menu">Bloquear Usuarios</a></li>
 
                             </c:if>
 
-                            <c:if  test="${TipoUsuario=='u'}">
+                            <c:if  test="${usuario.tipo=='u'}">
 
                                 <li><a href="" data-toggle="modal" data-target="#Registro">Panel de control</a></li>
                                 <li><a href="" data-toggle="modal" data-target="#inicioSesion">cerrar sesion</a></li>

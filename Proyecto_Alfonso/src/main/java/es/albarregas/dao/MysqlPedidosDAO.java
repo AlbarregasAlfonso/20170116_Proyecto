@@ -42,6 +42,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeConnection();
     }
 
     @Override
@@ -76,7 +77,13 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return re;
+    }
+
+    @Override
+    public void closeConnection() {
+       ConnectionFactory.closeConnection();
     }
 
 }

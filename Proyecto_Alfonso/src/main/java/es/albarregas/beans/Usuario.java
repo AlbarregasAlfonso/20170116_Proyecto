@@ -15,19 +15,46 @@ private String idUsuario;
 private String userName;
 private String clave;
 private String bloqueado;
+private String ultimoAcceso;
+private String tipo;
+
 
     public Usuario(String userName, String clave) {
         this.userName = userName;
         this.clave = clave;
     }
+
+    public Usuario(String idUsuario, String userName, String clave, String bloqueado, String ultimoAcceso, String tipo) {
+        this.idUsuario = idUsuario;
+        this.userName = userName;
+        this.clave = clave;
+        this.bloqueado = bloqueado;
+        this.ultimoAcceso = ultimoAcceso;
+        this.tipo = tipo;
+    }
+    
+    
+    
     
     public Usuario() {
     }
 
-    public Usuario(String idUsuario, String userName, String bloqueado) {
-        this.idUsuario = idUsuario;
-        this.userName = userName;
-        this.bloqueado = bloqueado;
+   
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getUltimoAcceso() {
+        return ultimoAcceso;
+    }
+
+    public void setUltimoAcceso(String ultimoAcceso) {
+        this.ultimoAcceso = ultimoAcceso;
     }
 
     

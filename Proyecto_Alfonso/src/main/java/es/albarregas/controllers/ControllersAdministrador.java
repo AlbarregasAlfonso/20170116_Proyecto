@@ -45,19 +45,29 @@ public class ControllersAdministrador extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
+            DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
+            IUsuarioDAO udao = daof.getUsuarioDAO();
+            
+            String url = null;
+
             if (request.getParameter("menu") != null) {
-                
-                DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
-                IUsuarioDAO udao = daof.getUsuarioDAO();
+
                 ArrayList<Usuario> usuarios;
                 usuarios = udao.getUsuarios();
                 request.setAttribute("usuarios", usuarios);
-                request.getRequestDispatcher("/JSP/MenuAdministrador.jsp").forward(request, response);
-                
+                url = "/JSP/MenuAdministrador.jsp";
+
             }
-            if (request.getParameter("cambiar") != null) {
-                
+            
+            if (request.getParameter("bloquear") != null) {
+//                
+                udao.BloquearDesbloquearUsuario(request.getParameter("idusuario"), request.getParameter("bloquear"));
+                request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
+                url = "index.jsp";
+
             }
+
+            request.getRequestDispatcher(url).forward(request, response);
 
             out.println("<h1>Servlet ControllersAdministrador at " + request.getContextPath() + "</h1>");
             out.println("</body>");

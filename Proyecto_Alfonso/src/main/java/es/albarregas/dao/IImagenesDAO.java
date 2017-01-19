@@ -10,6 +10,5 @@ public interface IImagenesDAO {
 
     public ArrayList<Imagen> getImagenes(String idProducto);
     
-
     public void closeConnection();
 }

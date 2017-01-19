@@ -72,6 +72,7 @@ public class MysqlCaracyprodsDAO implements ICaracyprodsDAO{
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
     }
     

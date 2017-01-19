@@ -16,7 +16,7 @@
             
             <tr>
                 <td>Nombre de usuario</td>
-                <td><input name="user" type="text"/></td>       
+                <td><input name="user" pattern="[a-zA-Z]+" type="text"/></td>       
             </tr>
             <tr>
                 <td>clave</td>

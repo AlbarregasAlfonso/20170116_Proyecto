@@ -9,7 +9,7 @@ public interface IUsuarioDAO {
 
     public void addUsuario(Usuario usuario);
     
-    public boolean inicioSession (String correo, String clave);
+    public String inicioSession (String correo, String clave);
     
     public String getSacarIdUsuario(String userName);
     
@@ -18,6 +18,8 @@ public interface IUsuarioDAO {
     public ArrayList<Usuario> getUsuarios();
     
     public void BloquearDesbloquearUsuario(String IdUsuario, String estado);
+    
+    public Usuario obtenerUsuario(String idUsuario);
     
     public void closeConnection();
 }

@@ -67,6 +67,7 @@ implements IClienteDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
     }
     
@@ -86,6 +87,7 @@ implements IClienteDAO {
             System.out.println("Algo ha pasado al insertar");
             Logger.getLogger(MysqlClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeConnection();
     }
     
  

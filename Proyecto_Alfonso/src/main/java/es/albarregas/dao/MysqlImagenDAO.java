@@ -57,6 +57,7 @@ public class MysqlImagenDAO implements IImagenesDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
     }
 

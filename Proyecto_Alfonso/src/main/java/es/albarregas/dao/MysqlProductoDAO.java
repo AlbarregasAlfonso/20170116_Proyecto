@@ -69,6 +69,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
     }
 
@@ -120,6 +121,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
 }
 
@@ -161,6 +163,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             ex.printStackTrace();
         }
         System.out.println("Estamos en el daooooooo"+re);
+        closeConnection();
         return re;
     }
     
@@ -200,7 +203,9 @@ public class MysqlProductoDAO implements IProductoDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return re;
+        
     }
 
     @Override
@@ -239,8 +244,8 @@ public class MysqlProductoDAO implements IProductoDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return re;
-        
     }
 }
    

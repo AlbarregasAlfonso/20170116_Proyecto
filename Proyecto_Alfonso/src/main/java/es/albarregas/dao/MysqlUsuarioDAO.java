@@ -17,21 +17,38 @@ import es.albarregas.dao.IClienteDAO;
 
 public class MysqlUsuarioDAO implements IUsuarioDAO {
 
-    public boolean inicioSession(String username, String clave) {
+    public String inicioSession(String username, String clave) {
 
-        boolean encontrado = false;
+        String mensaje = " ";
 
         String consulta = "SELECT * FROM usuarios";
+        
         try {
+            
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
+            
             try {
+                
                 while (resultado.next()) {
-                    System.out.println("Estamos comparando" + resultado.getString("UserName") + " con " + username + " y la clave " + resultado.getString("clave") + " con " + clave);
+
                     if (resultado.getString("UserName").equals(username) && resultado.getString("clave").equals(clave)) {
-                        System.out.println("Entramosssss");
-                        encontrado = true;
+
+                        if (resultado.getString("bloqueado").equals("s")) {
+                            
+                            mensaje = "usuario bloqueado";
+                            break;
+                            
+                        } else {
+                            
+                            mensaje = "bienvenido " + resultado.getString("UserName");
+                            break;
+                        }
+                    } else {
+                        
+                        mensaje = "Usuario o contraseña erroneos";
+                        
                     }
                 }
             } catch (Throwable equipo) {
@@ -54,7 +71,8 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             System.out.println("Error al ejecutar la sentencia de consulta");
             ex.printStackTrace();
         }
-        return encontrado;
+        closeConnection();
+        return mensaje;
     }
 
     public void addUsuario(Usuario usuario) {
@@ -80,6 +98,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             System.out.println("Algo ha pasado al insertar");
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeConnection();
     }
 
     @Override
@@ -124,12 +143,13 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return re;
     }
 
     @Override
     public String SacarTipoUsuario(String idUsuario) {
-         String re = null;
+        String re = null;
         if (idUsuario == null) {
             idUsuario = "";
         }
@@ -164,15 +184,14 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return re;
-       
     }
 
-    
     @Override
     public ArrayList<Usuario> getUsuarios() {
-          ArrayList<Usuario> lista;
-        
+        ArrayList<Usuario> lista;
+
         lista = new ArrayList<Usuario>();
         String consulta = "select * from usuarios where tipo='u'";
         try {
@@ -207,23 +226,67 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+        closeConnection();
         return lista;
     }
 
     @Override
     public void BloquearDesbloquearUsuario(String IdUsuario, String estado) {
-         try {
+        try {
             String sql = "UPDATE usuarios SET Bloqueado=? WHERE IdUsuario=?";
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, estado);
             preparada.setString(2, IdUsuario);
             preparada.executeUpdate();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Algo ha pasado al actualizar");
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        closeConnection();
 
     }
 
+    public Usuario obtenerUsuario(String idUsuario) {
+
+        Usuario u = new Usuario();
+        String consulta = "select * from usuarios where IdUsuario=" + idUsuario;
+
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {
+                    u = new Usuario();
+                    u.setTipo(resultado.getString("Tipo"));
+                    u.setIdUsuario(resultado.getString("IdUsuario"));
+                    u.setUserName(resultado.getString("UserName"));
+                    u.setBloqueado(resultado.getString("Bloqueado"));
+                    u.setClave(resultado.getString("Clave"));
+                    u.setUltimoAcceso(resultado.getString("UltimoAcceso"));
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            System.out.println(ex.getMessage());
+        }
+        closeConnection();
+        return u;
+
+    }
 }

@@ -12,9 +12,11 @@ import es.albarregas.beans.Pedidos;
  * @author AlfonsoTerrones
  */
 public interface IPedidosDAO {
-    
+
     public void insertarCarrito(Pedidos p);
-    
-     public String idPedidoMax();
-    
+
+    public String idPedidoMax();
+
+    public void closeConnection();
+
 }
