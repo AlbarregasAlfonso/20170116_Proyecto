@@ -22,14 +22,14 @@
 
                 <c:if test="${u.bloqueado=='n'}">
 
-            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=s&idusuario=${u.idUsuario}'" type="radio" value="bloqueado" /></td>
-            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=n&idusuario=${u.idUsuario}'" type="radio" value="desbloqueado" checked="checked"/></td>
+            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=s&idusuario=${u.idUsuario}&mensaje=usuario ${u.userName} bloqueado'" type="radio" value="bloqueado" /></td>
+            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=n&idusuario=${u.idUsuario}&mensaje=usuario ${u.userName} desbloqueado'" type="radio" value="desbloqueado" checked="checked"/></td>
 
         </c:if>
         <c:if test="${u.bloqueado=='s'}">
 
-            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=s&idusuario=${u.idUsuario}'" type="radio" value="bloqueado" checked="checked"/></td>
-            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=n&idusuario=${u.idUsuario}'" type="radio" value="desbloqueado"/></td>
+            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=s&idusuario=${u.idUsuario}&mensaje=usuario ${u.userName} bloqueado'" type="radio" value="bloqueado" checked="checked"/></td>
+            <td><input onclick= "self.location.href = 'ControllersAdministrador?bloquear=n&idusuario=${u.idUsuario}&mensaje=usuario ${u.userName} desbloqueado'" type="radio" value="desbloqueado"/></td>
                 </c:if>
 
 
