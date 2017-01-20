@@ -15,4 +15,10 @@ public interface ILineasPedidosDAO {
     
     public void insertarProductoACarrito(LineasPedidos lp);
     
+    public int idLineaPedidoMax();
+    
+     public void closeConnection();
+        
+    
+    
 }

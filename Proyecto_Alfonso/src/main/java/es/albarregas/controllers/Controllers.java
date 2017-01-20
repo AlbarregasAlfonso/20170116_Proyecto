@@ -54,23 +54,21 @@ public class Controllers extends HttpServlet {
             IUsuarioDAO udao = daof.getUsuarioDAO();
             //request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
 
-            System.out.println("parametros cerrar Sesion "+request.getParameter("cerrarsesion"));
-            if(request.getParameter("cerrarsesion") != null) {
-                System.out.println("Estamos en cerrar sesion");
-                request.getSession().removeAttribute("usuario"); 
+          
+            if (request.getParameter("cerrarsesion") != null) {
+                request.setAttribute("mensaje", "Hasta pronto!");
+                request.getSession().removeAttribute("usuario");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-            
-            
+
             if (request.getParameter("imagen") != null) {
 
-                
                 IImagenesDAO idao = daof.getImagenDAO();
                 ArrayList<Imagen> imagenes;
 
                 String clausulaWhere = request.getParameter("imagen");
                 imagenes = idao.getImagenes(clausulaWhere);
-       
+
                 request.setAttribute("imagenes", imagenes);
 
                 IProductoDAO pdao = daof.getProductoDAO();
@@ -108,12 +106,10 @@ public class Controllers extends HttpServlet {
 
                 out.println("<h1>Servlet Controladorrrrrr at " + request.getContextPath() + "</h1>");
 
-                
                 IProductoDAO pdao = daof.getProductoDAO();
                 ArrayList<Producto> productos;
                 String clausulaWhere = new String();
                 productos = pdao.getProductos(clausulaWhere);
-
 
                 //fraccionar el array
                 List<Producto> productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + 9);
@@ -128,8 +124,6 @@ public class Controllers extends HttpServlet {
             }
 
             //request.getRequestDispatcher(url).forward(request, response);
-            
-
             if (request.getParameter("Enviar").equals("registro")) {
 
                 IClienteDAO cdao = daof.getRegistroDAO();
@@ -149,14 +143,12 @@ public class Controllers extends HttpServlet {
                 } else {
                     request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
 
-                    
-                    Usuario u=udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));
-                    request.setAttribute("mensaje",udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
+                    Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));
+                    request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
                     request.getRequestDispatcher("index.jsp").forward(request, response);
-                    
+
                 }
             }
-            
 
             out.println("</body>");
             out.println("</html>");

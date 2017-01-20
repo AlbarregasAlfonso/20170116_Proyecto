@@ -37,6 +37,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             preparada.setString(2, p.getEstado());
             preparada.setString(3, p.getIdCliente());
             preparada.executeUpdate();
+            System.out.println("Estamos insertando!");
         } catch (SQLException ex) {
             System.out.println("Algo ha pasado al insertar");
             System.out.println(ex.getErrorCode());
@@ -55,7 +56,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             Throwable throwable = null;
             try {
                 if (resultado.next()) {
-                    re = resultado.getString("IdPedido");
+                    re = resultado.getString("max(IdPedido)");
                 }
             } catch (Throwable cliente) {
                 throwable = cliente;
@@ -84,6 +85,42 @@ public class MysqlPedidosDAO implements IPedidosDAO {
     @Override
     public void closeConnection() {
        ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public String sacarEstadoUltimoPedido() {
+        String re= null;
+        try {
+            String idPedido = "select estado from pedidos order by IdPedido desc limit 1";
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(idPedido);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("estado");
+                }
+            } catch (Throwable cliente) {
+                throwable = cliente;
+                throw cliente;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable registro) {
+                            throwable.addSuppressed(registro);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return re;
     }
 
 }

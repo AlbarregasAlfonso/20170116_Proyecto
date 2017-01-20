@@ -16,6 +16,8 @@ public interface IPedidosDAO {
     public void insertarCarrito(Pedidos p);
 
     public String idPedidoMax();
+    
+    public String sacarEstadoUltimoPedido();
 
     public void closeConnection();
 

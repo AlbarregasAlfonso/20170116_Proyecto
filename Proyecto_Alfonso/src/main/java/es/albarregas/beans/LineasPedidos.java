@@ -11,12 +11,12 @@ package es.albarregas.beans;
  */
 public class LineasPedidos {
     private String idPedido;
-    private String numeroLinea;
+    private int numeroLinea;
     private String idProducto;
     private String cantidad;
     private String precioUnitario;
 
-    public LineasPedidos(String idPedido, String numeroLinea, String idProducto, String cantidad) {
+    public LineasPedidos(String idPedido, int numeroLinea, String idProducto, String cantidad) {
         this.idPedido = idPedido;
         this.numeroLinea = numeroLinea;
         this.idProducto = idProducto;
@@ -34,11 +34,11 @@ public class LineasPedidos {
         this.idPedido = idPedido;
     }
 
-    public String getNumeroLinea() {
+    public int getNumeroLinea() {
         return numeroLinea;
     }
 
-    public void setNumeroLinea(String numeroLinea) {
+    public void setNumeroLinea(int numeroLinea) {
         this.numeroLinea = numeroLinea;
     }
 

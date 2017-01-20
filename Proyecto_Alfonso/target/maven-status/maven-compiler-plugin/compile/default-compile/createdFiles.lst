@@ -6,7 +6,6 @@ es\albarregas\dao\MysqlImagenDAO.class
 es\albarregas\beans\Usuario.class
 es\albarregas\beans\Producto.class
 es\albarregas\beans\Caracyprods.class
-es\albarregas\beans\Lineapedidos.class
 es\albarregas\controllers\Controllers.class
 es\albarregas\beans\Pedidos.class
 es\albarregas\dao\IClienteDAO.class
