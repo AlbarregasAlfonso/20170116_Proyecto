@@ -13,6 +13,7 @@ import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +51,20 @@ public class ControllersCarrito extends HttpServlet {
 
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IPedidosDAO pedao = daof.getPedidosDAO();
+            ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
+            
+            System.out.println("Constructorrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+            if(request.getParameter("Vercarrito")!=null){
+                
+                
+                 ArrayList<LineasPedidos> productosCarrito;
+                 Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+                 System.out.println("ConstructorrrrrrrVer carritoooooo"+ u.getIdUsuario());
+                 productosCarrito=lpdao.getProductosEnCarrito(u.getIdUsuario());
+                 request.setAttribute("productosCarrito", productosCarrito);
+                
+                request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
+            }
 
             if (!pedao.sacarEstadoUltimoPedido().equals("p")) {
 
@@ -59,7 +74,7 @@ public class ControllersCarrito extends HttpServlet {
                 Pedidos p = new Pedidos(u.getIdUsuario(), "p");
                 pedao.insertarCarrito(p);
 
-                ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
+                
                 lpdao.idLineaPedidoMax();
                 int numeroLinea = lpdao.idLineaPedidoMax();
                 LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
@@ -68,23 +83,22 @@ public class ControllersCarrito extends HttpServlet {
                 
                 request.setAttribute("mensaje", "Nuevo carrito creado");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                
             } else {
-                
-   
-               
-                
-                ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
+
                 lpdao.idLineaPedidoMax();
                 int numeroLinea = lpdao.idLineaPedidoMax();
                 LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
 
                 lpdao.insertarProductoACarrito(lp);
                 
+                request.getSession().setAttribute("carrito", "abierto");
                 request.setAttribute("mensaje", "Has añadido un producto al carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-                
 
             }
+            
+            
 
             out.println("</body>");
             out.println("</html>");

@@ -56,7 +56,9 @@
                         <li><a href="Controllers?valor=0">Productos</a></li>  
               
                         
-
+                        <c:if test="${sessionScope.carrito=='abierto'}">
+                             <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
+                        </c:if>
                         
                         <c:if test="${sessionScope.usuario==null}">
 

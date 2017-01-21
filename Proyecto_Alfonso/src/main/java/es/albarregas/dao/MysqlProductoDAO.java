@@ -5,6 +5,7 @@
  */
 package es.albarregas.dao;
 
+import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Producto;
 import es.albarregas.beans.ProductoCaracteristicas;
 import java.sql.ResultSet;
@@ -247,5 +248,8 @@ public class MysqlProductoDAO implements IProductoDAO {
         closeConnection();
         return re;
     }
+
+    
+    
 }
    

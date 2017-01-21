@@ -15,6 +15,7 @@ public class LineasPedidos {
     private String idProducto;
     private String cantidad;
     private String precioUnitario;
+    private Producto producto;
 
     public LineasPedidos(String idPedido, int numeroLinea, String idProducto, String cantidad) {
         this.idPedido = idPedido;
@@ -22,6 +23,21 @@ public class LineasPedidos {
         this.idProducto = idProducto;
         this.cantidad = cantidad;
     }
+
+    public LineasPedidos(String cantidad, Producto producto) {
+        this.cantidad = cantidad;
+        this.producto = producto;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+    
+    
 
     public LineasPedidos() {
     }

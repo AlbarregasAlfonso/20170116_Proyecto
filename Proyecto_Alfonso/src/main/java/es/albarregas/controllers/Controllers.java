@@ -52,13 +52,14 @@ public class Controllers extends HttpServlet {
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
 
             IUsuarioDAO udao = daof.getUsuarioDAO();
-            //request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
-
-          
+                      
             if (request.getParameter("cerrarsesion") != null) {
+                
                 request.setAttribute("mensaje", "Hasta pronto!");
                 request.getSession().removeAttribute("usuario");
+                request.getSession().removeAttribute("carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                
             }
 
             if (request.getParameter("imagen") != null) {
@@ -85,19 +86,14 @@ public class Controllers extends HttpServlet {
                 request.setAttribute("idProducto", request.getParameter("imagen"));
 
                 int numEntero = Integer.parseInt(pdao.getSacarStock(IdProducto));
+                
                 //hacemos un array con la misma dimesion que productos en stock tengamos
-
                 int[] stock = new int[numEntero];
-                for (int i = 1; i < stock.length + 1; i++) {
+                for (int i = 1; i < stock.length + 1; i++) {                    
                     stock[i - 1] = i;
                 }
-
-                for (Integer i : stock) {
-                    System.out.println("Este es el vector " + i);
-                }
-
+       
                 request.setAttribute("Stock", stock);
-
                 request.setAttribute("imagen", request.getParameter("imagen"));
                 request.getRequestDispatcher("/JSP/ProductoCaracteristicas.jsp").forward(request, response);
             }

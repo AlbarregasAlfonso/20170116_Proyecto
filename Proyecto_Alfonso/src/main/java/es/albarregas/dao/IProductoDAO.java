@@ -26,6 +26,9 @@ public interface IProductoDAO {
     
     public String getSacarStock(String idProducto);
     
+   
+      
+    
     public void closeConnection();
     
 }

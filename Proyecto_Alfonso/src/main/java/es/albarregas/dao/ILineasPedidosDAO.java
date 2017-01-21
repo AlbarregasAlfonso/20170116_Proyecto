@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.LineasPedidos;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,8 +18,7 @@ public interface ILineasPedidosDAO {
     
     public int idLineaPedidoMax();
     
-     public void closeConnection();
-        
-    
-    
+    public void closeConnection();
+
+    public ArrayList<LineasPedidos> getProductosEnCarrito(String idcliente);
 }

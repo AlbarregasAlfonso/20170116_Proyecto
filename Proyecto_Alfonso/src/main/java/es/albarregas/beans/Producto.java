@@ -24,6 +24,18 @@ public class Producto {
     private String fueraCatalogo;
     private String rating;
 
+    public Producto(String idProducto, String denominacion, String precioUnitario) {
+        this.idProducto = idProducto;
+        this.denominacion = denominacion;
+        this.precioUnitario = precioUnitario;
+    }
+
+   
+
+    public Producto() {
+    }
+
+    
     public String getIdProducto() {
         return idProducto;
     }
