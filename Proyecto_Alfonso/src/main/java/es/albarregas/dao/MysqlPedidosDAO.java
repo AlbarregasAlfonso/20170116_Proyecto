@@ -88,27 +88,33 @@ public class MysqlPedidosDAO implements IPedidosDAO {
     }
 
     @Override
-    public String sacarEstadoUltimoPedido() {
-        String re= null;
+    public String sacarEstadoUltimoPedido(String idusuario) {
+      String re=null;
+
+        
+        String consulta = "select estado from pedidos where IdCliente="+idusuario+" order by IdPedido desc limit 1";
         try {
-            String idPedido = "select estado from pedidos order by IdPedido desc limit 1";
+            System.out.println("2");
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
-            ResultSet resultado = sentencia.executeQuery(idPedido);
+            ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                if (resultado.next()) {
-                    re = resultado.getString("estado");
-                }
-            } catch (Throwable cliente) {
-                throwable = cliente;
-                throw cliente;
+
+                 while (resultado.next()) {
+
+                    re=resultado.getString("estado");
+                    
+                 }
+               
+            } catch (Exception e) {
+                
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
-                        } catch (Throwable registro) {
-                            throwable.addSuppressed(registro);
+                        } catch (Exception e) {
+                           
                         }
                     } else {
                         resultado.close();
@@ -119,7 +125,13 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
+
         closeConnection();
+        
+        if (re==null){
+            re=" ";
+        }
+        
         return re;
     }
 

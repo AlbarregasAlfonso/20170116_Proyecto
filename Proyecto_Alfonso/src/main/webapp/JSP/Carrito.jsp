@@ -9,17 +9,24 @@
       <tr>
         <th>Descripcion</th>
         <th>Caracteristica</th>
-        <th>Caracterist</th>
+        <th>precio</th>
+        <th></th>
+        <th>Cantidad</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
-    <c:forEach begin="1" items="${productosCarrito}" var="lp">
+    <c:forEach items="${productosCarrito}" var="lp">
     <tbody>
       <tr>
-          
+         
           <td><img src="${pageContext.request.contextPath}/IMG/${lp.producto.idProducto}.1.jpg" alt="Lights" style="width:20%"></td>
         <td><c:out value="${lp.producto.denominacion}"/></td>
         <td><c:out value="${lp.producto.precioUnitario}"/></td>
+        <td><a href="${pageContext.request.contextPath}/ControllersCarrito?signo=menos&idProducto=${lp.producto.idProducto}" style="font-size:24px" class="fa" >&#xf104;</a></td>
         <td><c:out value="${lp.cantidad}"/></td>
+        <td><a href="${pageContext.request.contextPath}/ControllersCarrito?signo=mas&idProducto=${lp.producto.idProducto}" style="font-size:24px" class="fa" >&#xf105;</a></td>
+         <td><a href="${pageContext.request.contextPath}/ControllersCarrito?idpedido=${lp.idPedido}&idProducto=${lp.producto.idProducto}&borramos=borramos" style="font-size:24px" class="fa" >&#xf00d;</a></td>
       </tr>      
         
     </tbody>

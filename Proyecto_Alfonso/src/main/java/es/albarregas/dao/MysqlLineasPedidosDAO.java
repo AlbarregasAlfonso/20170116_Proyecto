@@ -29,6 +29,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
             preparada.setInt(2, lp.getNumeroLinea());
             preparada.setString(3, lp.getIdProducto());
             preparada.setString(4, lp.getCantidad());
+       
 
             preparada.executeUpdate();
 
@@ -77,22 +78,21 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
 
     @Override
     public ArrayList<LineasPedidos> getProductosEnCarrito(String idcliente) {
-       ArrayList<LineasPedidos> lista = new ArrayList<LineasPedidos>();
+        ArrayList<LineasPedidos> lista = new ArrayList<LineasPedidos>();
 
-   
-        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, lp.Cantidad from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente="+idcliente;
+        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, lp.Cantidad,lp.IdPedido from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
                 while (resultado.next()) {
-                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"),resultado.getString("pro.PrecioUnitario"));
-                    LineasPedidos lp = new LineasPedidos(resultado.getString("lp.Cantidad"),p);
+                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario"));
+                    LineasPedidos lp = new LineasPedidos(resultado.getString("lp.Cantidad"), p,resultado.getString("lp.IdPedido"));
                     lista.add(lp);
                 }
             } catch (Throwable producto) {
-         
+
                 throwable = producto;
                 throw producto;
             } finally {
@@ -119,6 +119,47 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void modificarValorCantidad(String signo, String idProducto) {
+
+        if (signo.equals("mas")) {
+            signo = "+";
+        } else {
+            signo = "-";
+        }
+
+        try {
+            
+            String sql = " update lineaspedidos set cantidad =cantidad" + signo + "1 where IdProducto=" + idProducto + "";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar");
+            System.out.println(ex.getErrorCode());
+            //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
+    @Override
+    public void eliminarProductoLineaPedido(String IdPedido, String IdProducto) {
+
+
+        try {
+            
+            String sql = "DELETE FROM lineaspedidos WHERE IdProducto = '"+IdProducto+"' && IdPedido = '"+IdPedido+"'";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar");
+            System.out.println(ex.getErrorCode());
+            //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
     }
 
 }

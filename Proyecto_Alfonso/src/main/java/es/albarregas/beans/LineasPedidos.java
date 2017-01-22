@@ -24,7 +24,8 @@ public class LineasPedidos {
         this.cantidad = cantidad;
     }
 
-    public LineasPedidos(String cantidad, Producto producto) {
+    public LineasPedidos(String cantidad, Producto producto , String idPedido) {
+        this.idPedido = idPedido;
         this.cantidad = cantidad;
         this.producto = producto;
     }

@@ -17,7 +17,7 @@ public interface IPedidosDAO {
 
     public String idPedidoMax();
     
-    public String sacarEstadoUltimoPedido();
+    public String sacarEstadoUltimoPedido(String idusuario);
 
     public void closeConnection();
 

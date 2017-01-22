@@ -21,4 +21,8 @@ public interface ILineasPedidosDAO {
     public void closeConnection();
 
     public ArrayList<LineasPedidos> getProductosEnCarrito(String idcliente);
+    
+    public void modificarValorCantidad(String signo,String idProducto);
+    
+    public void eliminarProductoLineaPedido(String IdPedido, String IdProducto);
 }
