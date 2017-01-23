@@ -37,9 +37,8 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             preparada.setString(2, p.getEstado());
             preparada.setString(3, p.getIdCliente());
             preparada.executeUpdate();
-            System.out.println("Estamos insertando!");
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar");
+            System.out.println("Algo ha pasado al insertar  insertarCarrito(Pedidos p)");
             System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,7 +74,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia idPedidoMax()");
             ex.printStackTrace();
         }
         closeConnection();
@@ -94,7 +93,6 @@ public class MysqlPedidosDAO implements IPedidosDAO {
         
         String consulta = "select estado from pedidos where IdCliente="+idusuario+" order by IdPedido desc limit 1";
         try {
-            System.out.println("2");
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
@@ -122,7 +120,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia sacarEstadoUltimoPedido(String idusuario)");
             ex.printStackTrace();
         }
 
@@ -140,7 +138,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
            
      boolean semaforo = true;
      String re="";
-     System.out.println("El id pedido dentro del daooooooooooooooooooooooo"+idPedido);
+
         try {
             String aux = " select cl.apellidos from pedidos pe inner join lineaspedidos lp on pe.IdPedido=lp.IdPedido inner join clientes cl on cl.IdCliente=pe.IdCliente where pe.IdPedido="+idPedido;
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
@@ -149,7 +147,6 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             try {
                 if (resultado.next()) {
                     re = resultado.getString("cl.apellidos");
-                    System.out.println("Estamos en el DAO y este es su apellidooooooo"+resultado.getString("cl.apellidos"));
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -167,7 +164,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia obtenerApellidoDelClienteDeUnPedido(String idPedido)");
             ex.printStackTrace();
         }
         closeConnection();

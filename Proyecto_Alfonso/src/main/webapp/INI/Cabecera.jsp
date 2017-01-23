@@ -29,7 +29,7 @@
             $(document).ready(function() {
                 setTimeout(function() {
                     $(".content").fadeOut(1500);
-                },3000);
+                },1000);
             });
 </script>
 

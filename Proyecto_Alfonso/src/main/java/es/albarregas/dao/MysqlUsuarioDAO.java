@@ -68,7 +68,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia de consulta");
+            System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
             ex.printStackTrace();
         }
         closeConnection();

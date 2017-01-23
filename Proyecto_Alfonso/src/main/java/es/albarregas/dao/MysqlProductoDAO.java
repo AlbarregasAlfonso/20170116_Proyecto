@@ -67,7 +67,7 @@ public class MysqlProductoDAO implements IProductoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
             ex.printStackTrace();
         }
         closeConnection();
@@ -119,7 +119,7 @@ public class MysqlProductoDAO implements IProductoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia getProductosCaracteristicas");
             ex.printStackTrace();
         }
         closeConnection();
@@ -140,8 +140,9 @@ public class MysqlProductoDAO implements IProductoDAO {
             Throwable throwable = null;
             try {
                  while (resultado.next()) {
+                     
                     re=resultado.getString("Denominacion");
-               System.out.println("Estamos en el dentro dentro"+resultado.getString("Denominacion")); 
+
                  }
                
             } catch (Exception e) {
@@ -160,10 +161,10 @@ public class MysqlProductoDAO implements IProductoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia getSacarNombreProducto");
             ex.printStackTrace();
         }
-        System.out.println("Estamos en el daooooooo"+re);
+
         closeConnection();
         return re;
     }
@@ -201,7 +202,7 @@ public class MysqlProductoDAO implements IProductoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia getSacarDescripcionProducto");
             ex.printStackTrace();
         }
         closeConnection();
@@ -242,7 +243,7 @@ public class MysqlProductoDAO implements IProductoDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia getSacarStock");
             ex.printStackTrace();
         }
         closeConnection();

@@ -50,7 +50,6 @@ public class Controllers extends HttpServlet {
 
             String url = "";
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
-
             IUsuarioDAO udao = daof.getUsuarioDAO();
                       
             if (request.getParameter("cerrarsesion") != null) {
@@ -85,15 +84,17 @@ public class Controllers extends HttpServlet {
 
                 request.setAttribute("idProducto", request.getParameter("imagen"));
 
-                int numEntero = Integer.parseInt(pdao.getSacarStock(IdProducto));
+              //  int numEntero = Integer.parseInt(pdao.getSacarStock(IdProducto));
                 
                 //hacemos un array con la misma dimesion que productos en stock tengamos
-                int[] stock = new int[numEntero];
-                for (int i = 1; i < stock.length + 1; i++) {                    
-                    stock[i - 1] = i;
-                }
-       
-                request.setAttribute("Stock", stock);
+                
+                
+//                int[] stock = new int[numEntero];
+//                for (int i = 1; i < stock.length + 1; i++) {                    
+//                    stock[i - 1] = i;
+//                }
+//       
+//                request.setAttribute("Stock", stock);
                 request.setAttribute("imagen", request.getParameter("imagen"));
                 request.getRequestDispatcher("/JSP/ProductoCaracteristicas.jsp").forward(request, response);
             }
@@ -119,7 +120,6 @@ public class Controllers extends HttpServlet {
 
             }
 
-            //request.getRequestDispatcher(url).forward(request, response);
             if (request.getParameter("Enviar").equals("registro")) {
 
                 IClienteDAO cdao = daof.getRegistroDAO();
@@ -136,9 +136,12 @@ public class Controllers extends HttpServlet {
             } else if (request.getParameter("Enviar").equals("iniciarSesion")) {
 
                 if (udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
+                    
                     request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
                     request.getRequestDispatcher("index.jsp").forward(request, response);
+                
                 } else {
+                    
                     request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
 
                     Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));

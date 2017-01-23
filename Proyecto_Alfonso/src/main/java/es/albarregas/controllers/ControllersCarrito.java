@@ -10,6 +10,7 @@ import es.albarregas.beans.Pedidos;
 import es.albarregas.beans.Usuario;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
+import es.albarregas.dao.IProductoDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,6 +53,7 @@ public class ControllersCarrito extends HttpServlet {
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IPedidosDAO pedao = daof.getPedidosDAO();
             ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
+            IProductoDAO pdao = daof.getProductoDAO();
 
             ArrayList<LineasPedidos> productosCarrito;
             Usuario u = (Usuario) request.getSession().getAttribute("usuario");
@@ -59,29 +61,45 @@ public class ControllersCarrito extends HttpServlet {
             request.setAttribute("productosCarrito", productosCarrito);
 
             if (request.getParameter("borramos") != null) {
-                
+
                 lpdao.eliminarProductoLineaPedido(request.getParameter("idpedido"), request.getParameter("idProducto"));
-                request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);    
+                productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
+                request.setAttribute("productosCarrito", productosCarrito);
+                request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
+
             }
-            
+
             if (request.getParameter("signo") != null) {
 
                 lpdao.modificarValorCantidad(request.getParameter("signo"), request.getParameter("idProducto"));
+                productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
+                request.setAttribute("productosCarrito", productosCarrito);
+                
+                
+//                int cantidad=Integer.parseInt(request.getParameter("cantidad"));
+//                int idproducto=Integer.parseInt(pdao.getSacarStock(request.getParameter("idProducto")));
+//                
+//                
+//                System.out.println("si "+cantidad+" es igual a "+idproducto);
+//                
+//                if(cantidad+1==idproducto){
+//                    System.out.println("Entramos!!");
+//                    request.setAttribute("mas", false);
+//                }else{
+//                    request.setAttribute("mas", true);
+//                }
+                
                 request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
 
             }
 
             if (request.getParameter("Vercarrito") != null) {
-                
+
                 request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
             }
 
- 
             if (pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario")).equals("p")) {
-                    
-                System.out.println("El idPedido es "+request.getParameter("idpedido"));
-                System.out.println("El valor de boolean para saber si existe o no "+lpdao.aumentarPedido(request.getParameter("idpedido"), request.getParameter("cantidad"), request.getParameter("idProducto")));
-                
+
                 lpdao.idLineaPedidoMax();
                 int numeroLinea = lpdao.idLineaPedidoMax();
                 LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
@@ -92,10 +110,8 @@ public class ControllersCarrito extends HttpServlet {
                 request.setAttribute("mensaje", "Has añadido un producto al carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
-            } else if(request.getParameter("productoCaracteristicas")!=null){
-                
-                System.out.println("entramos porq "+pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario"))+" es distinto de p");
-                System.out.println("Entramos en crear pedido");
+            } else if (request.getParameter("productoCaracteristicas") != null) {
+
                 Pedidos p = new Pedidos(u.getIdUsuario(), "p");
                 pedao.insertarCarrito(p);
 

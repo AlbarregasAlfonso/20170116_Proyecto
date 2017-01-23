@@ -35,7 +35,6 @@ implements IClienteDAO {
                 while (resultado.next()) {
                     Cliente cliente = new Cliente();
                     //cliente.setIdCliente(resultado.getString("idCliente"));
-                    System.out.println(resultado.getString("nombre"));
                     cliente.setNombre(resultado.getString("nombre"));
                     cliente.setApellidos(resultado.getString("apellidos"));
                     cliente.setEmail(resultado.getString("email"));
@@ -84,7 +83,7 @@ implements IClienteDAO {
             preparada.executeUpdate();
         }
         catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar");
+            System.out.println("Algo ha pasado al insertar en addCliente");
             Logger.getLogger(MysqlClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();

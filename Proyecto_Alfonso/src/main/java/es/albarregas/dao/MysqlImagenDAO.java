@@ -54,7 +54,7 @@ public class MysqlImagenDAO implements IImagenesDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia de getImagenes");
             ex.printStackTrace();
         }
         closeConnection();

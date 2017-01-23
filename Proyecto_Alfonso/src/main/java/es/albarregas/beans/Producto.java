@@ -24,10 +24,11 @@ public class Producto {
     private String fueraCatalogo;
     private String rating;
 
-    public Producto(String idProducto, String denominacion, String precioUnitario) {
+    public Producto(String idProducto, String denominacion, String precioUnitario, String stock) {
         this.idProducto = idProducto;
         this.denominacion = denominacion;
         this.precioUnitario = precioUnitario;
+        this.stock = stock;
     }
 
    

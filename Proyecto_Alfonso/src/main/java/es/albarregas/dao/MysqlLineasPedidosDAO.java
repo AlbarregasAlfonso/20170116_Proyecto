@@ -34,7 +34,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
             preparada.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar");
+            System.out.println("Algo ha pasado al insertar en insertarProductoACarrito");
             System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,7 +69,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia idLineaPedidoMax");
             ex.printStackTrace();
         }
         closeConnection();
@@ -80,14 +80,14 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
     public ArrayList<LineasPedidos> getProductosEnCarrito(String idcliente) {
         ArrayList<LineasPedidos> lista = new ArrayList<LineasPedidos>();
 
-        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, lp.Cantidad,lp.IdPedido from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
+        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, lp.Cantidad,lp.IdPedido, pro.Stock from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
                 while (resultado.next()) {
-                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario"));
+                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario"), resultado.getString("pro.Stock"));
                     LineasPedidos lp = new LineasPedidos(resultado.getString("lp.Cantidad"), p,resultado.getString("lp.IdPedido"));
                     lista.add(lp);
                 }
@@ -109,7 +109,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia  getProductosEnCarrito");
             ex.printStackTrace();
         }
         closeConnection();
@@ -137,7 +137,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
             preparada.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar");
+            System.out.println("Algo ha pasado al insertar  modificarValorCantidad");
             System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,7 +155,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
             preparada.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar");
+            System.out.println("Algo ha pasado al insertar eliminarProductoLineaPedido");
             System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,7 +194,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al ejecutar la sentencia");
+            System.out.println("Error al ejecutar la sentencia aumentarPedido");
             ex.printStackTrace();
         }
         closeConnection();
