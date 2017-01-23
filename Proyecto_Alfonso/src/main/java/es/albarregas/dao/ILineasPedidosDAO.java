@@ -25,4 +25,6 @@ public interface ILineasPedidosDAO {
     public void modificarValorCantidad(String signo,String idProducto);
     
     public void eliminarProductoLineaPedido(String IdPedido, String IdProducto);
+    
+    public boolean aumentarPedido (String idPedido, String cantidad, String idProducto);
 }

@@ -162,4 +162,50 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
         closeConnection();
     }
 
+    @Override
+    public boolean aumentarPedido(String idPedido, String cantidad,String idProducto) {
+        
+     boolean semaforo = true;
+     String re="";
+     
+        try {
+            String aux = "select idproducto from lineaspedidos where idproducto="+idProducto+" and idpedido="+idPedido;
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(aux);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("idproducto");
+                }
+            } catch (Throwable cliente) {
+                throwable = cliente;
+                throw cliente;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable registro) {
+                            throwable.addSuppressed(registro);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        
+        if(re!=null){
+            semaforo=false;
+        }else{
+            semaforo=true;
+        }
+        
+        return semaforo;
+    }
+
 }

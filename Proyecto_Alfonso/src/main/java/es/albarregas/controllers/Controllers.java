@@ -123,7 +123,9 @@ public class Controllers extends HttpServlet {
             if (request.getParameter("Enviar").equals("registro")) {
 
                 IClienteDAO cdao = daof.getRegistroDAO();
-                Cliente cliente = new Cliente(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("email"), request.getParameter("nif"), request.getParameter("fechaNacimiento"));
+                Cliente cliente = new Cliente("nombre", "apellido", request.getParameter("email"), "nif", "0000-00-00");
+                request.getSession().setAttribute("apellido",true);
+                
                 cdao.addCliente(cliente);
 
                 Usuario usuario = new Usuario(request.getParameter("user"), request.getParameter("clave"));

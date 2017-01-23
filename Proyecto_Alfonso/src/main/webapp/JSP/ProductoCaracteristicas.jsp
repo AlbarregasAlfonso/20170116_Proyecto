@@ -96,7 +96,7 @@
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <c:forEach items="${Stock}" var="s">
-                        <li><a href="${pageContext.request.contextPath}/ControllersCarrito?cantidad=${s}&idProducto=${idProducto}&idusuario=${usuario.idUsuario}"><c:out  value="${s}"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/ControllersCarrito?cantidad=${s}&idProducto=${idProducto}&idusuario=${usuario.idUsuario}&productoCaracteristicas=productoCaracteristicas"><c:out  value="${s}"/></a></li>
                     </c:forEach>
 
                 </ul>

@@ -78,8 +78,10 @@ public class ControllersCarrito extends HttpServlet {
 
  
             if (pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario")).equals("p")) {
-
-
+                    
+                System.out.println("El idPedido es "+request.getParameter("idpedido"));
+                System.out.println("El valor de boolean para saber si existe o no "+lpdao.aumentarPedido(request.getParameter("idpedido"), request.getParameter("cantidad"), request.getParameter("idProducto")));
+                
                 lpdao.idLineaPedidoMax();
                 int numeroLinea = lpdao.idLineaPedidoMax();
                 LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
@@ -90,8 +92,10 @@ public class ControllersCarrito extends HttpServlet {
                 request.setAttribute("mensaje", "Has añadido un producto al carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
-            } else {
-
+            } else if(request.getParameter("productoCaracteristicas")!=null){
+                
+                System.out.println("entramos porq "+pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario"))+" es distinto de p");
+                System.out.println("Entramos en crear pedido");
                 Pedidos p = new Pedidos(u.getIdUsuario(), "p");
                 pedao.insertarCarrito(p);
 

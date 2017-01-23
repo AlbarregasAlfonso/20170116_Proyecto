@@ -134,5 +134,51 @@ public class MysqlPedidosDAO implements IPedidosDAO {
         
         return re;
     }
+    
+     @Override
+    public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido) {
+           
+     boolean semaforo = true;
+     String re="";
+     System.out.println("El id pedido dentro del daooooooooooooooooooooooo"+idPedido);
+        try {
+            String aux = " select cl.apellidos from pedidos pe inner join lineaspedidos lp on pe.IdPedido=lp.IdPedido inner join clientes cl on cl.IdCliente=pe.IdCliente where pe.IdPedido="+idPedido;
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(aux);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("cl.apellidos");
+                    System.out.println("Estamos en el DAO y este es su apellidooooooo"+resultado.getString("cl.apellidos"));
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        
+        if(re.equals("apellido")){
+            semaforo=false;
+        }else{
+            semaforo=true;
+        }
+        
+        return semaforo;
+    }
 
 }

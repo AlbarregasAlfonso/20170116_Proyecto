@@ -18,6 +18,8 @@ public interface IPedidosDAO {
     public String idPedidoMax();
     
     public String sacarEstadoUltimoPedido(String idusuario);
+    
+     public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
 
     public void closeConnection();
 
