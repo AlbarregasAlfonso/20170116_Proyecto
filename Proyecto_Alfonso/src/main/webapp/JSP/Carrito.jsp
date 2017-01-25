@@ -84,13 +84,13 @@ alert('empezamos ajax');
                 <td></td>
 
 
-                <c:if test="${sessionScope.apellido!=null}">
+                <c:if test="${sessionScope.apellido==false}">
 
                     <td><a href="" data-toggle="modal" data-target="#RegistroCompra"><button type="button" class="btn btn-info">Comprar</button></a></td>
 
                 </c:if>
 
-                <c:if test="${sessionScope.apellido==null}">
+                <c:if test="${sessionScope.apellido==true}">
 
                     <td><a href="${pageContext.request.contextPath}/ControllersPagar?idPedido=${idPedido}"><button type="button" class="btn btn-success">Comprar</button></a></td>
 

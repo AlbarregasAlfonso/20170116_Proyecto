@@ -6,44 +6,52 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">¿Aún no estas registrado?</h4>
+          <h4 class="modal-title">Para finalizar su compra debes de terminar su registro</h4>
         </div>
         <div class="modal-body">
             
-        <form action="Controllers" method="POST">
+        <form action="ControllersPagar" method="POST">
         
         <table>
-            
+
             <tr>
-                <td>Nombre de usuario</td>
-                <td><input name="user" pattern="[a-zA-Z]+" type="text"/></td>       
-            </tr>
-            <tr>
-                <td>clave</td>
-                <td><input name="clave" type="password"/></td>      
-            </tr>
-            <tr>
-                <td>nombre</td>
-                <td><input name="nombre" type="text"/></td>         
+              
+                <td><input name="nombre" placeholder="Nombre" type="text"/></td>         
             </tr> 
             <tr>
-                <td>apellidos</td>
-                <td><input name="apellidos" type="text"/></td>       
+             
+                <td><input name="apellidos" placeholder="Apellido" type="text"/></td>       
             </tr>
             <tr>
-                <td>email</td>
-                <td><input name="email" type="text"/></td>          
+         
+                <td><input name="email" placeholder="Email" type="text"/></td>          
             </tr>
             <tr>
-                <td>NIF</td>
-                <td><input name="nif" type="text"/></td>         
+     
+                <td><input name="nif" placeholder="NIF" type="text"/></td>         
             </tr>
             <tr>
-                <td>Fecha de nacimiento</td>
-                <td><input name="fechaNacimiento" type="text"/></td>       
+
+                <td><input name="fechaNacimiento" placeholder="Fecha Nacimiento 'XXXX-XX-XX" type="text"/></td>       
+            </tr>
+              <tr>
+        
+                <td><input name="nombredireccion" placeholder="Nombre Direccion" type="text"/></td>       
+            </tr>
+              <tr>
+   
+                <td><input name="direccion" placeholder="Direccion" type="text"/></td>       
+            </tr>
+              <tr>
+       
+                <td><input name="codigopostal" placeholder="Codigo Postal" type="text"/></td>       
+            </tr>
+             <tr>
+      
+                <td><input name="telefono" placeholder="Telefono" type="text"/></td>       
             </tr>
             <tr>
-                <td><input type="submit" name="Enviar" value="registro"/></td>
+                <td><input type="submit" name="Enviar" value="RegistroTotal"/></td>
                 <td></td>        
             </tr>
 

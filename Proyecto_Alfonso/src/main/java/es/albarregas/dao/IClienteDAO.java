@@ -10,5 +10,7 @@ public interface IClienteDAO {
 
     public void addCliente(Cliente cliente);
     
+    public boolean verSiEstanTodosLosDatosDelRegistro(String idCliente);
+    
     public void closeConnection();
 }

@@ -14,12 +14,14 @@ package es.albarregas.daofactory;
 import es.albarregas.dao.ICaracyprodsDAO;
 import es.albarregas.dao.MysqlClienteDAO;
 import es.albarregas.dao.IClienteDAO;
+import es.albarregas.dao.IDireccionesDAO;
 import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.dao.MysqlCaracyprodsDAO;
+import es.albarregas.dao.MysqlDireccionesDAO;
 import es.albarregas.dao.MysqlImagenDAO;
 import es.albarregas.dao.MysqlLineasPedidosDAO;
 import es.albarregas.dao.MysqlPedidosDAO;
@@ -65,6 +67,11 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public ILineasPedidosDAO getLineaPedidosDAO() {
         return new MysqlLineasPedidosDAO();
+    }
+
+    @Override
+    public IDireccionesDAO getDireccionesDAO() {
+        return new MysqlDireccionesDAO();
     }
 
    

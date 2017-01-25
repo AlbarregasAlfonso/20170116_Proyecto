@@ -54,15 +54,18 @@ public class ControllersPagar extends HttpServlet {
             Usuario u = (Usuario) request.getSession().getAttribute("usuario");
           
             
-            if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){
+           // if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){
                 
                  ArrayList<LineasPedidos> productosCarritoDesglose=lpdao.getProductosEnCarritoConDesglose(u.getIdUsuario());
-                 
                  request.setAttribute("productosCarritoDeglose", productosCarritoDesglose);
-                
+                 
+                 
+                 
+                 
                  request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
-            }
+          //  }
      
+            out.println("Esto va to perfe");
             out.println("</body>");
             out.println("</html>");
         }

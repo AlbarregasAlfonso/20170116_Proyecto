@@ -51,6 +51,7 @@ public class Controllers extends HttpServlet {
             String url = "";
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IUsuarioDAO udao = daof.getUsuarioDAO();
+            IClienteDAO cdao = daof.getRegistroDAO();
                       
             if (request.getParameter("cerrarsesion") != null) {
                 
@@ -122,9 +123,9 @@ public class Controllers extends HttpServlet {
 
             if (request.getParameter("Enviar").equals("registro")) {
 
-                IClienteDAO cdao = daof.getRegistroDAO();
+              
                 Cliente cliente = new Cliente("nombre", "apellido", request.getParameter("email"), "nif", "0000-00-00");
-                request.getSession().setAttribute("apellido",true);
+                request.getSession().setAttribute("apellido",false);
                 
                 cdao.addCliente(cliente);
 
@@ -138,13 +139,17 @@ public class Controllers extends HttpServlet {
                 if (udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
                     
                     request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
+                    
+                    
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 
                 } else {
                     
                     request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
-
                     Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));
+                    
+                    request.getSession().setAttribute("apellido",cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
+                    
                     request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 

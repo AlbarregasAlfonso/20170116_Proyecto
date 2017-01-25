@@ -1,4 +1,3 @@
-
 package es.albarregas.dao;
 
 import es.albarregas.beans.Cliente;
@@ -16,8 +15,7 @@ import es.albarregas.beans.Cliente;
 import es.albarregas.dao.IClienteDAO;
 
 public class MysqlClienteDAO
-implements IClienteDAO {
-  
+        implements IClienteDAO {
 
     @Override
     public ArrayList<Cliente> getCliente(String where) {
@@ -42,18 +40,15 @@ implements IClienteDAO {
                     cliente.setFechaNacimiento(resultado.getString("fechaNacimiento"));
                     lista.add(cliente);
                 }
-            }
-            catch (Throwable cliente) {
+            } catch (Throwable cliente) {
                 throwable = cliente;
                 throw cliente;
-            }
-            finally {
+            } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
-                        }
-                        catch (Throwable registro) {
+                        } catch (Throwable registro) {
                             throwable.addSuppressed(registro);
                         }
                     } else {
@@ -61,15 +56,14 @@ implements IClienteDAO {
                     }
                 }
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
         closeConnection();
         return lista;
     }
-    
+
     public void addCliente(Cliente cliente) {
         try {
             String sql = "insert into clientes (IdCliente,Nombre,Apellidos,Email,NIF,FechaNacimiento,FechaAlta) values (?,?,?,?,?,?,now())";
@@ -81,23 +75,61 @@ implements IClienteDAO {
             preparada.setString(5, cliente.getNif());
             preparada.setString(6, cliente.getFechaNacimiento());
             preparada.executeUpdate();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Algo ha pasado al insertar en addCliente");
             Logger.getLogger(MysqlClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();
     }
-    
- 
-   
-
-
 
     @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
     }
 
+    @Override
+    public boolean verSiEstanTodosLosDatosDelRegistro(String idCliente) {
+        boolean semaforo = true;
+        String re = null;
+
+        try {
+            String sql = " select Nombre from clientes where IdCliente="+idCliente;
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(sql);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("Nombre");
+                }
+            } catch (Throwable cliente) {
+                throwable = cliente;
+                throw cliente;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable registro) {
+                            throwable.addSuppressed(registro);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia aumentarPedido");
+            ex.printStackTrace();
+        }
+        closeConnection();
+
+        if (re.equals("nombre")) {
+            semaforo = false;
+        } else {
+            semaforo = true;
+        }
+
+        return semaforo;
+    }
 
 }
