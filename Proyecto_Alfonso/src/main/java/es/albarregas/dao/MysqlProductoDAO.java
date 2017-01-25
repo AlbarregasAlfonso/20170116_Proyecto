@@ -26,7 +26,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             where = "";
         }
         lista = new ArrayList<Producto>();
-        String consulta = "SELECT * FROM productos " + where;
+        String consulta = "SELECT IdProducto,IdCategoria,IdMarca,Denominacion,Descripcion,IdProveedor,PrecioUnitario*(select GastosEnvio from general),Stock,StockMinimo,FechaAlta,Oferta,FueraCatalogo,Rating FROM productos " + where;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
@@ -41,7 +41,7 @@ public class MysqlProductoDAO implements IProductoDAO {
                     producto.setDenominacion(resultado.getString("Denominacion"));
                     producto.setDescripcion(resultado.getString("Descripcion"));
                     producto.setIdProveedor(resultado.getString("IdProveedor"));
-                    producto.setPrecioUnitario(resultado.getString("PrecioUnitario"));
+                    producto.setPrecioUnitario(resultado.getString("PrecioUnitario*(select GastosEnvio from general)"));
                     producto.setStock(resultado.getString("Stock"));
                     producto.setStockMinimo(resultado.getString("StockMinimo"));
                     producto.setFechaAlta(resultado.getString("FechaAlta"));

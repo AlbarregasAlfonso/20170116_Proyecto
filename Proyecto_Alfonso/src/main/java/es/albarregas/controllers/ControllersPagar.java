@@ -5,10 +5,14 @@
  */
 package es.albarregas.controllers;
 
+import es.albarregas.beans.LineasPedidos;
+import es.albarregas.beans.Usuario;
+import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +50,17 @@ public class ControllersPagar extends HttpServlet {
             
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IPedidosDAO pedao = daof.getPedidosDAO();
+            ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
+            Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+          
+            
             if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){
-                out.println("<p>Esto va toperfe</p>");
+                
+                 ArrayList<LineasPedidos> productosCarritoDesglose=lpdao.getProductosEnCarritoConDesglose(u.getIdUsuario());
+                 
+                 request.setAttribute("productosCarritoDeglose", productosCarritoDesglose);
+                
+                 request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
             }
      
             out.println("</body>");

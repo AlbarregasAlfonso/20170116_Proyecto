@@ -1,7 +1,35 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <jsp:include page="../INI/Cabecera.jsp"/>
 <jsp:include page="../INI/RegistroCompra.jsp"/>
 
+<!--<script>
+    
+    
+    function cambiarCantidad(id,signo){
+alert('empezamos ajax');
+    $.ajax({
+
+        url: "ControllersCarrito",
+        method: "GET",
+        data: {
+
+            idProducto: $('#prod'+id).val(),
+            signo: signo,
+        },
+        success: function (results) {
+
+            if (results != null) { //esto es lo que recibo del controlador, si ha ido bien o mal
+                alert('funciona');
+            } else {
+                alert('Algo fallo');
+            }
+        }
+    });
+};
+
+
+</script>-->
 <div class="container">
     <h2><c:out value="Carrito"/></h2>
     <p>Caracteristicas del producto</p>
@@ -18,6 +46,8 @@
             </tr>
         </thead>
         <c:set var="totalPrecio" value="0"/>
+<!--        < c:set var="contador" value="0"/>
+        -->
         <c:forEach items="${productosCarrito}" var="lp">
             <tbody>
 
@@ -28,18 +58,20 @@
                     <td><c:out value="${lp.producto.denominacion}"/></td>
                     <td><c:out value="${lp.producto.precioUnitario}"/></td>
                     <td> 
-                    <c:if test="${lp.cantidad!=1}">
-                            <a href="${pageContext.request.contextPath}/ControllersCarrito?signo=menos&idProducto=${lp.producto.idProducto}&cantidad=${lp.cantidad}" style="font-size:24px" class="fa" >&#xf104;</a></td>
+                        <c:if test="${lp.cantidad!=1}">
+                            <a href="${pageContext.request.contextPath}/ControllersCarrito?signo=menos&idProducto=${lp.producto.idProducto}&cantidad=${lp.cantidad}" style="font-size:24px" class="fa" >&#xf104;</a>
                         </c:if>  
-  
+                    </td>
                     <td><c:out value="${lp.cantidad}"/></td>
-                    <td><c:out value="${lp.producto.stock}"/></td>
+<!--                    <input id="articuloCantidad$ {contador}" type="text" value="$ {lp.cantidad}"/>-->
                     <td>
                         <c:if test="${lp.cantidad!=lp.producto.stock}">
-                             <a href="${pageContext.request.contextPath}/ControllersCarrito?signo=mas&idProducto=${lp.producto.idProducto}&cantidad=${lp.cantidad}" style="font-size:24px" class="fa" >&#xf105;</a>
+                            <a href="${pageContext.request.contextPath}/ControllersCarrito?signo=mas&idProducto=${lp.producto.idProducto}&cantidad=${lp.cantidad}" style="font-size:24px" class="fa" >&#xf105;</a>
+<!--                             <input type="button"  onclick="cambiarCantidad($ {contador},'mas');" value="enviar"/>                        
+                            <a href="#" onclick="cambiarCantidad($ {contador},'mas');" style="font-size:24px" class="fa">&#xf105;</a>
+                            <input id="prod$m{contador}" type="hidden" value="$ {lp.producto.idProducto}"/>-->
                         </c:if>                       
                     </td>
-
                     <td><a href="${pageContext.request.contextPath}/ControllersCarrito?idpedido=${lp.idPedido}&idProducto=${lp.producto.idProducto}&borramos=borramos" style="font-size:24px" class="fa" >&#xf00d;</a></td>
                     <c:set var="totalPrecio" value="${totalPrecio+(lp.producto.precioUnitario*lp.cantidad)}"/>
                     <c:set var="idPedido" value="${lp.idPedido}"/>

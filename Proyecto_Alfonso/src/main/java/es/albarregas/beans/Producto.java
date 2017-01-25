@@ -23,17 +23,35 @@ public class Producto {
     private String oferta;
     private String fueraCatalogo;
     private String rating;
+    private String precioConIva;
 
-    public Producto(String idProducto, String denominacion, String precioUnitario, String stock) {
+
+    public Producto(String idProducto, String denominacion, String precioUnitario, String stock, String precioConIva) {
         this.idProducto = idProducto;
         this.denominacion = denominacion;
         this.precioUnitario = precioUnitario;
         this.stock = stock;
+        this.precioConIva = precioConIva;
     }
 
+      public Producto(String idProducto, String denominacion, String precioUnitario, String stock) {
+        this.idProducto = idProducto;
+        this.denominacion = denominacion;
+        this.precioUnitario = precioUnitario;
+        this.stock = stock;
+ 
+    }
    
 
     public Producto() {
+    }
+
+        public String getPrecioConIva() {
+        return precioConIva;
+    }
+
+    public void setPrecioConIva(String precioConIva) {
+        this.precioConIva = precioConIva;
     }
 
     

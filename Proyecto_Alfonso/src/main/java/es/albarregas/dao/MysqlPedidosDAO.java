@@ -46,10 +46,10 @@ public class MysqlPedidosDAO implements IPedidosDAO {
     }
 
     @Override
-    public String idPedidoMax() {
+    public String idPedidoMaxDeUnCliente(String idCliente) {
         String re = null;
         try {
-            String idPedido = "Select max(IdPedido) from pedidos";
+            String idPedido = "Select max(IdPedido) from pedidos  where IdCliente="+idCliente;
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(idPedido);
             Throwable throwable = null;

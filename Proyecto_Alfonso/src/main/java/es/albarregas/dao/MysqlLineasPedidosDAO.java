@@ -80,14 +80,14 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
     public ArrayList<LineasPedidos> getProductosEnCarrito(String idcliente) {
         ArrayList<LineasPedidos> lista = new ArrayList<LineasPedidos>();
 
-        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, lp.Cantidad,lp.IdPedido, pro.Stock from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
+        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario*(select GastosEnvio from general), lp.Cantidad,lp.IdPedido, pro.Stock from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
                 while (resultado.next()) {
-                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario"), resultado.getString("pro.Stock"));
+                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario*(select GastosEnvio from general)"), resultado.getString("pro.Stock"));
                     LineasPedidos lp = new LineasPedidos(resultado.getString("lp.Cantidad"), p,resultado.getString("lp.IdPedido"));
                     lista.add(lp);
                 }
@@ -207,5 +207,92 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
         
         return semaforo;
     }
+
+    @Override
+    public boolean buscarProductoEnLineaPedidos(String idCliente, String idProducto) {
+       boolean semaforo = true;
+     String re=null;
+     
+        try {
+            String aux = "select pro.IdProducto from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente="+idCliente+" and pro.IdProducto="+idProducto;
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(aux);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("pro.IdProducto");
+                }
+            } catch (Throwable cliente) {
+                throwable = cliente;
+                throw cliente;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable registro) {
+                            throwable.addSuppressed(registro);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia aumentarPedido");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        
+        if(re!=null){
+            semaforo=false;
+        }else{
+            semaforo=true;
+        }
+        
+        return semaforo;
+    }
+
+    @Override
+    public ArrayList<LineasPedidos> getProductosEnCarritoConDesglose(String idcliente) {
+          ArrayList<LineasPedidos> lista = new ArrayList<LineasPedidos>();
+
+        String consulta = "select pro.IdProducto, pro.Denominacion,pro.PrecioUnitario, pro.PrecioUnitario*(select GastosEnvio from general), lp.Cantidad,lp.IdPedido, pro.Stock from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where estado='p' and p.IdCliente=" + idcliente;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {
+                    Producto p = new Producto(resultado.getString("pro.IdProducto"), resultado.getString("pro.Denominacion"), resultado.getString("pro.PrecioUnitario"), resultado.getString("pro.Stock"),resultado.getString("pro.PrecioUnitario*(select GastosEnvio from general)"));
+                    LineasPedidos lp = new LineasPedidos(resultado.getString("lp.Cantidad"), p,resultado.getString("lp.IdPedido"));
+                    lista.add(lp);
+                }
+            } catch (Throwable producto) {
+
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia  getProductosEnCarrito");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return lista;
+        
+    }
+    
 
 }

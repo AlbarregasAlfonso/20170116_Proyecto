@@ -15,11 +15,11 @@ public interface IPedidosDAO {
 
     public void insertarCarrito(Pedidos p);
 
-    public String idPedidoMax();
-    
+    public String idPedidoMaxDeUnCliente(String idCliente);
+
     public String sacarEstadoUltimoPedido(String idusuario);
-    
-     public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
+
+    public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
 
     public void closeConnection();
 

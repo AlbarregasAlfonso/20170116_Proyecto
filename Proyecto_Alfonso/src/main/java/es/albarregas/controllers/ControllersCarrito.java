@@ -74,8 +74,7 @@ public class ControllersCarrito extends HttpServlet {
                 lpdao.modificarValorCantidad(request.getParameter("signo"), request.getParameter("idProducto"));
                 productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
                 request.setAttribute("productosCarrito", productosCarrito);
-                
-                
+
 //                int cantidad=Integer.parseInt(request.getParameter("cantidad"));
 //                int idproducto=Integer.parseInt(pdao.getSacarStock(request.getParameter("idProducto")));
 //                
@@ -88,7 +87,7 @@ public class ControllersCarrito extends HttpServlet {
 //                }else{
 //                    request.setAttribute("mas", true);
 //                }
-                
+                //  AJAX response.getWriter().write("Ha ido bien");
                 request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
 
             }
@@ -100,14 +99,23 @@ public class ControllersCarrito extends HttpServlet {
 
             if (pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario")).equals("p")) {
 
-                lpdao.idLineaPedidoMax();
-                int numeroLinea = lpdao.idLineaPedidoMax();
-                LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
+                if (lpdao.buscarProductoEnLineaPedidos(request.getParameter("idusuario"), request.getParameter("idProducto"))) {
 
-                lpdao.insertarProductoACarrito(lp);
-
+                    int numeroLinea = lpdao.idLineaPedidoMax();
+   
+                    LineasPedidos lp = new LineasPedidos(pedao.idPedidoMaxDeUnCliente(u.getIdUsuario()), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
+ 
+                    lpdao.insertarProductoACarrito(lp);
+                    
+                    request.setAttribute("mensaje", "Has añadido un producto al carrito");
+                    
+                } else {
+                    
+                    request.setAttribute("mensaje", "ya estaba añadido al carrito");
+                    
+                }
+                
                 request.getSession().setAttribute("carrito", "abierto");
-                request.setAttribute("mensaje", "Has añadido un producto al carrito");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else if (request.getParameter("productoCaracteristicas") != null) {
@@ -117,7 +125,7 @@ public class ControllersCarrito extends HttpServlet {
 
                 lpdao.idLineaPedidoMax();
                 int numeroLinea = lpdao.idLineaPedidoMax();
-                LineasPedidos lp = new LineasPedidos(pedao.idPedidoMax(), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
+                LineasPedidos lp = new LineasPedidos(pedao.idPedidoMaxDeUnCliente(u.getIdUsuario()), numeroLinea + 1, request.getParameter("idProducto"), request.getParameter("cantidad"));
 
                 lpdao.insertarProductoACarrito(lp);
 
