@@ -46,7 +46,7 @@ public class Controllers extends HttpServlet {
             out.println("<title>Servlet Controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
+          
 
             String url = "";
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
@@ -135,24 +135,32 @@ public class Controllers extends HttpServlet {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else if (request.getParameter("Enviar").equals("iniciarSesion")) {
+                
 
                 if (udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
-                    
+                    response.getWriter().write("Usuario no registrado");
                     request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
                     
                     
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                  //  request.getRequestDispatcher("index.jsp").forward(request, response);
                 
                 } else {
                     
+                 
                     request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
                     Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));
                     
                     request.getSession().setAttribute("apellido",cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
                     
+                   
+                    
                     request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-
+                    
+                    //request.getRequestDispatcher("index.jsp").forward(request, response);
+                    
+                    response.getWriter().write("Bienvenido");
+                    
+        
                 }
             }
 

@@ -76,7 +76,7 @@
                         <c:if test="${lp.cantidad!=lp.producto.stock}">
 <!--                        <a href="$ {pageContext.request.contextPath}/ControllersCarrito?signo=mas&idProducto=$ {lp.producto.idProducto}&cantidad=$ {lp.cantidad}" style="font-size:24px" class="fa" >&#xf105;</a>-->
                             <input type="button"  onclick="cambiarCantidad(${contador},'mas');" value="mas"/>  
-                            <input type="button"  onclick="cambiarCantidadAMenos(${contador},'mas');" value="menos"/>    
+                      
                             <a href="#" onclick="cambiarCantidad(${contador},'mas');" style="font-size:24px" class="fa">&#xf105;</a>
                             <input id="prod${contador}" type="hidden" value="${lp.producto.idProducto}"/>
                         </c:if>                       

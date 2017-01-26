@@ -5,8 +5,12 @@
  */
 package es.albarregas.controllers;
 
+import es.albarregas.beans.Producto;
+import es.albarregas.dao.IProductoDAO;
+import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -21,26 +25,29 @@ import javax.servlet.http.HttpServletResponse;
  * @author AlfonsoTerrones
  */
 @WebServlet(name = "MyListenner", urlPatterns = {"/MyListenner"})
-public class MyListener implements ServletContextListener  {
+public class MyListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext sc = sce.getServletContext();
-        sc.setAttribute("escuchador", "Escuchamos");
-    
-    
-    
-    
-    
-    
+        
+
+        DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
+        IProductoDAO pdao = daof.getProductoDAO();
+        ArrayList<Producto> productosOferta = pdao.getProductos(" where Oferta='s'");
+        sc.setAttribute("productosEnOferta",  productosOferta);
+        
+        for(Producto p:productosOferta){
+            System.out.println(p.getIdProducto());
+             sc.setAttribute("primeraOferta",p.getIdProducto());
+             break;
+        }
+
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
 
     }
-
-
- 
 
 }
