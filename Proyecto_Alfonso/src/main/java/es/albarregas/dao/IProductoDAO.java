@@ -26,12 +26,7 @@ public interface IProductoDAO {
     
     public String getSacarStock(String idProducto);
     
-  
-    
-   
-    
-   
-      
+    public String sacarIdProducto(String denominacion);
     
     public void closeConnection();
     

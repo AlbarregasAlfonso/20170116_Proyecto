@@ -7,6 +7,12 @@
 <jsp:include page="INI/InicioSesion.jsp"/>
 
 
+
+
+
+
+
+
 <div class="container">
             <h2>Productos en oferta</h2>
             <p>¡Aquí tenemos los precios mas baratos del mercado!</p>
@@ -33,6 +39,7 @@
 
 
 
+                
 <div id="contact" class="container">
   <h3 class="text-center">Contacto</h3>
  

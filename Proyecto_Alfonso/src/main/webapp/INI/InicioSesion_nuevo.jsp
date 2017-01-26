@@ -37,6 +37,11 @@
             function handleResponse() {
                 if (request.readyState == 4) {
                     document.getElementById("message").innerHTML = request.responseText;
+              
+               if(document.getElementById("message").innerHTML==='Bienvenido'){
+      
+                          $('#inicioSesion').modal('hide');
+                    }
                 }
             }
 

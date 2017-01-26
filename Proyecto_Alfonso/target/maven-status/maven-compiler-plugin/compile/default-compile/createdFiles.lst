@@ -17,6 +17,7 @@ es\albarregas\controllers\ControllersPagar.class
 es\albarregas\controllers\ControllersAdministrador.class
 es\albarregas\dao\ConnectionFactory.class
 es\albarregas\dao\MysqlLineasPedidosDAO.class
+es\albarregas\controllers\ControllersBusqudas.class
 es\albarregas\controllers\ControllersCarrito.class
 es\albarregas\dao\MysqlUsuarioDAO.class
 es\albarregas\beans\Cliente.class

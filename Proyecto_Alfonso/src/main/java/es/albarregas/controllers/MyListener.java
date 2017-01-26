@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author AlfonsoTerrones
@@ -42,6 +43,7 @@ public class MyListener implements ServletContextListener {
              sc.setAttribute("primeraOferta",p.getIdProducto());
              break;
         }
+  
 
     }
 

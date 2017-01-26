@@ -32,9 +32,9 @@ public class MysqlProductoDAO implements IProductoDAO {
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
+                
                 while (resultado.next()) {
                     Producto producto = new Producto();
-
                     producto.setIdProducto(resultado.getString("IdProducto"));
                     producto.setIdCategoria(resultado.getString("IdCategoria"));
                     producto.setIdMarca(resultado.getString("IdMarca"));
@@ -246,6 +246,47 @@ public class MysqlProductoDAO implements IProductoDAO {
             System.out.println("Error al ejecutar la sentencia getSacarStock");
             ex.printStackTrace();
         }
+        closeConnection();
+        return re;
+    }
+
+    @Override
+    public String sacarIdProducto(String denominacion) {
+       String re=null;
+        if (denominacion == null) {
+            denominacion = "";
+        }
+        
+        String consulta = "select IdProducto from productos where denominacion='"+denominacion+"'";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                 while (resultado.next()) {     
+                    re=resultado.getString("IdProducto");
+                 }
+               
+            } catch (Exception e) {
+                
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Exception e) {
+                           
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getSacarNombreProducto");
+            ex.printStackTrace();
+        }
+
         closeConnection();
         return re;
     }
