@@ -75,20 +75,21 @@ public class ControllersCarrito extends HttpServlet {
                 productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
                 request.setAttribute("productosCarrito", productosCarrito);
 
-//                int cantidad=Integer.parseInt(request.getParameter("cantidad"));
-//                int idproducto=Integer.parseInt(pdao.getSacarStock(request.getParameter("idProducto")));
-//                
-//                
-//                System.out.println("si "+cantidad+" es igual a "+idproducto);
-//                
-//                if(cantidad+1==idproducto){
-//                    System.out.println("Entramos!!");
-//                    request.setAttribute("mas", false);
-//                }else{
-//                    request.setAttribute("mas", true);
-//                }
-                //  AJAX response.getWriter().write("Ha ido bien");
-                request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
+                int cantidad=Integer.parseInt(request.getParameter("cantidad"));
+                int idproducto=Integer.parseInt(pdao.getSacarStock(request.getParameter("idProducto")));
+                
+                
+                System.out.println("si "+cantidad+" es igual a "+idproducto);
+                
+                if(cantidad+1==idproducto){
+                    System.out.println("Entramos!!");
+                    request.setAttribute("mas", false);
+                }else{
+                    request.setAttribute("mas", true);
+                }
+                
+                response.getWriter().write("Ha ido bien");
+               // request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
 
             }
 

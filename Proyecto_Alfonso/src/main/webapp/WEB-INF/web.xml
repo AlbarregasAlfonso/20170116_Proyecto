@@ -14,4 +14,7 @@
             30
         </session-timeout>
     </session-config>
+    <listener>
+        <listener-class>es.albarregas.controllers.MyListener</listener-class>
+    </listener>
 </web-app>

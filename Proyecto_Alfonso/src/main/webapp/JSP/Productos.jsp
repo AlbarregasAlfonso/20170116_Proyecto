@@ -16,7 +16,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <a href="${pageContext.request.contextPath}/Controllers?imagen=${pc.idProducto}">
-                                <img src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Lights" style="width:100%">
+                                <img class="thumbnail" src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Lights" style="width:100%">
                                 <div class="caption">
                                     <p><c:out value="${pc.denominacion}"/></p>
                                     <p><c:out value="${pc.precioUnitario} €"/></p>

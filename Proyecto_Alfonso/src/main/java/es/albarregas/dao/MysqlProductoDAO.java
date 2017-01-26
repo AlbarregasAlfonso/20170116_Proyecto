@@ -250,6 +250,11 @@ public class MysqlProductoDAO implements IProductoDAO {
         return re;
     }
 
+    @Override
+    public ArrayList<ProductoCaracteristicas> getProductosEnOferta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    
 
     

@@ -1,4 +1,5 @@
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Imagen.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlDireccionesDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracteristicas.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Categorias.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlUsuarioDAO.java
@@ -20,11 +21,13 @@ C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\contr
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracyprods.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\LineasPedidos.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IUsuarioDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IDireccionesDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IClienteDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlCaracyprodsDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IImagenesDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlImagenDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Pedidos.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\MyListener.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlClienteDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlPedidosDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlProductoDAO.java

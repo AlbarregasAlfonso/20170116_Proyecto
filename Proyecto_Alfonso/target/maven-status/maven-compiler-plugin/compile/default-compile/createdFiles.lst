@@ -4,9 +4,11 @@ es\albarregas\daofactory\MySQLDAOFactory.class
 es\albarregas\beans\Categorias.class
 es\albarregas\dao\MysqlImagenDAO.class
 es\albarregas\beans\Usuario.class
+es\albarregas\dao\IDireccionesDAO.class
 es\albarregas\beans\Producto.class
 es\albarregas\beans\Caracyprods.class
 es\albarregas\controllers\Controllers.class
+es\albarregas\controllers\MyListener.class
 es\albarregas\beans\Pedidos.class
 es\albarregas\dao\IClienteDAO.class
 es\albarregas\dao\MysqlClienteDAO.class
@@ -29,3 +31,4 @@ es\albarregas\dao\ILineasPedidosDAO.class
 es\albarregas\dao\MysqlCaracyprodsDAO.class
 es\albarregas\beans\LineasPedidos.class
 es\albarregas\dao\IPedidosDAO.class
+es\albarregas\dao\MysqlDireccionesDAO.class

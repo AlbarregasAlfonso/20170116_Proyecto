@@ -11,4 +11,6 @@ package es.albarregas.dao;
  */
 public interface IDireccionesDAO {
     
+    
+    
 }

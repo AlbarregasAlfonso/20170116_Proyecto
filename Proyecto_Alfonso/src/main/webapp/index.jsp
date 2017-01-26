@@ -25,7 +25,7 @@
       <div class="item active">
           <img src="IMG/1001.1.jpg" alt="New York" width="1000" height="600">
         <div class="carousel-caption">
-          <h3>New York</h3>
+            <h3><c:out value="${escuchador}"/></h3>
           <p>The atmosphere in New York is lorem ipsum.</p>
         </div>      
       </div>

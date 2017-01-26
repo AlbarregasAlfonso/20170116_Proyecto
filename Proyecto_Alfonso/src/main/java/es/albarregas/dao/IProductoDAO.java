@@ -26,6 +26,8 @@ public interface IProductoDAO {
     
     public String getSacarStock(String idProducto);
     
+      public ArrayList<ProductoCaracteristicas> getProductosEnOferta();
+    
    
     
    
