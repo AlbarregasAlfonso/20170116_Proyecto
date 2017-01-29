@@ -19,6 +19,7 @@ import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
+import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.dao.MysqlCaracyprodsDAO;
 import es.albarregas.dao.MysqlDireccionesDAO;
@@ -26,6 +27,7 @@ import es.albarregas.dao.MysqlImagenDAO;
 import es.albarregas.dao.MysqlLineasPedidosDAO;
 import es.albarregas.dao.MysqlPedidosDAO;
 import es.albarregas.dao.MysqlProductoDAO;
+import es.albarregas.dao.MysqlProvinciaDAO;
 import es.albarregas.dao.MysqlUsuarioDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
@@ -72,6 +74,11 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public IDireccionesDAO getDireccionesDAO() {
         return new MysqlDireccionesDAO();
+    }
+
+    @Override
+    public IProvinciaDAO getProvinciaDAO() {
+        return new MysqlProvinciaDAO();
     }
 
    

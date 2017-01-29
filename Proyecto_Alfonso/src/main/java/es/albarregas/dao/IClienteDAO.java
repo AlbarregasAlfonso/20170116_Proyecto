@@ -12,5 +12,7 @@ public interface IClienteDAO {
     
     public boolean verSiEstanTodosLosDatosDelRegistro(String idCliente);
     
+    public void terminarRegistro(String nombre, String apellidos,String nif, String fechaNac,String idUsuario);
+    
     public void closeConnection();
 }

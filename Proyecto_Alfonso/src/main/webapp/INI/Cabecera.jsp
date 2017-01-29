@@ -29,7 +29,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 setTimeout(function () {
-                    $(".content").fadeOut(1500);
+                    $(".content").fadeOut(3500);
                 }, 1000);
             });
         </script>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-
+                        <!--<li><h4><div id="message"></div></h4><li>-->
                         <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
 
                         <li><a href="Controllers?valor=0">Productos</a></li>  
@@ -216,7 +216,7 @@
 
                 <input class="form-control" type="text" value="" name="nombre" id="searchField" autocomplete="off" placeholder="Escriba el Producto"/><br/>
                 <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
-                
+
             </form>
         </nav>
 

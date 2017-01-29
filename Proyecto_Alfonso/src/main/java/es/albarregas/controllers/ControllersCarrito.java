@@ -65,12 +65,13 @@ public class ControllersCarrito extends HttpServlet {
                 lpdao.eliminarProductoLineaPedido(request.getParameter("idpedido"), request.getParameter("idProducto"));
                 productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
                 request.setAttribute("productosCarrito", productosCarrito);
-                request.getRequestDispatcher("/JSP/Carrito_1.jsp").forward(request, response);
+                request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
 
             }
 
             if (request.getParameter("signo") != null) {
 
+                
                 lpdao.modificarValorCantidad(request.getParameter("signo"), request.getParameter("idProducto"));
                 productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
                 request.setAttribute("productosCarrito", productosCarrito);
@@ -79,7 +80,7 @@ public class ControllersCarrito extends HttpServlet {
                 int idproducto=Integer.parseInt(pdao.getSacarStock(request.getParameter("idProducto")));
                 
                 
-                System.out.println("si "+cantidad+" es igual a "+idproducto);
+ 
                 
                 if(cantidad+1==idproducto){
                     System.out.println("Entramos!!");

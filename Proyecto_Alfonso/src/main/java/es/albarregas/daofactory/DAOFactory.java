@@ -20,6 +20,7 @@ import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
+import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.dao.IUsuarioDAO;
 
 public abstract class DAOFactory {
@@ -32,6 +33,8 @@ public abstract class DAOFactory {
     public abstract IUsuarioDAO getUsuarioDAO();
     
     public abstract IImagenesDAO getImagenDAO();
+    
+    public abstract IProvinciaDAO getProvinciaDAO();
     
     public abstract IDireccionesDAO getDireccionesDAO();
     

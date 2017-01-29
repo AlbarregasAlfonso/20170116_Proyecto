@@ -5,10 +5,15 @@
  */
 package es.albarregas.controllers;
 
+import es.albarregas.beans.Direccion;
 import es.albarregas.beans.LineasPedidos;
+import es.albarregas.beans.Provincia;
 import es.albarregas.beans.Usuario;
+import es.albarregas.dao.IClienteDAO;
+import es.albarregas.dao.IDireccionesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
+import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,28 +48,65 @@ public class ControllersPagar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControllersPagar</title>");            
+            out.println("<title>Servlet ControllersPagar</title>");
             out.println("</head>");
             out.println("<body>");
-            
-            
+
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IPedidosDAO pedao = daof.getPedidosDAO();
+            IClienteDAO cdao = daof.getRegistroDAO();
+            IProvinciaDAO prodao = daof.getProvinciaDAO();
+
+            IDireccionesDAO ddao = daof.getDireccionesDAO();
             ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
             Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-          
-            
-           // if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){
-                
-                 ArrayList<LineasPedidos> productosCarritoDesglose=lpdao.getProductosEnCarritoConDesglose(u.getIdUsuario());
-                 request.setAttribute("productosCarritoDeglose", productosCarritoDesglose);
-                 
-                 
-                 
-                 
-                 request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
-          //  }
-     
+            ArrayList<LineasPedidos> productosCarritoDesglose = lpdao.getProductosEnCarritoConDesglose(u.getIdUsuario());
+            request.setAttribute("productosCarritoDeglose", productosCarritoDesglose);
+
+            ArrayList<Direccion> direcciones = ddao.obtenerDirecciones(u.getIdUsuario());
+            request.setAttribute("direcciones", direcciones);
+
+            System.out.println("holaa antes del if");
+
+            if (request.getParameter("Enviar") != null) {
+
+                System.out.println("holaa dentro");
+                cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
+                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
+                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+                Provincia p = new Provincia();
+                p = prodao.obtenerProvincia(request.getParameter("codigoPostal"));
+
+            }
+
+            if (request.getParameter("EnviarDesdePago") != null) {
+                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
+
+                lpdao = daof.getLineaPedidosDAO();
+                u = (Usuario) request.getSession().getAttribute("usuario");
+                productosCarritoDesglose = lpdao.getProductosEnCarritoConDesglose(u.getIdUsuario());
+                request.setAttribute("productosCarritoDeglose", productosCarritoDesglose);
+
+                direcciones = ddao.obtenerDirecciones(u.getIdUsuario());
+                request.setAttribute("direcciones", direcciones);
+
+                 request.setAttribute("mensaje", "Has añadido una nueva dirección");
+                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+            }
+
+            if (request.getParameter("idPedido") != null) {
+
+            }
+
+//            if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){//si no esta registrado entramos aqui
+//                
+//                
+//                 
+//
+//                 
+//            }
+            request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+
             out.println("Esto va to perfe");
             out.println("</body>");
             out.println("</html>");

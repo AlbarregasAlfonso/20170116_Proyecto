@@ -132,4 +132,19 @@ public class MysqlClienteDAO
         return semaforo;
     }
 
+    @Override
+    public void terminarRegistro(String nombre, String apellidos,String nif, String fechaNac, String idUsuario) {
+        try {
+            
+            String sql = "UPDATE clientes SET Nombre='"+nombre+"', Apellidos='"+apellidos+"',NIF='"+nif+"',FechaNacimiento='"+fechaNac+"' WHERE IdCliente="+idUsuario;
+           
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
 }
