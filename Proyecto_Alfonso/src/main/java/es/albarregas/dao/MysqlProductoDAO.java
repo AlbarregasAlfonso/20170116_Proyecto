@@ -8,10 +8,13 @@ package es.albarregas.dao;
 import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Producto;
 import es.albarregas.beans.ProductoCaracteristicas;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -289,6 +292,64 @@ public class MysqlProductoDAO implements IProductoDAO {
 
         closeConnection();
         return re;
+    }
+
+    @Override
+    public ArrayList<Producto> obtenerProductosQueFaltanEnStock(String idCliente) {
+            ArrayList<Producto> lista;
+        if (idCliente == null) {
+            idCliente = "";
+        }
+        lista = null;
+        String consulta = "select pro.Denominacion,(lp.Cantidad-pro.Stock) from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where p.IdCliente="+idCliente+" and p.Estado='p' and lp.Cantidad>pro.Stock";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                
+                while (resultado.next()) {
+                    System.out.println("Estamos en el dao "+resultado.getString("pro.Denominacion"));
+                    Producto producto = new Producto(resultado.getString("pro.Denominacion"),resultado.getString("(lp.Cantidad-pro.Stock)"));
+                    lista.add(producto);
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return lista;
+    }
+
+    @Override
+    public void disminuirProductosEnStock(String idCliente) {
+         try {
+            String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente="+idCliente+" and pedi.estado='p';";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+     
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+
     }
 
 

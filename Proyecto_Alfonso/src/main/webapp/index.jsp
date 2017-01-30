@@ -56,7 +56,7 @@
     <div class="content">
 
         <div class="alert alert-success" class="content">
-            <strong>Success!</strong><c:out value="${mensaje}"/>
+            <h5> <c:out value="${mensaje}"/> <strong>!</strong></h5>
         </div>
 
     </div>

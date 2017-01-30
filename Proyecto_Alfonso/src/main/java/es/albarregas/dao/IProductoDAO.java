@@ -28,6 +28,10 @@ public interface IProductoDAO {
     
     public String sacarIdProducto(String denominacion);
     
+    public ArrayList<Producto> obtenerProductosQueFaltanEnStock (String idCliente);
+    
+    public void disminuirProductosEnStock (String idCliente);
+    
     public void closeConnection();
     
 }

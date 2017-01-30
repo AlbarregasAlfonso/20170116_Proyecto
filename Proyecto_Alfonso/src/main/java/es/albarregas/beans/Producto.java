@@ -24,6 +24,7 @@ public class Producto {
     private String fueraCatalogo;
     private String rating;
     private String precioConIva;
+    private String cantidadQueFaltaEnStock;
 
 
     public Producto(String idProducto, String denominacion, String precioUnitario, String stock, String precioConIva) {
@@ -46,7 +47,14 @@ public class Producto {
     public Producto() {
     }
 
-        public String getPrecioConIva() {
+    public Producto(String denominacion, String cantidadQueFaltaEnStock) {
+        this.denominacion = denominacion;
+        this.cantidadQueFaltaEnStock = cantidadQueFaltaEnStock;
+    }
+
+    
+    
+    public String getPrecioConIva() {
         return precioConIva;
     }
 

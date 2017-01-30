@@ -7,12 +7,14 @@ package es.albarregas.controllers;
 
 import es.albarregas.beans.Direccion;
 import es.albarregas.beans.LineasPedidos;
+import es.albarregas.beans.Producto;
 import es.albarregas.beans.Provincia;
 import es.albarregas.beans.Usuario;
 import es.albarregas.dao.IClienteDAO;
 import es.albarregas.dao.IDireccionesDAO;
 import es.albarregas.dao.ILineasPedidosDAO;
 import es.albarregas.dao.IPedidosDAO;
+import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -56,6 +58,7 @@ public class ControllersPagar extends HttpServlet {
             IPedidosDAO pedao = daof.getPedidosDAO();
             IClienteDAO cdao = daof.getRegistroDAO();
             IProvinciaDAO prodao = daof.getProvinciaDAO();
+            IProductoDAO pdao = daof.getProductoDAO();
 
             IDireccionesDAO ddao = daof.getDireccionesDAO();
             ILineasPedidosDAO lpdao = daof.getLineaPedidosDAO();
@@ -66,11 +69,68 @@ public class ControllersPagar extends HttpServlet {
             ArrayList<Direccion> direcciones = ddao.obtenerDirecciones(u.getIdUsuario());
             request.setAttribute("direcciones", direcciones);
 
-            System.out.println("holaa antes del if");
+            if (request.getParameter("Enviar2") != null) {
+                System.out.println("Envaiamos2");
+                if (request.getParameter("direccionDeEnvio") == null) {
+                    System.out.println("no hay direccion");
+                    request.setAttribute("mensaje", "Tienes que seleccionar donde enviaremos el pedido");
+                    request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+
+                }
+
+                if (pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario()) != null) {
+                    
+                    System.out.println("No hay stock");
+                    ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
+
+                    for (Producto p : productosSinStock) {
+
+                        System.out.println("Esto es lo que hay"+p.getDenominacion());
+
+                    }
+
+                } else {
+                    System.out.println("todo bien");
+                    pdao.disminuirProductosEnStock(u.getIdUsuario());
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+
+                }
+
+            }
+//            if (request.getParameter("direccionDeEnvio") != null) {
+//                
+//                //HAs reyenado todos los datos
+//                
+//                if (pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario()) != null) {
+//                
+//                    ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
+//                    
+//                    for (Producto p : productosSinStock) {
+//                    
+//                         
+//                        request.setAttribute("mensaje", "del producto " + p.getDenominacion() + " no hay stock");
+//                    
+//                    } 
+//           
+//                }else{
+//                   
+//                    System.out.println("entramos en finalizar compra bien y quitar de stock");
+//                   
+//                    pdao.disminuirProductosEnStock(u.getIdUsuario());
+//                    
+//                }
+//                
+//                request.getRequestDispatcher("index.jsp").forward(request, response);
+//                
+//            } else if(request.getParameter("Enviar2")!=null){
+//                
+//                request.setAttribute("mensaje", "Tienes que seleccionar donde enviaremos el pedido");
+//                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+//            
+//            }
 
             if (request.getParameter("Enviar") != null) {
 
-                System.out.println("holaa dentro");
                 cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
                 ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
                 request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
@@ -90,12 +150,8 @@ public class ControllersPagar extends HttpServlet {
                 direcciones = ddao.obtenerDirecciones(u.getIdUsuario());
                 request.setAttribute("direcciones", direcciones);
 
-                 request.setAttribute("mensaje", "Has añadido una nueva dirección");
+                request.setAttribute("mensaje", "Has añadido una nueva dirección");
                 request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
-            }
-
-            if (request.getParameter("idPedido") != null) {
-
             }
 
 //            if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){//si no esta registrado entramos aqui

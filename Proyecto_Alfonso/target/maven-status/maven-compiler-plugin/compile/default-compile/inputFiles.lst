@@ -1,3 +1,4 @@
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Direccion.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Imagen.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlDireccionesDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Caracteristicas.java
@@ -13,6 +14,7 @@ C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\I
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\ILineasPedidosDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\ProductoCaracteristicas.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\Controllers.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Pueblo.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IProductoDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\daofactory\DAOFactory.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\ControllersCarrito.java

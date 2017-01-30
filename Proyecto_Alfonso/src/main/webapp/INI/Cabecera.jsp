@@ -35,38 +35,30 @@
         </script>
 
         <style>
-
             body, #searchfield {
                 font: 1.2em arial, helvetica, sans-serif;
             }
-
             .suggestions {
                 background-color: #FFF;
                 padding: 2px 6px;
                 border: 1px solid #000;
             }
-
             .suggestions:hover {
                 background-color: #69F;
             }
-
             #popups {
                 position: absolute;
             }
-
             #searchField.error {
                 background-color: #FFC;
             }
-
         </style>
 
         <script>window.onload = initAll;
             var xhr = false;
             var statesArray = new Array();
-
             function initAll() {
                 document.getElementById("searchField").onkeyup = searchSuggest;
-
                 if (window.XMLHttpRequest) {
                     xhr = new XMLHttpRequest();
                 } else {
@@ -77,7 +69,6 @@
                         }
                     }
                 }
-
                 if (xhr) {
                     xhr.onreadystatechange = setStatesArray;
                     xhr.open("GET", "us-states.xml", true);
@@ -86,7 +77,6 @@
                     alert("Sorry, but I couldn't create an XMLHttpRequest");
                 }
             }
-
             function setStatesArray() {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
@@ -94,7 +84,6 @@
                             var allStates = xhr.responseXML.getElementsByTagName("item");
                             for (var i = 0; i < allStates.length; i++) {
                                 statesArray[i] = allStates[i].getElementsByTagName("label")[0].firstChild;
-
                             }
                         }
                     } else {
@@ -102,16 +91,13 @@
                     }
                 }
             }
-
             function searchSuggest() {
                 var str = document.getElementById("searchField").value;
                 document.getElementById("searchField").className = "";
                 if (str != "") {
                     document.getElementById("popups").innerHTML = "";
-
                     for (var i = 0; i < statesArray.length; i++) {
                         var thisState = statesArray[i].nodeValue;
-
                         if (thisState.toLowerCase().indexOf(str.toLowerCase()) == 0) {
                             var tempDiv = document.createElement("div");
                             tempDiv.innerHTML = thisState;
@@ -127,17 +113,14 @@
                     if (foundCt == 1) {
                         document.getElementById("searchField").value = document.getElementById("popups").firstChild.innerHTML;
                         document.getElementById("popups").innerHTML = "";
-
                     }
                 }
             }
-
             function makeChoice(evt) {
                 var thisDiv = (evt) ? evt.target : window.event.srcElement;
                 document.getElementById("searchField").value = thisDiv.innerHTML;
                 document.getElementById("popups").innerHTML = "";
             }
-
 //            function mas(){
 ////                alert('Hola');
 ////                alert(document.getElementById("popups").innerHTML);
@@ -237,4 +220,3 @@
 
 
         <!-- ///////////////////////Alert Registro ////////////////////////// -->
-
