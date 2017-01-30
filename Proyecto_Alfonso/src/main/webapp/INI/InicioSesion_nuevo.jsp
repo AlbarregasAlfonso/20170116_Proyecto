@@ -41,13 +41,14 @@
                if(document.getElementById("message").innerHTML==='Bienvenido'){
       
                           $('#inicioSesion').modal('hide');
+                          $('#Bienvenido').modal();
                     }
                 }
             }
 
 
         </script>
-
+        <jsp:include page="Bienvenido.jsp"/>
 
 
 <div class="modal fade" id="inicioSesion" role="dialog">

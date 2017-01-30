@@ -30,7 +30,11 @@ public interface IProductoDAO {
     
     public ArrayList<Producto> obtenerProductosQueFaltanEnStock (String idCliente);
     
+    public ArrayList<Producto> productosSinStock();
+    
     public void disminuirProductosEnStock (String idCliente);
+    
+    public void insertarEnProductosSinStock(String denominacion, String faltan);
     
     public void closeConnection();
     

@@ -80,18 +80,27 @@ public class ControllersPagar extends HttpServlet {
 
                 if (pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario()) != null) {
                     
+                    request.getSession().setAttribute("carrito", "cerrado");
                     System.out.println("No hay stock");
                     ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
+                    pedao.modificarEstadoDePedido("s", u.getIdUsuario());
 
                     for (Producto p : productosSinStock) {
 
-                        System.out.println("Esto es lo que hay"+p.getDenominacion());
+                        System.out.println("Esto es lo que hay" + p.getDenominacion()+"Y faltan "+p.getCantidadQueFaltaEnStock());
+                        request.setAttribute("mensaje", "El producto " + p.getDenominacion() + " no lo tenemos en Stock ahora mismo");
+                        pdao.insertarEnProductosSinStock( p.getDenominacion(), p.getCantidadQueFaltaEnStock());
 
                     }
+                    
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
 
                 } else {
-                    System.out.println("todo bien");
+
                     pdao.disminuirProductosEnStock(u.getIdUsuario());
+                    request.setAttribute("mensaje", "Su pedido llegara en 5 dias laborales");
+                    pedao.modificarEstadoDePedido("r", u.getIdUsuario());
+                    request.getSession().setAttribute("carrito", "cerrado");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 
                 }
@@ -133,9 +142,14 @@ public class ControllersPagar extends HttpServlet {
 
                 cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
                 ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
-                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
+
                 Provincia p = new Provincia();
                 p = prodao.obtenerProvincia(request.getParameter("codigoPostal"));
+
+                direcciones = ddao.obtenerDirecciones(u.getIdUsuario());
+                request.setAttribute("direcciones", direcciones);
+
+                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
 
             }
 

@@ -178,4 +178,17 @@ public class MysqlPedidosDAO implements IPedidosDAO {
         return semaforo;
     }
 
+    @Override
+    public void modificarEstadoDePedido(String estado, String idCliente) {
+           try {
+            String sql = "update pedidos set estado='"+estado+"' where IdCliente="+idCliente+"";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
 }

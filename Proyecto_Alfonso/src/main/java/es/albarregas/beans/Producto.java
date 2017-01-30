@@ -26,6 +26,19 @@ public class Producto {
     private String precioConIva;
     private String cantidadQueFaltaEnStock;
 
+    
+    
+    
+    
+    public String getCantidadQueFaltaEnStock() {
+        return cantidadQueFaltaEnStock;
+    }
+
+    public void setCantidadQueFaltaEnStock(String cantidadQueFaltaEnStock) {
+        this.cantidadQueFaltaEnStock = cantidadQueFaltaEnStock;
+    }
+
+    
 
     public Producto(String idProducto, String denominacion, String precioUnitario, String stock, String precioConIva) {
         this.idProducto = idProducto;

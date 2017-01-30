@@ -35,7 +35,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                
+
                 while (resultado.next()) {
                     Producto producto = new Producto();
                     producto.setIdProducto(resultado.getString("IdProducto"));
@@ -127,36 +127,36 @@ public class MysqlProductoDAO implements IProductoDAO {
         }
         closeConnection();
         return lista;
-}
+    }
 
     @Override
     public String getSacarNombreProducto(String idProducto) {
-        String re=null;
+        String re = null;
         if (idProducto == null) {
             idProducto = "";
         }
-        
+
         String consulta = "select Denominacion from productos where IdProducto= " + idProducto;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                 while (resultado.next()) {
-                     
-                    re=resultado.getString("Denominacion");
+                while (resultado.next()) {
 
-                 }
-               
+                    re = resultado.getString("Denominacion");
+
+                }
+
             } catch (Exception e) {
-                
+
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
                         } catch (Exception e) {
-                           
+
                         }
                     } else {
                         resultado.close();
@@ -171,33 +171,33 @@ public class MysqlProductoDAO implements IProductoDAO {
         closeConnection();
         return re;
     }
-    
+
     @Override
     public String getSacarDescripcionProducto(String idProducto) {
-        String re=null;
+        String re = null;
         if (idProducto == null) {
             idProducto = "";
         }
-        
+
         String consulta = "select descripcion from productos where IdProducto=" + idProducto;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                 while (resultado.next()) {
-                    re=resultado.getString("descripcion"); 
-                 }
-               
+                while (resultado.next()) {
+                    re = resultado.getString("descripcion");
+                }
+
             } catch (Exception e) {
-                
+
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
                         } catch (Exception e) {
-                           
+
                         }
                     } else {
                         resultado.close();
@@ -210,35 +210,35 @@ public class MysqlProductoDAO implements IProductoDAO {
         }
         closeConnection();
         return re;
-        
+
     }
 
     @Override
     public String getSacarStock(String idProducto) {
-        String re=null;
+        String re = null;
         if (idProducto == null) {
             idProducto = "";
         }
-        
+
         String consulta = "select Stock from productos where IdProducto=" + idProducto;
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                 while (resultado.next()) {
-                    re=resultado.getString("Stock"); 
-                 }
-               
+                while (resultado.next()) {
+                    re = resultado.getString("Stock");
+                }
+
             } catch (Exception e) {
-                
+
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
                         } catch (Exception e) {
-                           
+
                         }
                     } else {
                         resultado.close();
@@ -255,30 +255,30 @@ public class MysqlProductoDAO implements IProductoDAO {
 
     @Override
     public String sacarIdProducto(String denominacion) {
-       String re=null;
+        String re = null;
         if (denominacion == null) {
             denominacion = "";
         }
-        
-        String consulta = "select IdProducto from productos where denominacion='"+denominacion+"'";
+
+        String consulta = "select IdProducto from productos where denominacion='" + denominacion + "'";
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                 while (resultado.next()) {     
-                    re=resultado.getString("IdProducto");
-                 }
-               
+                while (resultado.next()) {
+                    re = resultado.getString("IdProducto");
+                }
+
             } catch (Exception e) {
-                
+
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
                         try {
                             resultado.close();
                         } catch (Exception e) {
-                           
+
                         }
                     } else {
                         resultado.close();
@@ -296,22 +296,86 @@ public class MysqlProductoDAO implements IProductoDAO {
 
     @Override
     public ArrayList<Producto> obtenerProductosQueFaltanEnStock(String idCliente) {
-            ArrayList<Producto> lista;
+
+        ArrayList<Producto> lista = null;
         if (idCliente == null) {
             idCliente = "";
         }
-        lista = null;
-        String consulta = "select pro.Denominacion,(lp.Cantidad-pro.Stock) from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where p.IdCliente="+idCliente+" and p.Estado='p' and lp.Cantidad>pro.Stock";
+
+        String consulta = "select pro.Denominacion,(lp.Cantidad-pro.Stock) from pedidos p inner join lineaspedidos lp on p.IdPedido=lp.IdPedido inner join productos pro on pro.IdProducto=lp.IdProducto where p.IdCliente=" + idCliente + " and p.Estado='p' and lp.Cantidad>pro.Stock";
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
             try {
-                
+
                 while (resultado.next()) {
-                    System.out.println("Estamos en el dao "+resultado.getString("pro.Denominacion"));
-                    Producto producto = new Producto(resultado.getString("pro.Denominacion"),resultado.getString("(lp.Cantidad-pro.Stock)"));
+                    lista = new ArrayList();
+
+                    System.out.println("Estamos en el dao " + resultado.getString("pro.Denominacion") + " y la cantidad " + resultado.getString("(lp.Cantidad-pro.Stock)"));
+                    Producto producto = new Producto(resultado.getString("pro.Denominacion"), resultado.getString("(lp.Cantidad-pro.Stock)"));
                     lista.add(producto);
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        System.out.println("Vamos a salir del dao");
+
+        System.out.println("El valor de la lista" + lista);
+
+        return lista;
+    }
+
+    @Override
+    public void disminuirProductosEnStock(String idCliente) {
+        try {
+            String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente=" + idCliente + " and pedi.estado='p';";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+
+    }
+
+    @Override
+    public ArrayList<Producto> productosSinStock() {
+        ArrayList<Producto> lista;
+        Producto p = new Producto();
+        
+        lista = new ArrayList<Producto>();
+        String consulta = "select denominacion,faltan from productosSinStock";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+
+                while (resultado.next()) {
+                    p.setDenominacion(resultado.getString("denominacion"));
+                    p.setCantidadQueFaltaEnStock(resultado.getString("faltan"));
+                    lista.add(p);
                 }
             } catch (Throwable producto) {
                 throwable = producto;
@@ -338,23 +402,21 @@ public class MysqlProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void disminuirProductosEnStock(String idCliente) {
-         try {
-            String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente="+idCliente+" and pedi.estado='p';";
+    public void insertarEnProductosSinStock(String denominacion, String faltan) {
+            try {
+            
+
+            String sql = "insert into productosSinStock values('"+denominacion+"','"+faltan+"')";
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
-     
+
             preparada.executeUpdate();
+
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al actualizar");
+            System.out.println("Algo ha pasado al insertar");
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();
 
     }
 
-
-
-    
-    
 }
-   

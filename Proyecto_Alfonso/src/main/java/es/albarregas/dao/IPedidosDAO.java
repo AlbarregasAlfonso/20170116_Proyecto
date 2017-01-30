@@ -20,6 +20,10 @@ public interface IPedidosDAO {
     public String sacarEstadoUltimoPedido(String idusuario);
 
     public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
+    
+    public void modificarEstadoDePedido(String estado,String idCliente);
+    
+    
 
     public void closeConnection();
 
