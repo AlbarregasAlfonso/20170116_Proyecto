@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface IDireccionesDAO {
     
-    public void introducirDireccion(String nombreDireccion, String direccion, String codigoPostal, String telefono, String idUsuario);
+    public void introducirDireccion(String nombreDireccion, String direccion, String codigoPostal, String telefono, String idUsuario, String nombre);
     
     public  ArrayList<Direccion> obtenerDirecciones (String idCliente);
     

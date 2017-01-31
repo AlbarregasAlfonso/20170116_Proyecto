@@ -15,5 +15,7 @@ public interface IProvinciaDAO {
  
     public Provincia obtenerProvincia(String codigoPostal);
     
+    public void mostrarTodosLosPueblos();
+    
      public void closeConnection();
 }

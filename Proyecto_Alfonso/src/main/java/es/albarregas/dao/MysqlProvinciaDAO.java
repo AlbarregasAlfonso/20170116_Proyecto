@@ -59,10 +59,54 @@ public class MysqlProvinciaDAO implements IProvinciaDAO{
         return p;
 
     }
+    
+    
 
   @Override
     public void closeConnection() {
         ConnectionFactory.closeConnection();
+    }
+
+    @Override
+    public void mostrarTodosLosPueblos() {
+   
+        
+
+        String consulta = " select codigoPostal,nombre from pueblos;";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+               
+                while (resultado.next()) {
+                    // <item><label>Alaska</label><value>AK</value></item>
+                    System.out.println("<item><label>"+resultado.getString("codigoPostal")+"-"+resultado.getString("nombre")+"</label><value>AK</value></item>");
+                    //System.out.println("<item><label>"+resultado.getString("codigoPostal")+"-"+resultado.getString("nombre")+"</label><value>AK</value></item>");
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        
+        
     }
     
     

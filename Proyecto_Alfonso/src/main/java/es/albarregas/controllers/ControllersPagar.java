@@ -139,9 +139,11 @@ public class ControllersPagar extends HttpServlet {
 //            }
 
             if (request.getParameter("Enviar") != null) {
-
+                
+              
+                
                 cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
-                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
+             //   ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
 
                 Provincia p = new Provincia();
                 p = prodao.obtenerProvincia(request.getParameter("codigoPostal"));
@@ -154,7 +156,14 @@ public class ControllersPagar extends HttpServlet {
             }
 
             if (request.getParameter("EnviarDesdePago") != null) {
-                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
+                
+                  String codigoYCiudad=(request.getParameter("codigoPostal"));
+                System.out.println("Este es el codigo "+codigoYCiudad.substring(0,5)+" y la direccion "+codigoYCiudad.substring(6, codigoYCiudad.length()));
+                String codigoPostal=codigoYCiudad.substring(0,5);
+                String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
+                
+                
+                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"),codigoPostal, request.getParameter("telefono"), u.getIdUsuario(),pueblo);
 
                 lpdao = daof.getLineaPedidosDAO();
                 u = (Usuario) request.getSession().getAttribute("usuario");

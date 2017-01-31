@@ -195,12 +195,15 @@
                     </ul>
                 </div>
             </div>
+                        
+                          
             <form action="ControllersBusqudas">
 
                 <input class="form-control" type="text" value="" name="nombre" id="searchField" autocomplete="off" placeholder="Escriba el Producto"/><br/>
                 <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
 
             </form>
+             
         </nav>
 
         <!-- ///////////////////////Alert Registro ////////////////////////// -->

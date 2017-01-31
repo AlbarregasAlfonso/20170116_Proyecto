@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class MysqlDireccionesDAO implements IDireccionesDAO{
 
     @Override
-    public void introducirDireccion(String nombreDireccion, String direccion, String codigoPostal, String telefono, String idUsuario) {
+    public void introducirDireccion(String nombreDireccion, String direccion, String codigoPostal, String telefono, String idUsuario, String nombre) {
        try {
             String sqlAux = "select max(IdDireccion)+1 from direcciones";
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
@@ -35,8 +35,8 @@ public class MysqlDireccionesDAO implements IDireccionesDAO{
                 idDireccion = resultado.getString("max(IdDireccion)+1");
             }
 
-            String sql = "insert into direcciones value("+idDireccion+","+idUsuario+",'"+nombreDireccion+"','"+direccion+"',"+codigoPostal+",(select IdPueblo from pueblos where CodigoPostal="+codigoPostal+"),"+telefono+")";
-
+            String sql = "insert into direcciones value("+idDireccion+","+idUsuario+",'"+nombreDireccion+"','"+direccion+"',"+codigoPostal+",(select IdPueblo from pueblos where CodigoPostal="+codigoPostal+" and Nombre='"+nombre+"'),"+telefono+")";
+            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
 

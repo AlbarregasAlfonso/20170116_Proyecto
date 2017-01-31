@@ -7,6 +7,7 @@ package es.albarregas.controllers;
 
 import es.albarregas.beans.Producto;
 import es.albarregas.dao.IProductoDAO;
+import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +38,9 @@ public class MyListener implements ServletContextListener {
         IProductoDAO pdao = daof.getProductoDAO();
         ArrayList<Producto> productosOferta = pdao.getProductos(" where Oferta='s'");
         sc.setAttribute("productosEnOferta",  productosOferta);
+        IProvinciaDAO prodao = daof.getProvinciaDAO();
+        
+//        prodao.mostrarTodosLosPueblos();
         
         for(Producto p:productosOferta){
             System.out.println(p.getIdProducto());
