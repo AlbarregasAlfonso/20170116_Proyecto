@@ -67,6 +67,7 @@ public class ControllersAdministrador extends HttpServlet {
                 udao.BloquearDesbloquearUsuario(request.getParameter("idusuario"), request.getParameter("bloquear"));
                 request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
                 request.setAttribute("mensaje", request.getParameter("mensaje"));
+                
                 url = "index.jsp";
 
             }

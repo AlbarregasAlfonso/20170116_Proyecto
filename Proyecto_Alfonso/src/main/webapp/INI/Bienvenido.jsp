@@ -1,12 +1,12 @@
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>z
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="modal fade" id="Bienvenido" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <a href="ControllersAc"> <button type="button" class="close" data-dismiss="modal">&times;</button></a>
                 <h4 class="modal-title">Holaa</h4>
             </div>
             <div class="modal-body">
