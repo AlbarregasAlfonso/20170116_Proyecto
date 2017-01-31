@@ -148,8 +148,12 @@
                         <!--<li><h4><div id="message"></div></h4><li>-->
                         <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
 
-                        <li><a href="Controllers?valor=0">Productos</a></li>  
-
+                        <c:if  test="${usuario.tipo!='a'}">
+                            <li><a href="Controllers?valor=0">Productos</a></li>
+                        </c:if>
+                        <c:if  test="${usuario.tipo=='a'}">
+                            <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?stock=stock">Mensajes de Stock</a></li>
+                        </c:if>
 
                         <c:if test="${sessionScope.carrito=='abierto'}">
                             <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
@@ -182,28 +186,31 @@
                         </c:if>
 
                         <li><a href="#nada">-----</a></li>
-                        <li class="dropdown">
-                            <a class="glyphicon glyphicon-search" data-toggle="dropdown" href="#">
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                            <c:if  test="${usuario.tipo!='a'}">
+                            <li class="dropdown">
+                                <a class="glyphicon glyphicon-search" data-toggle="dropdown" href="#">
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
 
-                                <!--                                <li><input type="text" placeholder="Escriba el Producto"></li>-->
-                                <li><a href="#">Busqueda avanzada</a></li>
-                            </ul>
-                        </li>
+                                    <!--                                <li><input type="text" placeholder="Escriba el Producto"></li>-->
+                                    <li><a href="#">Busqueda avanzada</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
 
                     </ul>
                 </div>
             </div>
-                        
-                          
-            <form action="ControllersBusqudas">
+            <c:if  test="${usuario.tipo!='a'}">
+                <c:if test="${Busqueda==null}">           
+                    <form action="ControllersBusqudas">
 
-                <input class="form-control" type="text" value="" name="nombre" id="searchField" autocomplete="off" placeholder="Escriba el Producto"/><br/>
-                <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
+                        <input class="form-control" type="text" value="" name="nombre" id="searchField" autocomplete="off" placeholder="Escriba el Producto"/><br/>
+                        <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
 
-            </form>
-             
+                    </form>
+                </c:if> 
+            </c:if>
         </nav>
 
         <!-- ///////////////////////Alert Registro ////////////////////////// -->

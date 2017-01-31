@@ -11,78 +11,78 @@
 </script>
 
 <script>window.onload = initAll;
-            var xhr = false;
-            var statesArray = new Array();
-            function initAll() {
-                document.getElementById("searchField1").onkeyup = searchSuggest;
-                if (window.XMLHttpRequest) {
-                    xhr = new XMLHttpRequest();
-                } else {
-                    if (window.ActiveXObject) {
-                        try {
-                            xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                        } catch (e) {
-                        }
-                    }
-                }
-                if (xhr) {
-                    xhr.onreadystatechange = setStatesArray;
-                    xhr.open("GET", "Codigos.xml", true);
-                    xhr.send(null);
-                } else {
-                    alert("Sorry, but I couldn't create an XMLHttpRequest");
+    var xhr = false;
+    var statesArray = new Array();
+    function initAll() {
+        document.getElementById("searchField1").onkeyup = searchSuggest;
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            if (window.ActiveXObject) {
+                try {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
                 }
             }
-            function setStatesArray() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        if (xhr.responseXML) {
-                            var allStates = xhr.responseXML.getElementsByTagName("item");
-                            for (var i = 0; i < allStates.length; i++) {
-                                statesArray[i] = allStates[i].getElementsByTagName("label")[0].firstChild;
-                            }
-                        }
-                    } else {
-                        alert("There was a problem with the request " + xhr.status);
+        }
+        if (xhr) {
+            xhr.onreadystatechange = setStatesArray;
+            xhr.open("GET", "Codigos.xml", true);
+            xhr.send(null);
+        } else {
+            alert("Sorry, but I couldn't create an XMLHttpRequest");
+        }
+    }
+    function setStatesArray() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                if (xhr.responseXML) {
+                    var allStates = xhr.responseXML.getElementsByTagName("item");
+                    for (var i = 0; i < allStates.length; i++) {
+                        statesArray[i] = allStates[i].getElementsByTagName("label")[0].firstChild;
                     }
                 }
+            } else {
+                alert("There was a problem with the request " + xhr.status);
             }
-            function searchSuggest() {
-                var str = document.getElementById("searchField1").value;
-                document.getElementById("searchField1").className = "";
-                if (str != "") {
-                    document.getElementById("popups").innerHTML = "";
-                    for (var i = 0; i < statesArray.length; i++) {
-                        var thisState = statesArray[i].nodeValue;
-                        if (thisState.toLowerCase().indexOf(str.toLowerCase()) == 0) {
-                            var tempDiv = document.createElement("div");
-                            tempDiv.innerHTML = thisState;
-                            tempDiv.onclick = makeChoice;
-                            tempDiv.className = "suggestions";
-                            document.getElementById("popups").appendChild(tempDiv);
-                        }
-                    }
-                    var foundCt = document.getElementById("popups").childNodes.length;
-                    if (foundCt == 0) {
-                        document.getElementById("searchField1").className = "error";
-                    }
-                    if (foundCt == 1) {
-                        document.getElementById("searchField1").value = document.getElementById("popups").firstChild.innerHTML;
-                        document.getElementById("popups").innerHTML = "";
-                    }
+        }
+    }
+    function searchSuggest() {
+        var str = document.getElementById("searchField1").value;
+        document.getElementById("searchField1").className = "";
+        if (str != "") {
+            document.getElementById("popups").innerHTML = "";
+            for (var i = 0; i < statesArray.length; i++) {
+                var thisState = statesArray[i].nodeValue;
+                if (thisState.toLowerCase().indexOf(str.toLowerCase()) == 0) {
+                    var tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = thisState;
+                    tempDiv.onclick = makeChoice;
+                    tempDiv.className = "suggestions";
+                    document.getElementById("popups").appendChild(tempDiv);
                 }
             }
-            function makeChoice(evt) {
-                var thisDiv = (evt) ? evt.target : window.event.srcElement;
-                document.getElementById("searchField1").value = thisDiv.innerHTML;
+            var foundCt = document.getElementById("popups").childNodes.length;
+            if (foundCt == 0) {
+                document.getElementById("searchField1").className = "error";
+            }
+            if (foundCt == 1) {
+                document.getElementById("searchField1").value = document.getElementById("popups").firstChild.innerHTML;
                 document.getElementById("popups").innerHTML = "";
             }
+        }
+    }
+    function makeChoice(evt) {
+        var thisDiv = (evt) ? evt.target : window.event.srcElement;
+        document.getElementById("searchField1").value = thisDiv.innerHTML;
+        document.getElementById("popups").innerHTML = "";
+    }
 //            function mas(){
 ////                alert('Hola');
 ////                alert(document.getElementById("popups").innerHTML);
 //                //alert(document.formulario.nombre.value());
 //            }
-        </script>
+</script>
 
 
 <div class="row">
@@ -92,7 +92,7 @@
         <br/>
 
 
-        <form action="ControllersPagar" class="form-horizontal" role="form"> 
+        
             <div class="container">
 
                 <ul class="list-inline">
@@ -109,65 +109,55 @@
 
 
                     </c:forEach>
-                    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Otra dirección</a></li>
+                        <br/>
+                        
+                        
+                        
+                        
+                    <li><a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Otra dirección</a>
 
-                    <div id="collapse2" class="panel-collapse collapse">
+                        <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
 
+                            
                             <form action="ControllersPagar" class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre de la Direccion</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="nombreDireccion" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="Casa..Trabajo..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="direccion" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="Direccion">
-                                            </div>
-                                        </div>
                                 <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="codigoPostal" id="searchField1" autocomplete="off" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="XXXXXX">
-                                            </div>
-                                        </div>
-<!--                                <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="codigoPostal" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="XXXXXX">
-                                            </div>
-                                        </div>-->
-<!--                                        <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="codigoPostal" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="XXXXXX">
-                                            </div>
-                                        </div>-->
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre de la Direccion</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="nombreDireccion" class="form-control" id="ejemplo_email_3"
+                                               placeholder="Casa..Trabajo..">
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                            <label for="ejemplo_email_3" class="col-lg-2 control-label">Telefono</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" name="telefono" class="form-control" id="ejemplo_email_3"
-                                                       placeholder="XXX XX XX XX">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                                <button type="submit" name="EnviarDesdePago" class="btn btn-default">Enviar</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="direccion" class="form-control" id="ejemplo_email_3"
+                                               placeholder="Direccion">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="codigoPostal" id="searchField1" autocomplete="off" class="form-control" id="ejemplo_email_3"
+                                               placeholder="XXXXXX">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Telefono</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="telefono" class="form-control" id="ejemplo_email_3"
+                                               placeholder="XXX XX XX XX">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button type="submit" name="EnviarDesdePago" class="btn btn-default">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
-                    </div>
+                    </div></li>
 
 
 
@@ -182,8 +172,8 @@
                 </div>
             </div>
         </form>
-<br/>
-<br/>
+        <br/>
+        <br/>
         <c:if test="${mensaje!=null}">
             <div class="content">
                 <h5><div class="alert alert-danger">
@@ -195,8 +185,8 @@
         </c:if>
 
 
- <input class="form-control" type="text" value="" name="nombre" id="searchField1" autocomplete="off" placeholder="Escriba el Producto"/><br/>
-                <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
+        <input class="form-control" type="text" value="" name="nombre" id="searchField1" autocomplete="off" placeholder="Escriba el Producto"/><br/>
+        <a href="#" onclick="ControllersBusqudas"><div id="popups"></div></a>
 
 
     </div>
@@ -442,7 +432,6 @@
 
 
     </div>
-
 
 </div>
 

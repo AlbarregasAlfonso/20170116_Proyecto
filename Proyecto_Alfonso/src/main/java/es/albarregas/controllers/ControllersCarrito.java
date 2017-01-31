@@ -95,6 +95,8 @@ public class ControllersCarrito extends HttpServlet {
             }
 
             if (request.getParameter("Vercarrito") != null) {
+                
+                request.setAttribute("Busqueda","cerrar");//esto lo hacemos para que desaparezca la barra de busqueda
 
                 request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
             }

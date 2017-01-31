@@ -36,6 +36,10 @@ public interface IProductoDAO {
     
     public void insertarEnProductosSinStock(String denominacion, String faltan);
     
+    public void aumentarStockProducto(String denominacion);
+    
+    public void eliminarDeProductosSinStock(String denominacion);
+    
     public void closeConnection();
     
 }

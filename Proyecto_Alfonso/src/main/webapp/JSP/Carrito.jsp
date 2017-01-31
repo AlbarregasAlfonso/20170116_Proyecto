@@ -123,6 +123,8 @@
 
 
             <c:if test="${sessionScope.apellido==false}">
+                
+                
 
                 <td><a href="" data-toggle="modal" data-target="#RegistroCompra"><button type="button" class="btn btn-info">Comprar</button></a></td>
 

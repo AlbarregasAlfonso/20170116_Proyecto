@@ -70,6 +70,9 @@ public class ControllersPagar extends HttpServlet {
             request.setAttribute("direcciones", direcciones);
 
             if (request.getParameter("Enviar2") != null) {
+                
+               
+                
                 System.out.println("Envaiamos2");
                 if (request.getParameter("direccionDeEnvio") == null) {
                     System.out.println("no hay direccion");
@@ -139,11 +142,18 @@ public class ControllersPagar extends HttpServlet {
 //            }
 
             if (request.getParameter("Enviar") != null) {
-                
+           
               
                 
                 cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
-             //   ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"), request.getParameter("codigoPostal"), request.getParameter("telefono"), u.getIdUsuario());
+             
+                String codigoYCiudad=(request.getParameter("codigoPostal"));
+                System.out.println("Este es el codigo "+codigoYCiudad.substring(0,5)+" y la direccion "+codigoYCiudad.substring(6, codigoYCiudad.length()));
+                String codigoPostal=codigoYCiudad.substring(0,5);
+                String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
+                
+                
+                ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"),codigoPostal, request.getParameter("telefono"), u.getIdUsuario(),pueblo);
 
                 Provincia p = new Provincia();
                 p = prodao.obtenerProvincia(request.getParameter("codigoPostal"));
@@ -157,7 +167,9 @@ public class ControllersPagar extends HttpServlet {
 
             if (request.getParameter("EnviarDesdePago") != null) {
                 
-                  String codigoYCiudad=(request.getParameter("codigoPostal"));
+       
+                
+                 String codigoYCiudad=(request.getParameter("codigoPostal"));
                 System.out.println("Este es el codigo "+codigoYCiudad.substring(0,5)+" y la direccion "+codigoYCiudad.substring(6, codigoYCiudad.length()));
                 String codigoPostal=codigoYCiudad.substring(0,5);
                 String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
@@ -184,6 +196,7 @@ public class ControllersPagar extends HttpServlet {
 //
 //                 
 //            }
+           
             request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
 
             out.println("Esto va to perfe");

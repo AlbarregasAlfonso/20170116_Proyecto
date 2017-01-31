@@ -361,11 +361,10 @@ public class MysqlProductoDAO implements IProductoDAO {
 
     @Override
     public ArrayList<Producto> productosSinStock() {
-        ArrayList<Producto> lista;
-        Producto p = new Producto();
-        
-        lista = new ArrayList<Producto>();
-        String consulta = "select denominacion,faltan from productosSinStock";
+        ArrayList<Producto> lista = lista = new ArrayList<Producto>();
+       
+   
+        String consulta = " select deminacion,faltan from productosSinStock";
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
@@ -373,9 +372,10 @@ public class MysqlProductoDAO implements IProductoDAO {
             try {
 
                 while (resultado.next()) {
-                    p.setDenominacion(resultado.getString("denominacion"));
-                    p.setCantidadQueFaltaEnStock(resultado.getString("faltan"));
-                    lista.add(p);
+                    Producto producto = new Producto();
+                    producto.setDenominacion(resultado.getString("deminacion"));
+                    producto.setCantidadQueFaltaEnStock(resultado.getString("faltan"));
+                    lista.add(producto);
                 }
             } catch (Throwable producto) {
                 throwable = producto;
@@ -398,6 +398,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             ex.printStackTrace();
         }
         closeConnection();
+
         return lista;
     }
 
@@ -417,6 +418,36 @@ public class MysqlProductoDAO implements IProductoDAO {
         }
         closeConnection();
 
+    }
+
+    @Override
+    public void aumentarStockProducto(String denominacion) {
+        try {
+            String sql = "UPDATE productos SET Stock=10 where denominacion='"+denominacion+"'";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
+    @Override
+    public void eliminarDeProductosSinStock(String denominacion) {
+          try {
+            
+            String sql = "DELETE FROM productosSinStock WHERE deminacion = '"+denominacion+"'";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar eliminarProductoLineaPedido");
+            System.out.println(ex.getErrorCode());
+            //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
     }
 
 }

@@ -5,7 +5,9 @@
  */
 package es.albarregas.controllers;
 
+import es.albarregas.beans.Producto;
 import es.albarregas.beans.Usuario;
+import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
@@ -47,6 +49,7 @@ public class ControllersAdministrador extends HttpServlet {
 
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IUsuarioDAO udao = daof.getUsuarioDAO();
+            IProductoDAO pdao = daof.getProductoDAO();
             
             String url = null;
 
@@ -66,6 +69,24 @@ public class ControllersAdministrador extends HttpServlet {
                 request.setAttribute("mensaje", request.getParameter("mensaje"));
                 url = "index.jsp";
 
+            }
+            
+            if(request.getParameter("stock") != null){
+                
+                ArrayList<Producto> productosSinStock = pdao.productosSinStock();
+                request.setAttribute("ProductosSinStock",productosSinStock);
+               
+                url= "/JSP/StockAdmin.jsp";
+               
+            }
+            if(request.getParameter("aumentarStock")!=null){
+                
+                pdao.aumentarStockProducto(request.getParameter("productoDenominacion"));
+                pdao.eliminarDeProductosSinStock(request.getParameter("productoDenominacion"));
+                
+                ArrayList<Producto> productosSinStock = pdao.productosSinStock();
+                request.setAttribute("ProductosSinStock",productosSinStock);
+                url= "/JSP/StockAdmin.jsp";
             }
 
             request.getRequestDispatcher(url).forward(request, response);

@@ -29,10 +29,14 @@ public class MysqlDireccionesDAO implements IDireccionesDAO{
             String sqlAux = "select max(IdDireccion)+1 from direcciones";
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(sqlAux);
-            String idDireccion = "";
+            String idDireccion = null;
 
             while (resultado.next()) {
                 idDireccion = resultado.getString("max(IdDireccion)+1");
+            }
+            if(idDireccion==null){
+                idDireccion="1";
+                
             }
 
             String sql = "insert into direcciones value("+idDireccion+","+idUsuario+",'"+nombreDireccion+"','"+direccion+"',"+codigoPostal+",(select IdPueblo from pueblos where CodigoPostal="+codigoPostal+" and Nombre='"+nombre+"'),"+telefono+")";
