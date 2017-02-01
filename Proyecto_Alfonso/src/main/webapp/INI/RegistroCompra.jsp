@@ -84,7 +84,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="ControllersPagar" class="form-horizontal" role="form">
+                <form action="ControllersPagar" method="POST" class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre</label>
                         <div class="col-lg-10">

@@ -7,6 +7,7 @@ package es.albarregas.controllers;
 
 import es.albarregas.beans.Producto;
 import es.albarregas.beans.Usuario;
+import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
@@ -50,6 +51,7 @@ public class ControllersAdministrador extends HttpServlet {
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IUsuarioDAO udao = daof.getUsuarioDAO();
             IProductoDAO pdao = daof.getProductoDAO();
+            IPedidosDAO pedao = daof.getPedidosDAO();
             
             String url = null;
 
@@ -80,13 +82,21 @@ public class ControllersAdministrador extends HttpServlet {
                 url= "/JSP/StockAdmin.jsp";
                
             }
+            
             if(request.getParameter("aumentarStock")!=null){
                 
-                pdao.aumentarStockProducto(request.getParameter("productoDenominacion"));
+                int cantidad = Integer.parseInt(request.getParameter("HacenFalta"));
+                cantidad=cantidad+10;
+                request.setAttribute("mensaje1", "se han comprado "+cantidad+" productos por lo que ahora mismo en stock hay 10 productos, "+request.getParameter("HacenFalta")+" para el cliente y 10 para el stock");
+                pdao.aumentarStockProducto(request.getParameter("productoDenominacion"),request.getParameter("HacenFalta"));
                 pdao.eliminarDeProductosSinStock(request.getParameter("productoDenominacion"));
                 
-                ArrayList<Producto> productosSinStock = pdao.productosSinStock();
-                request.setAttribute("ProductosSinStock",productosSinStock);
+                ArrayList<Producto> productosSinStock = pdao.productosSinStock();//actualizamos los productos sin stock
+                request.setAttribute("ProductosSinStock",productosSinStock);    //actualizamos productos sin stock
+                
+                pedao.modificarEstadosDesPedidos();//actualiza el estado de los pedidos
+              //  pdao.disminuirProductosEnStock(u.getIdUsuario(),"s");
+                
                 url= "/JSP/StockAdmin.jsp";
             }
 

@@ -48,7 +48,7 @@ public class Controllers extends HttpServlet {
             IClienteDAO cdao = daof.getRegistroDAO();
                       
             if (request.getParameter("cerrarsesion") != null) {
-                
+                System.out.println("Entramos en cerrar sesion "+request.getParameter("cerrarsesion"));
                 request.setAttribute("mensaje", "Hasta pronto!");
                 request.getSession().removeAttribute("usuario");
                 request.getSession().removeAttribute("carrito");
@@ -146,9 +146,8 @@ public class Controllers extends HttpServlet {
                     
                     request.getSession().setAttribute("apellido",cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
                     
-                   
-                    
-                    request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
+                    //request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
+                    //request.setAttribute("mensaje", "bienvenido!");
                     
                     //request.getRequestDispatcher("index.jsp").forward(request, response);
                     

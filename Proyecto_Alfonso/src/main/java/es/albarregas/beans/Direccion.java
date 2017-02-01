@@ -16,16 +16,22 @@ public class Direccion {
     private Provincia provincia;
     private String telefono;
     private String idDireccion;
+    private String codigoPostal;
 
-    
-    public String getTelefono() {
-        return telefono;
+    public Direccion(String nombre, String nombreDireccion) {
+        this.nombre = nombre;
+        this.nombreDireccion = nombreDireccion;
     }
 
-    public void setTelefono(String telefono) {
+
+    public Direccion(String nombre, String nombreDireccion, String telefono, String codigoPostal) {
+        this.nombre = nombre;
+        this.nombreDireccion = nombreDireccion;
         this.telefono = telefono;
+        this.codigoPostal = codigoPostal;
     }
-
+    
+    
     public Direccion(String idDireccion,String nombre, String nombreDireccion,String telefono, Pueblo pueblo, Provincia provincia) {
         this.nombre = nombre;
         this.nombreDireccion = nombreDireccion;
@@ -35,7 +41,21 @@ public class Direccion {
         this.idDireccion = idDireccion;
     }
 
+ public String getTelefono() {
+        return telefono;
+    }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
     
     
     

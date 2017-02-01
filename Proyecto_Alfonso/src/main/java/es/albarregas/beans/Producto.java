@@ -60,10 +60,13 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String denominacion, String cantidadQueFaltaEnStock) {
+    public Producto(String idProducto, String denominacion, String cantidadQueFaltaEnStock) {
+        this.idProducto = idProducto;
         this.denominacion = denominacion;
         this.cantidadQueFaltaEnStock = cantidadQueFaltaEnStock;
     }
+
+   
 
     
     

@@ -6,11 +6,13 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Cliente;
+import es.albarregas.beans.Direccion;
 import es.albarregas.beans.Pedidos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -179,9 +181,10 @@ public class MysqlPedidosDAO implements IPedidosDAO {
     }
 
     @Override
-    public void modificarEstadoDePedido(String estado, String idCliente) {
+    public void modificarEstadoDePedido(String estado, String idCliente,String idDireccion,float totalprecio,String gastosEnvio) {
            try {
-            String sql = "update pedidos set estado='"+estado+"' where IdCliente="+idCliente+"";
+            String sql = "update pedidos set estado='"+estado+"',BaseImponible="+totalprecio+", GastosEnvio="+gastosEnvio+", IdDireccion="+idDireccion+" where IdCliente="+idCliente;
+            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
         } catch (SQLException ex) {
@@ -189,6 +192,126 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();
+    }
+
+    @Override
+    public void modificarEstadosDesPedidos() {
+         try {
+            String sqlAux = "select pe.idpedido from productos p inner join lineaspedidos lp on lp.idproducto=p.idproducto inner join pedidos pe on lp.idpedido=pe.idpedido where stock>cantidad and pe.estado='s'";
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(sqlAux);
+            String idPedido = null;
+
+            while (resultado.next()) {
+                idPedido = resultado.getString("pe.idpedido");
+            }
+           
+
+            String sql = "update pedidos set estado='r' where IdPedido="+idPedido+"";
+            System.out.println(sql);
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       closeConnection();
+        
+    }
+
+//    @Override
+//    public ArrayList<Pedidos> obtenerPedidos(String idCliente) {
+//        Pedidos p = new Pedidos();
+//        Direccion d= new Direccion();
+//        String consulta = "select * from pedidos where IdUsuario=" + idCliente;
+//
+//        try {
+//            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+//            ResultSet resultado = sentencia.executeQuery(consulta);
+//            Throwable throwable = null;
+//            try {
+//                while (resultado.next()) {
+//                 //   d = new Direccion()
+//                    p = new Pedidos(resultado.getString("Fecha"),resultado.getString("estado"));
+//                   
+//                }
+//            } catch (Throwable producto) {
+//                throwable = producto;
+//                throw producto;
+//            } finally {
+//                if (resultado != null) {
+//                    if (throwable != null) {
+//                        try {
+//                            resultado.close();
+//                        } catch (Throwable producto) {
+//                            throwable.addSuppressed(producto);
+//                        }
+//                    } else {
+//                        resultado.close();
+//                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println("Error al ejecutar la sentencia");
+//            System.out.println(ex.getMessage());
+//        }
+//        closeConnection();
+//       // return u;
+//       return ArrayList<Pedidos> = new ArrayList();
+//
+//    }
+
+    @Override
+    public ArrayList<Pedidos> obtenerPedidos(String idCliente) {
+        
+        Pedidos p = new Pedidos();
+        Direccion d = new Direccion();
+        ArrayList<Pedidos> lista = null;
+        if (idCliente == null) {
+            idCliente = "";
+        }
+
+        String consulta = "select p.idPedido,p.Fecha,p.estado,p.idcliente,p.BaseImponible,p.gastosEnvio, d.NombreDireccion,d.direccion,d.codigoPostal,d.telefono from pedidos p inner join direcciones d on d.iddireccion=p.iddireccion where p.idCliente="+idCliente;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+
+                while (resultado.next()) {
+                    lista = new ArrayList();
+                    d = new Direccion(resultado.getString("d.NombreDireccion"),resultado.getString("d.direccion"),resultado.getString("d.codigoPostal"),resultado.getString("d.telefono"));
+                    p = new Pedidos(resultado.getString("p.idPedido"),resultado.getString("p.idcliente"),resultado.getString("p.Fecha"),resultado.getString("p.estado"),resultado.getString("p.BaseImponible"),resultado.getString("p.gastosEnvio"),d);
+      
+                    lista.add(p);
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        System.out.println("Vamos a salir del dao");
+
+        System.out.println("El valor de la lista" + lista);
+
+        return lista;
     }
 
 }

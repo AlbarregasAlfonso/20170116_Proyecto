@@ -6,6 +6,7 @@
 package es.albarregas.dao;
 
 import es.albarregas.beans.Pedidos;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,15 +16,17 @@ public interface IPedidosDAO {
 
     public void insertarCarrito(Pedidos p);
 
+    public ArrayList<Pedidos> obtenerPedidos(String idCliente);
+    
     public String idPedidoMaxDeUnCliente(String idCliente);
 
     public String sacarEstadoUltimoPedido(String idusuario);
 
     public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
     
-    public void modificarEstadoDePedido(String estado,String idCliente);
+    public void modificarEstadoDePedido(String estado,String idCliente,String idDireccion,float totalprecio,String gastosEnvio);
     
-    
+    public void modificarEstadosDesPedidos();
 
     public void closeConnection();
 

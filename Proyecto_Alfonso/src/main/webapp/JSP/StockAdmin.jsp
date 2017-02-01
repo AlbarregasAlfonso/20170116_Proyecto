@@ -31,6 +31,11 @@
                 </tbody>
             </c:forEach>
         </table>
+         <c:if test="${mensaje1!=null}">
+            <div class="alert alert-success" class="content">
+                <h5> <c:out value="${mensaje1}"/> <strong></strong></h5>
+            </div>
+            </c:if>
     </div>
 </div>
 

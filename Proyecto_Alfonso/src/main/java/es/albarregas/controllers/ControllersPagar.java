@@ -5,6 +5,7 @@
  */
 package es.albarregas.controllers;
 
+
 import es.albarregas.beans.Direccion;
 import es.albarregas.beans.LineasPedidos;
 import es.albarregas.beans.Producto;
@@ -19,6 +20,8 @@ import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,12 +73,9 @@ public class ControllersPagar extends HttpServlet {
             request.setAttribute("direcciones", direcciones);
 
             if (request.getParameter("Enviar2") != null) {
-                
-               
-                
-                System.out.println("Envaiamos2");
+
                 if (request.getParameter("direccionDeEnvio") == null) {
-                    System.out.println("no hay direccion");
+                    
                     request.setAttribute("mensaje", "Tienes que seleccionar donde enviaremos el pedido");
                     request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
 
@@ -86,13 +86,23 @@ public class ControllersPagar extends HttpServlet {
                     request.getSession().setAttribute("carrito", "cerrado");
                     System.out.println("No hay stock");
                     ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
-                    pedao.modificarEstadoDePedido("s", u.getIdUsuario());
+                    
+                     float precioTotal=0f;
+                    float cantidad1;
+                    float precioUnitario;
+                    
+                    for(LineasPedidos p:productosCarritoDesglose){
+                        cantidad1 = parseFloat(p.getCantidad()); 
+                        precioUnitario = parseFloat(p.getProducto().getPrecioConIva());
+                        precioTotal=precioTotal+precioUnitario*cantidad1;
+                    }
+                    pedao.modificarEstadoDePedido("s", u.getIdUsuario(),request.getParameter("direccionDeEnvio"), precioTotal+5,"5");
 
                     for (Producto p : productosSinStock) {
 
                         System.out.println("Esto es lo que hay" + p.getDenominacion()+"Y faltan "+p.getCantidadQueFaltaEnStock());
                         request.setAttribute("mensaje", "El producto " + p.getDenominacion() + " no lo tenemos en Stock ahora mismo");
-                        pdao.insertarEnProductosSinStock( p.getDenominacion(), p.getCantidadQueFaltaEnStock());
+                        pdao.insertarEnProductosSinStock( p.getDenominacion(), p.getCantidadQueFaltaEnStock(),p.getIdProducto());
 
                     }
                     
@@ -100,9 +110,20 @@ public class ControllersPagar extends HttpServlet {
 
                 } else {
 
-                    pdao.disminuirProductosEnStock(u.getIdUsuario());
+                    pdao.disminuirProductosEnStock(u.getIdUsuario(),"r");
                     request.setAttribute("mensaje", "Su pedido llegara en 5 dias laborales");
-                    pedao.modificarEstadoDePedido("r", u.getIdUsuario());
+                    
+                    float precioTotal=0f;
+                    float cantidad1;
+                    float precioUnitario;
+                    
+                    for(LineasPedidos p:productosCarritoDesglose){
+                        cantidad1 = parseFloat(p.getCantidad()); 
+                        precioUnitario = parseFloat(p.getProducto().getPrecioConIva());
+                        precioTotal=precioTotal+precioUnitario*cantidad1;
+                    }
+ 
+                    pedao.modificarEstadoDePedido("r", u.getIdUsuario(),request.getParameter("direccionDeEnvio"),precioTotal+5,"5");
                     request.getSession().setAttribute("carrito", "cerrado");
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 

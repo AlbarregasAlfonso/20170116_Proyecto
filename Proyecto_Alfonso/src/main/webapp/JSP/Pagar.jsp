@@ -223,8 +223,9 @@
                             <td><fmt:formatNumber value="${lp.producto.precioConIva-lp.producto.precioUnitario}" maxFractionDigits="2"/></td>
                             <td><fmt:formatNumber value="${lp.producto.precioConIva}" maxFractionDigits="2"/></td>
                             <td><c:out value="${lp.cantidad}"/></td>
+                            
                             <c:set var="totalPrecio" value="${totalPrecio+(lp.producto.precioConIva*lp.cantidad)}"/>
-
+                            
 
                         </tr>                    
                     </c:forEach>
@@ -244,6 +245,7 @@
 
 
                         <th><fmt:formatNumber value="${totalPrecio+5}" maxFractionDigits="2"/></th>
+                     
                     </tr>
                 </tbody>
             </table>

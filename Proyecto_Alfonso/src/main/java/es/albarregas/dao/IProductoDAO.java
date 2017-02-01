@@ -32,11 +32,11 @@ public interface IProductoDAO {
     
     public ArrayList<Producto> productosSinStock();
     
-    public void disminuirProductosEnStock (String idCliente);
+    public void disminuirProductosEnStock (String idCliente, String estado);
     
-    public void insertarEnProductosSinStock(String denominacion, String faltan);
+    public void insertarEnProductosSinStock(String denominacion, String faltan, String idProducto);
     
-    public void aumentarStockProducto(String denominacion);
+    public void aumentarStockProducto(String denominacion,String cantidad);
     
     public void eliminarDeProductosSinStock(String denominacion);
     

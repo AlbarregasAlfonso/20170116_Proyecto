@@ -150,10 +150,10 @@
 
                         <c:if  test="${usuario.tipo!='a'}">
                             <li><a href="Controllers?valor=0">Productos</a></li>
-                        </c:if>
-                        <c:if  test="${usuario.tipo=='a'}">
+                            </c:if>
+                            <c:if  test="${usuario.tipo=='a'}">
                             <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?stock=stock">Mensajes de Stock</a></li>
-                        </c:if>
+                            </c:if>
 
                         <c:if test="${sessionScope.carrito=='abierto'}">
                             <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
@@ -180,7 +180,7 @@
                             <c:if  test="${usuario.tipo=='u'}">
 
                                 <li><a href="" data-toggle="modal" data-target="#Registro">Panel de control</a></li>
-                                <li><a href="" data-toggle="modal" data-target="#inicioSesion">cerrar sesion</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ControllersMisPedidos" >Mis Pedidos</a></li>
                                 </c:if>
 
                         </c:if>
@@ -213,20 +213,7 @@
             </c:if>
         </nav>
 
-        <!-- ///////////////////////Alert Registro ////////////////////////// -->
-        <!-- Modal -->
-
-        <jsp:include page="Registro.jsp"/>
+        <jsp:include page="../INI/Registro.jsp"/>
 
 
-        <!-- ///////////////////////Alert Registro ////////////////////////// -->
-
-        <!-- ///////////////////////Alert Registro ////////////////////////// -->
-        <!-- Modal -->
-
-
-        <jsp:include page="InicioSesion_nuevo.jsp"/>
-
-
-
-        <!-- ///////////////////////Alert Registro ////////////////////////// -->
+        <jsp:include page="../INI/InicioSesion.jsp"/>

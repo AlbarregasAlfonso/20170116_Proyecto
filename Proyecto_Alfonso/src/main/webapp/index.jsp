@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="INI/Cabecera.jsp"/>
-<jsp:include page="INI/InicioSesion.jsp"/>
+
 
 <!--
 <div class="content">
@@ -56,11 +56,12 @@
         <br/>
         <br/>
         <div class="content">
-
+            
+            <c:if test="${mensaje!=null}">
             <div class="alert alert-success" class="content">
-                <h5> <c:out value="${mensaje}"/> <strong>!</strong></h5>
+                <h5> <c:out value="${mensaje}"/> <strong></strong></h5>
             </div>
-
+            </c:if>
         </div>
     </div>
 

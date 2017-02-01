@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Pedidos {
 
+    private String idPedido;
     private String idCliente;
     private String fecha;
     private String estado;
@@ -22,7 +23,30 @@ public class Pedidos {
     private String iva;
     private String idDireccion;
     ArrayList<LineasPedidos> lineasPedidos;
+    Direccion direccion;
 
+    public Pedidos(String fecha, String estado, Direccion direccion) {
+        this.fecha = fecha;
+        this.estado = estado;
+        this.direccion = direccion;
+    }
+
+    
+
+    public Pedidos(String idPedido, String idCliente, String fecha, String estado, String baseImponible, String gastosEnvio, Direccion direccion) {
+        this.idPedido = idPedido;
+        this.idCliente = idCliente;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.baseImponible = baseImponible;
+        this.gastosEnvio = gastosEnvio;
+        this.direccion = direccion;
+    }
+
+  
+            
+            
+            
     public Pedidos(String idCliente, String estado) {
         this.idCliente = idCliente;
         this.estado = estado;
@@ -34,6 +58,18 @@ public class Pedidos {
 
     public void setLineasPedidos(ArrayList<LineasPedidos> lineasPedidos) {
         this.lineasPedidos = lineasPedidos;
+    }
+    
+    
+    
+    
+    
+    public String getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(String idPedido) {
+        this.idPedido = idPedido;
     }
     
     public String getFecha() {
