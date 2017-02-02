@@ -161,8 +161,10 @@
 
                         <c:if test="${sessionScope.usuario==null}">
 
-                            <li><a href="" data-toggle="modal" data-target="#Registro">Registro</a></li>
-                            <li><a href="" data-toggle="modal" data-target="#inicioSesion">Inicio de sesión</a></li>
+                           
+                            <li><a href="" data-toggle="modal" data-target="#Registro"><span class="glyphicon glyphicon-user"></span>Registro</a></li>
+                           
+                            <li><a href="" data-toggle="modal" data-target="#inicioSesion"><span class="glyphicon glyphicon-log-in"></span> Inicio de sesión</a></li>
 
                         </c:if>
 
@@ -190,14 +192,31 @@
                             <li class="dropdown">
                                 <a class="glyphicon glyphicon-search" data-toggle="dropdown" href="#">
                                     <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-
-                                    <!--                                <li><input type="text" placeholder="Escriba el Producto"></li>-->
-                                    <li><a href="#">Busqueda avanzada</a></li>
+                                <ul class="dropdown-menu">           
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=1">Procesadores</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=2">Placas bases</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=3">Tarjetas gráficas</a></li> 
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=4">Memorias ram</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=5">discos duros HDD</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=6">Discos duros SSD</a></li> 
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=7">Unidades flash</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=8">Discos duros externos</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=9">Portatiles</a></li> 
+                                <li><a href="">Sockets</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=11">Cajas</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=12">Fuentes de alimentación</a></li> 
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=13">Monitores</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=14">Teclados</a></li>
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=15">Ratones</a></li> 
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=16">Otros periféricos</a></li> 
+                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=17">Tarjetas de red</a></li>
                                 </ul>
                             </li>
                         </c:if>
+                     
+  
 
+                        
                     </ul>
                 </div>
             </div>

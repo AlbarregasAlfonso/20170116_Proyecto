@@ -18,6 +18,8 @@ public interface IProductoDAO {
     
     public ArrayList<Producto> getProductos(String where);
     
+    public ArrayList<Producto> getProductosAvan(String where);
+    
     public ArrayList<ProductoCaracteristicas> getProductosCaracteristicas(String idProducto); 
     
     public String getSacarNombreProducto(String idProducto);
