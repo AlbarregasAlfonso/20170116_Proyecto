@@ -21,5 +21,9 @@ public interface IUsuarioDAO {
     
     public Usuario obtenerUsuario(String idUsuario);
     
+    public Usuario obtenerUsuariosConCliente(String idCliente);
+    
+    public void editarUsuarios(String nombre, String username, String clave, String apellidos, String mail, String idUsuario);
+    
     public void closeConnection();
 }

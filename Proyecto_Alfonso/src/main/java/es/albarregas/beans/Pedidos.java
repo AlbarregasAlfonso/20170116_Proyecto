@@ -25,6 +25,14 @@ public class Pedidos {
     ArrayList<LineasPedidos> lineasPedidos;
     Direccion direccion;
 
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
     public Pedidos(String fecha, String estado, Direccion direccion) {
         this.fecha = fecha;
         this.estado = estado;

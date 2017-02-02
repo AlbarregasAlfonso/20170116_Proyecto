@@ -17,8 +17,15 @@ private String clave;
 private String bloqueado;
 private String ultimoAcceso;
 private String tipo;
+private Cliente cliente;
 
 
+    public Usuario(String userName, String clave, Cliente cliente) {
+        this.userName = userName;
+        this.clave = clave;
+        this.cliente = cliente;
+    }
+    
     public Usuario(String userName, String clave) {
         this.userName = userName;
         this.clave = clave;
@@ -31,6 +38,14 @@ private String tipo;
         this.bloqueado = bloqueado;
         this.ultimoAcceso = ultimoAcceso;
         this.tipo = tipo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     
     

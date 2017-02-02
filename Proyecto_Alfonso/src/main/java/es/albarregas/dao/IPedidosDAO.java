@@ -24,7 +24,7 @@ public interface IPedidosDAO {
 
     public boolean obtenerApellidoDelClienteDeUnPedido(String idPedido);
     
-    public void modificarEstadoDePedido(String estado,String idCliente,String idDireccion,float totalprecio,String gastosEnvio);
+    public void modificarEstadoDePedido(String estado,String idCliente,String idDireccion,float totalprecio,String gastosEnvio, String idPedido);
     
     public void modificarEstadosDesPedidos();
 

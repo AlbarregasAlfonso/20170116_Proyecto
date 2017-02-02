@@ -179,7 +179,7 @@
 
                             <c:if  test="${usuario.tipo=='u'}">
 
-                                <li><a href="" data-toggle="modal" data-target="#Registro">Panel de control</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ControllersUsuario?editar=editar" >Panel de control</a></li>
                                 <li><a href="${pageContext.request.contextPath}/ControllersMisPedidos" >Mis Pedidos</a></li>
                                 </c:if>
 

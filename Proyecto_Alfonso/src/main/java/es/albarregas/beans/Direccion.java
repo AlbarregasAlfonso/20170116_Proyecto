@@ -23,13 +23,14 @@ public class Direccion {
         this.nombreDireccion = nombreDireccion;
     }
 
-
     public Direccion(String nombre, String nombreDireccion, String telefono, String codigoPostal) {
         this.nombre = nombre;
         this.nombreDireccion = nombreDireccion;
         this.telefono = telefono;
         this.codigoPostal = codigoPostal;
     }
+
+
     
     
     public Direccion(String idDireccion,String nombre, String nombreDireccion,String telefono, Pueblo pueblo, Provincia provincia) {
@@ -40,44 +41,6 @@ public class Direccion {
         this.telefono = telefono;
         this.idDireccion = idDireccion;
     }
-
- public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-    
-    
-    
-    public Pueblo getPueblo() {
-        return pueblo;
-    }
-
-    public void setPueblo(Pueblo pueblo) {
-        this.pueblo = pueblo;
-    }
-
-    public Provincia getProvincia() {
-        return provincia;
-    }
-
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
-    }
-
-    public Direccion() {
-    }
-
 
     public String getNombre() {
         return nombre;
@@ -94,8 +57,31 @@ public class Direccion {
     public void setNombreDireccion(String nombreDireccion) {
         this.nombreDireccion = nombreDireccion;
     }
-    
-    
+
+    public Pueblo getPueblo() {
+        return pueblo;
+    }
+
+    public void setPueblo(Pueblo pueblo) {
+        this.pueblo = pueblo;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public String getIdDireccion() {
         return idDireccion;
     }
@@ -103,5 +89,15 @@ public class Direccion {
     public void setIdDireccion(String idDireccion) {
         this.idDireccion = idDireccion;
     }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+
     
 }

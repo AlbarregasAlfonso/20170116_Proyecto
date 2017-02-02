@@ -22,33 +22,33 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
         String mensaje = " ";
 
         String consulta = "SELECT * FROM usuarios";
-        
+
         try {
-            
+
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
             Throwable throwable = null;
-            
+
             try {
-                
+
                 while (resultado.next()) {
 
                     if (resultado.getString("UserName").equals(username) && resultado.getString("clave").equals(clave)) {
 
                         if (resultado.getString("bloqueado").equals("s")) {
-                            
+
                             mensaje = "usuario bloqueado";
                             break;
-                            
+
                         } else {
-                            
+
                             mensaje = "bienvenido " + resultado.getString("UserName");
                             break;
                         }
                     } else {
-                        
+
                         mensaje = "Usuario o contraseña erroneos";
-                        
+
                     }
                 }
             } catch (Throwable equipo) {
@@ -288,5 +288,78 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
         closeConnection();
         return u;
 
+    }
+
+    @Override
+    public Usuario obtenerUsuariosConCliente(String idCliente) {
+
+        Usuario u = new Usuario();
+        Cliente c = new Cliente();
+
+        String consulta = " select  u.UserName,u.clave,c.nombre,c.apellidos,c.email from  usuarios u inner join clientes c on c.idcliente=u.idusuario where c.idcliente=" + idCliente;
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {
+                    // Usuario(String userName, String clave, Cliente cliente) {
+                    //public Cliente(String nombre, String apellidos, String email) {
+                    u = new Usuario();
+                    c = new Cliente();
+                    c = new Cliente(resultado.getString("c.nombre"), resultado.getString("c.apellidos"), resultado.getString("c.email"));
+                    u = new Usuario(resultado.getString("u.UserName"), resultado.getString("u.clave"), c);
+                    System.out.println("Estamos ene l dao de usuario " + u.getUserName());
+                    System.out.println("Estamos ene l dao de usuario " + u.getClave());
+                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getApellidos());
+                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getNombre());
+                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getEmail());
+
+                }
+            } catch (Throwable producto) {
+
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia  getProductosEnCarrito");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        System.out.println("Justo antes de salirrr" + u.getClave());
+        return u;
+    }
+
+    @Override
+    public void editarUsuarios(String nombre, String username, String clave, String apellidos, String mail, String idUsuario) {
+        try {
+            String sql = " UPDATE usuarios u inner join clientes c on c.idcliente=u.idusuario SET u.UserName=?,u.clave=?,c.nombre=?,c.apellidos=?,c.email=? where idusuario=?";
+            System.out.println(sql);
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+            
+            preparada.setString(1, username);
+            preparada.setString(2, clave);
+            preparada.setString(3, nombre);
+            preparada.setString(4, apellidos);
+            preparada.setString(5, mail);
+            preparada.setString(6, idUsuario);
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar editar usuarios");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
     }
 }

@@ -37,5 +37,6 @@ es\albarregas\dao\ILineasPedidosDAO.class
 es\albarregas\dao\MysqlCaracyprodsDAO.class
 es\albarregas\beans\LineasPedidos.class
 es\albarregas\beans\Pueblo.class
+es\albarregas\controllers\ControllersUsuario.class
 es\albarregas\dao\IPedidosDAO.class
 es\albarregas\dao\MysqlDireccionesDAO.class

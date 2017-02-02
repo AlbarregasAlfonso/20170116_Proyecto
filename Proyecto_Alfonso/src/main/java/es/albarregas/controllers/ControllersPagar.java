@@ -87,20 +87,21 @@ public class ControllersPagar extends HttpServlet {
                     System.out.println("No hay stock");
                     ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
                     
-                     float precioTotal=0f;
+                    float precioTotal=0f;
                     float cantidad1;
                     float precioUnitario;
+                    String idPedido = "";
                     
                     for(LineasPedidos p:productosCarritoDesglose){
+                         idPedido=p.getIdPedido();
                         cantidad1 = parseFloat(p.getCantidad()); 
                         precioUnitario = parseFloat(p.getProducto().getPrecioConIva());
                         precioTotal=precioTotal+precioUnitario*cantidad1;
                     }
-                    pedao.modificarEstadoDePedido("s", u.getIdUsuario(),request.getParameter("direccionDeEnvio"), precioTotal+5,"5");
+                    pedao.modificarEstadoDePedido("s", u.getIdUsuario(),request.getParameter("direccionDeEnvio"), precioTotal+5,"5",idPedido);
 
                     for (Producto p : productosSinStock) {
 
-                        System.out.println("Esto es lo que hay" + p.getDenominacion()+"Y faltan "+p.getCantidadQueFaltaEnStock());
                         request.setAttribute("mensaje", "El producto " + p.getDenominacion() + " no lo tenemos en Stock ahora mismo");
                         pdao.insertarEnProductosSinStock( p.getDenominacion(), p.getCantidadQueFaltaEnStock(),p.getIdProducto());
 
@@ -110,21 +111,24 @@ public class ControllersPagar extends HttpServlet {
 
                 } else {
 
-                    pdao.disminuirProductosEnStock(u.getIdUsuario(),"r");
+                    
                     request.setAttribute("mensaje", "Su pedido llegara en 5 dias laborales");
                     
                     float precioTotal=0f;
                     float cantidad1;
                     float precioUnitario;
+                    String idPedido = "";
                     
                     for(LineasPedidos p:productosCarritoDesglose){
+                        idPedido=p.getIdPedido();
                         cantidad1 = parseFloat(p.getCantidad()); 
                         precioUnitario = parseFloat(p.getProducto().getPrecioConIva());
                         precioTotal=precioTotal+precioUnitario*cantidad1;
                     }
  
-                    pedao.modificarEstadoDePedido("r", u.getIdUsuario(),request.getParameter("direccionDeEnvio"),precioTotal+5,"5");
+                    pedao.modificarEstadoDePedido("r", u.getIdUsuario(),request.getParameter("direccionDeEnvio"),precioTotal+5,"5",idPedido);
                     request.getSession().setAttribute("carrito", "cerrado");
+                    pdao.disminuirProductosEnStock(u.getIdUsuario(),"r",idPedido);
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 
                 }

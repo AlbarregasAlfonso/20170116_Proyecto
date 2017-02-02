@@ -18,6 +18,14 @@ public class Cliente {
     private String fechaNacimiento;
     private Producto producto;
 
+    public Cliente(String nombre, String apellidos, String email) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+    }
+
+    
+    
     
     public Producto getProducto() {
         return producto;

@@ -345,9 +345,9 @@ public class MysqlProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void disminuirProductosEnStock(String idCliente,String estado) {
+    public void disminuirProductosEnStock(String idCliente,String estado, String idPedido) {
         try {
-            String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente=" + idCliente + " and pedi.estado='"+estado+"';";
+            String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente=" + idCliente + " and pedi.estado='"+estado+"' and pedi.idpedido="+idPedido;
             System.out.println(sql);
             System.out.println("Estamos disminuyendo el stock");
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
