@@ -59,57 +59,82 @@ public class ControllersBusquedaAvan extends HttpServlet {
                 if (request.getParameter("Buscar") != null) {
 
                     switch (request.getParameter("categoria")) {
-                        
+
                         case "1":
 
-                            System.out.println("Esta esss categoria switch" + request.getParameter("categoria"));
-                            //clausulaWhere = "where IdCategoria=" + request.getParameter("categoria") + " and PrecioUnitario>" + request.getParameter("desde") + " and PrecioUnitario<" + request.getParameter("hasta") + " and denominacion LIKE '%" + request.getParameter("tipo") + "%'";
-                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("tipo") + "%'";
-
-                            //productos = pdao.getProductos(clausulaWhere);
-                            productos = pdao.getProductosAvan(clausulaWhere);
-                            System.out.println("Lili");
-                            System.out.println("Longitud del vector " + productos.size());
-                            //fraccionar el array
-                            productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and p.denominacion LIKE '%" + request.getParameter("tipo") + "%' and p.denominacion LIKE '%" + request.getParameter("velocidad") + "%' and c.descripcion LIKE '%" + request.getParameter("bits") + "%'";
 
                             break;
+
                         case "2":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and p.denominacion LIKE '%" + request.getParameter("marca") + "%' and c.descripcion LIKE '%" + request.getParameter("socket") + "%' and c.descripcion LIKE '%" + request.getParameter("chipset") + "%'";
+
                             break;
+
                         case "3":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("tamemoria") + "%' and c.descripcion LIKE '%" + request.getParameter("inmemoria") + "%'  and c.descripcion LIKE '%" + request.getParameter("tipomemoria") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+
                         case "4":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and p.denominacion LIKE '%" + request.getParameter("tipomemo") + "%' and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%'  and c.descripcion LIKE '%" + request.getParameter("voltaje") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+
                         case "5":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("tamano") + "%' and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%'  and c.descripcion LIKE '%" + request.getParameter("velocidad") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+
                         case "6":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%' and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+
                         case "7":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%' and p.denominacion LIKE '%" + request.getParameter("tipo") + "%' and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+
                         case "8":
+
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%' and p.denominacion LIKE '%" + request.getParameter("pulgadas") + "%' and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+
                             break;
+                            
                         case "9":
-
-                            System.out.println("Esta esss" + request.getParameter("categoria"));
-                            //clausulaWhere = "where IdCategoria=" + request.getParameter("categoria") + " and PrecioUnitario>" + request.getParameter("desde") + " and PrecioUnitario<" + request.getParameter("hasta") + " and denominacion LIKE '%" + request.getParameter("tipo") + "%'";
-                             //clausulaWhere = "where IdCategoria=" + request.getParameter("categoria") + " and PrecioUnitario>" + request.getParameter("desde") + " and PrecioUnitario<" + request.getParameter("hasta") + " and denominacion LIKE '%" + request.getParameter("tipo") + "%'";
+                            
                             clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("tipo") + "%'";
-
-                            //productos = pdao.getProductos(clausulaWhere);
-                            productos = pdao.getProductosAvan(clausulaWhere);
-
-                            System.out.println("Longitud del vector " + productos.size());
-                            //fraccionar el array
-                            productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
 
                             break;
                         case "10":
+                            
+                            
+                            
                             break;
+                            
                         case "11":
+                            
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("capacidad") + "%' and p.denominacion LIKE '%" + request.getParameter("usb") + "%' and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+                            
                             break;
+                            
                         case "12":
+                            
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("modular") + "%' and p.denominacion LIKE '%" + request.getParameter("vatios") + "%' and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+                            
                             break;
+                            
                         case "13":
+                            
+                            clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("formato") + "%' and c.descripcion LIKE '%" + request.getParameter("resolucion") + "%'  and c.descripcion LIKE '%" + request.getParameter("pulgadas") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
+                            
                             break;
                         case "14":
                             break;
@@ -122,6 +147,17 @@ public class ControllersBusquedaAvan extends HttpServlet {
 
                     }
 
+                    productos = pdao.getProductosAvan(clausulaWhere);
+
+                    request.setAttribute("productosFraccionado", productos);
+
+                    //request.setAttribute("valor", Integer.parseInt(request.getParameter("valor")) + productos.size());
+                    url = "/JSP/ProductosAvan.jsp";
+
+                    request.setAttribute("categoria", request.getParameter("categoria"));
+
+                    request.getRequestDispatcher(url).forward(request, response);
+
                 } else {
 
                     System.out.println("Esta esss" + request.getParameter("categoria"));
@@ -133,24 +169,23 @@ public class ControllersBusquedaAvan extends HttpServlet {
                     //fraccionar el array
                     productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
 
+                    request.setAttribute("productosFraccionado", productosFraccionado);
+
+                    request.setAttribute("valor", Integer.parseInt(request.getParameter("valor")) + 9);
+
+                    url = "/JSP/ProductosAvan.jsp";
+
+                    request.setAttribute("categoria", request.getParameter("categoria"));
+
+                    request.getRequestDispatcher(url).forward(request, response);
+
                 }
 
-                productos = pdao.getProductos(clausulaWhere);
-
-                System.out.println("Longitud del vector " + productos.size());
-                //fraccionar el array
-                 productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
-
-                request.setAttribute("productosFraccionado", productosFraccionado);
-
-                request.setAttribute("valor", Integer.parseInt(request.getParameter("valor")) + 9);
-
-                url = "/JSP/ProductosAvan.jsp";
-
-                request.setAttribute("categoria", request.getParameter("categoria"));
-
-                request.getRequestDispatcher(url).forward(request, response);
-
+//                productos = pdao.getProductos(clausulaWhere);
+//
+//                System.out.println("Longitud del vector " + productos.size());
+//                //fraccionar el array
+//                 productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
             }
         }
     }
