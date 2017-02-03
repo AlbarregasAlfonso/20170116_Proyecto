@@ -564,4 +564,29 @@ public class MysqlProductoDAO implements IProductoDAO {
         return lista;
     }
 
+    @Override
+    public void anadirProducto(String denominacion,String descripcion, String precio, String stock, String oferta, String catalogo, String categoria) {
+        try {
+            String sqlAux = "select max(idProducto)+1 from productos";
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(sqlAux);
+            String idpro = "";
+
+            while (resultado.next()) {
+                idpro = resultado.getString("max(idProducto)+1");
+            }
+
+            String sql = "insert into productos value("+idpro+","+categoria+",1,'"+denominacion+"','"+descripcion+"',1,"+precio+","+stock+",1,now(),'"+oferta+"','"+catalogo+"',2)";
+            System.out.println(sql);
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+   
+            preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al insertar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
 }

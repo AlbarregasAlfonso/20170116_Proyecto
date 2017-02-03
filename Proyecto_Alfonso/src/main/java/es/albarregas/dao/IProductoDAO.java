@@ -44,6 +44,8 @@ public interface IProductoDAO {
     
     public ArrayList<Producto> productosMasVendidos();
     
+    public void anadirProducto (String denominacion,String descripcion, String precio, String stock, String oferta,String catalogo, String categoria);
+    
     public void closeConnection();
     
 }

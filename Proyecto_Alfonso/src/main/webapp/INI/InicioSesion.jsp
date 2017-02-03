@@ -15,23 +15,21 @@
         }
     }
 
-    function sendRequest(numero) {
+    function sendRequest() {
         request = getRequestObject();
         request.onreadystatechange = handleResponse;
 
-        if (numero !== 0) {
+       
 
 //                    alert(document.formulario.nombre.value);
 //                    alert('hola');
-            request.open("POST", "Controllers?user=" + document.formulario.user.value + "&clave=" + document.formulario.clave.value + "&Enviar=iniciarSesion", true);
+            request.open("GET", "Controllers?user=" + document.formulario.user.value + "&clave=" + document.formulario.clave.value + "&Enviar=iniciarSesion", true);
             request.send(null);
 
 
-        } else {
 
-            request.open("GET", "message-data_1.html", true);
-            request.send(null);
-        }
+   
+    
     }
 
     function handleResponse() {
@@ -41,7 +39,8 @@
             if (document.getElementById("message").innerHTML === 'Bienvenido') {
 
                 $('#inicioSesion').modal('hide');
-                  location.reload(true);
+                
+                  location.reload(true);      
                   
 
             }
@@ -76,7 +75,8 @@
                     <div class="checkbox">
                         <label><input type="checkbox" value="" checked>Remember me</label>
                     </div>
-                    <button type="button" onclick="sendRequest(1)" name="Enviar" value="iniciarSesion" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+
+                    <button type="button" onclick="sendRequest()" name="Enviar" value="iniciarSesion" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
                 </form>
             </div>
             <div class="modal-footer">

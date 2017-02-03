@@ -141,7 +141,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                   
+
                     <a class="navbar-brand" href="#myPage"><img src="${pageContext.request.contextPath}/IMG/logo.png" alt="Chania" width="70" height="40"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -150,7 +150,7 @@
                         <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
 
                         <li><a href="${pageContext.request.contextPath}/ControllersBusquedaAvan?mas=0">Top Ventas</a></li>
-                        <c:if  test="${usuario.tipo!='a'}">
+                            <c:if  test="${usuario.tipo!='a'}">
                             <li><a href="Controllers?valor=0">Productos</a></li>
                             </c:if>
                             <c:if  test="${usuario.tipo=='a'}">
@@ -163,9 +163,9 @@
 
                         <c:if test="${sessionScope.usuario==null}">
 
-                           
+
                             <li><a href="" data-toggle="modal" data-target="#Registro"><span class="glyphicon glyphicon-user"></span>Registro</a></li>
-                           
+
                             <li><a href="" data-toggle="modal" data-target="#inicioSesion"><span class="glyphicon glyphicon-log-in"></span> Inicio de sesión</a></li>
 
                         </c:if>
@@ -177,6 +177,7 @@
 
                             <c:if  test="${usuario.tipo=='a'}">
 
+                                <li><a href="${pageContext.request.contextPath}/ControllersAdministrador2?anadir=anadir">Añadir Producto</a></li>
                                 <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?menu=menu">Bloquear Usuarios</a></li>
 
                             </c:if>
@@ -195,30 +196,30 @@
                                 <a class="glyphicon glyphicon-search" data-toggle="dropdown" href="#">
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">           
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=1">Procesadores</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=2">Placas bases</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=3">Tarjetas gráficas</a></li> 
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=4">Memorias ram</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=5">discos duros HDD</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=6">Discos duros SSD</a></li> 
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=7">Unidades flash</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=8">Discos duros externos</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=9">Portatiles</a></li> 
-                                <li><a href="">Sockets</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=11">Cajas</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=12">Fuentes de alimentación</a></li> 
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=13">Monitores</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=14">Teclados</a></li>
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=15">Ratones</a></li> 
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=16">Otros periféricos</a></li> 
-                                <li><a href="ControllersBusquedaAvan?valor=0&categoria=17">Tarjetas de red</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=1">Procesadores</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=2">Placas bases</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=3">Tarjetas gráficas</a></li> 
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=4">Memorias ram</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=5">discos duros HDD</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=6">Discos duros SSD</a></li> 
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=7">Unidades flash</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=8">Discos duros externos</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=9">Portatiles</a></li> 
+                                    <li><a href="">Sockets</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=11">Cajas</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=12">Fuentes de alimentación</a></li> 
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=13">Monitores</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=14">Teclados</a></li>
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=15">Ratones</a></li> 
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=16">Otros periféricos</a></li> 
+                                    <li><a href="ControllersBusquedaAvan?valor=0&categoria=17">Tarjetas de red</a></li>
                                 </ul>
                             </li>
                         </c:if>
-                     
-  
 
-                        
+
+
+
                     </ul>
                 </div>
             </div>

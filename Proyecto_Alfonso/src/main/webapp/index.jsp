@@ -24,7 +24,7 @@
             <h2>Productos en oferta</h2>
             <p>¡Aquí tenemos los precios mas baratos del mercado!</p>
             <p>Compra todo lo que necesites</p>
-            <div class="row">
+        
 
                 <div class="container">
                     <br>
@@ -51,7 +51,7 @@
 
                             <c:forEach begin="1"  items="${productosEnOferta}" var="pc">
                                 <div class="item">
-                                    <img src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Chania" width="1000" height="600">
+                                    <img src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Chania" width="2000" height="600">
                                     <div class="carousel-caption">
                                         <h3><c:out value="${pc.denominacion}"/></h3>
                                         <h3><c:out value="${pc.precioUnitario} €"/></h3>
