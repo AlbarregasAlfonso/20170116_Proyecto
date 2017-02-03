@@ -510,4 +510,58 @@ public class MysqlProductoDAO implements IProductoDAO {
         return lista;
     }
 
+    @Override
+    public ArrayList<Producto> productosMasVendidos() {
+         ArrayList<Producto> lista;
+        
+        lista = new ArrayList<Producto>();
+            String consulta = "select Distinct(p.IdProducto),p.IdCategoria,p.IdMarca,p.Denominacion,p.Descripcion,p.IdProveedor,p.PrecioUnitario*(select GastosEnvio from general),p.Stock,p.StockMinimo,p.FechaAlta,p.Oferta,p.FueraCatalogo,p.Rating from lineaspedidos lp inner join productos p on p.idproducto=lp.idproducto order by Cantidad desc";
+      
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+
+                while (resultado.next()) {
+                    Producto producto = new Producto();
+                    producto.setIdProducto(resultado.getString("p.IdProducto"));
+                    producto.setIdCategoria(resultado.getString("p.IdCategoria"));
+                    producto.setIdMarca(resultado.getString("p.IdMarca"));
+                    producto.setDenominacion(resultado.getString("p.Denominacion"));
+                    producto.setDescripcion(resultado.getString("p.Descripcion"));
+                    producto.setIdProveedor(resultado.getString("p.IdProveedor"));
+                    producto.setPrecioUnitario(resultado.getString("p.PrecioUnitario*(select GastosEnvio from general)"));
+                    producto.setStock(resultado.getString("p.Stock"));
+                    producto.setStockMinimo(resultado.getString("p.StockMinimo"));
+                    producto.setFechaAlta(resultado.getString("p.FechaAlta"));
+                    producto.setOferta(resultado.getString("p.Oferta"));
+                    producto.setFueraCatalogo(resultado.getString("p.FueraCatalogo"));
+                    producto.setRating(resultado.getString("p.Rating"));
+                    lista.add(producto);
+                }
+            } catch (Throwable producto) {
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia getProductos(String where)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return lista;
+    }
+
 }

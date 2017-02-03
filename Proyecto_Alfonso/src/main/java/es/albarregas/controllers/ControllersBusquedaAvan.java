@@ -187,6 +187,24 @@ public class ControllersBusquedaAvan extends HttpServlet {
 //                //fraccionar el array
 //                 productosFraccionado = productos.subList(Integer.parseInt(request.getParameter("valor")), Integer.parseInt(request.getParameter("valor")) + productos.size());
             }
+            
+            if (request.getParameter("mas") != null) {
+                
+                IProductoDAO pdao = daof.getProductoDAO();
+
+                ArrayList<Producto> productos;
+                productos=pdao.productosMasVendidos();
+                
+                request.setAttribute("productosFraccionado", productos);
+                
+                request.setAttribute("topventas", "top ventas");
+
+                url = "/JSP/Productos.jsp";
+
+                request.getRequestDispatcher(url).forward(request, response);
+                
+                
+            }
         }
     }
 

@@ -8,6 +8,8 @@
 
 
 <div class="row">
+    <div class="col-sm-1"></div>
+    
     <div class="col-sm-2" >
         <br/> <br/> <br/> <br/> <br/> <br/>
 
@@ -450,7 +452,6 @@
             <h3>Precio</h3>
             <select name="desde" class="form-control">
                 <option name="desde" value="0">Desde</option>
-                <option name="desde" value="0">0</option>
                 <option name="desde" value="41.3">50</option>
                 <option name="desde" value="82.6">100</option>
                 <option name="desde" value="165.2">200</option>
@@ -491,7 +492,7 @@
 
 
     </div>
-    <div class="col-sm-10" >
+    <div class="col-sm-9" >
 
 
 
@@ -531,5 +532,6 @@
         </footer>
 
     </div>
+</div>
 </body>
 </html>

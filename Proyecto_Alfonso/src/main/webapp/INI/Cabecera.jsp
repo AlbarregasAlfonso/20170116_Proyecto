@@ -141,13 +141,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#myPage">Logo</a>
+                   
+                    <a class="navbar-brand" href="#myPage"><img src="${pageContext.request.contextPath}/IMG/logo.png" alt="Chania" width="70" height="40"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <!--<li><h4><div id="message"></div></h4><li>-->
                         <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
 
+                        <li><a href="${pageContext.request.contextPath}/ControllersBusquedaAvan?mas=0">Top Ventas</a></li>
                         <c:if  test="${usuario.tipo!='a'}">
                             <li><a href="Controllers?valor=0">Productos</a></li>
                             </c:if>

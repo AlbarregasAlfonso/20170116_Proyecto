@@ -44,7 +44,11 @@ public class MyListener implements ServletContextListener {
         
         for(Producto p:productosOferta){
             System.out.println(p.getIdProducto());
+            
              sc.setAttribute("primeraOferta",p.getIdProducto());
+             sc.setAttribute("denominacionOferta",p.getDenominacion());
+             sc.setAttribute("precioOferta",p.getPrecioUnitario());
+             
              break;
         }
   

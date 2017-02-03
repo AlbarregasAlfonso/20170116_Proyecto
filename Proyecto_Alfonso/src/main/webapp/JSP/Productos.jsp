@@ -6,7 +6,8 @@
 
 
         <div class="container">
-            <h2>Productos</h2>
+           
+            <h2>Productos <c:out value="${topventas}"/></h2>
             <p>¡Aqui tienes todo lo que necesitas!</p>
             <p>Compra todo lo que necesites</p>
             <div class="row">

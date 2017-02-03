@@ -42,6 +42,8 @@ public interface IProductoDAO {
     
     public void eliminarDeProductosSinStock(String denominacion);
     
+    public ArrayList<Producto> productosMasVendidos();
+    
     public void closeConnection();
     
 }
