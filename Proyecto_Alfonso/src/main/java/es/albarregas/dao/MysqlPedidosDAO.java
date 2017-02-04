@@ -184,7 +184,6 @@ public class MysqlPedidosDAO implements IPedidosDAO {
     public void modificarEstadoDePedido(String estado, String idCliente,String idDireccion,float totalprecio,String gastosEnvio, String idPedido) {
            try {
             String sql = "update pedidos set estado='"+estado+"',BaseImponible="+totalprecio+", GastosEnvio="+gastosEnvio+", IdDireccion="+idDireccion+" where IdCliente="+idCliente+" and IdPedido="+idPedido;
-            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
         } catch (SQLException ex) {
@@ -208,7 +207,6 @@ public class MysqlPedidosDAO implements IPedidosDAO {
            
 
             String sql = "update pedidos set estado='r' where IdPedido="+idPedido+"";
-            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
 
@@ -284,13 +282,9 @@ public class MysqlPedidosDAO implements IPedidosDAO {
                       Direccion de=new Direccion(resultado.getString("d.direccion"),resultado.getString("d.NombreDireccion"),resultado.getString("d.telefono"),resultado.getString("d.codigoPostal"));
                       //String idPedido, String idCliente, String fecha, String estado, String baseImponible, String gastosEnvio, Direccion direccion
                       Pedidos p=new Pedidos(resultado.getString("p.idPedido"),resultado.getString("p.Fecha"),resultado.getString("p.Fecha"),resultado.getString("p.estado"),resultado.getString("p.BaseImponible"),resultado.getString("p.gastosEnvio"),de);
-                    System.out.println(p.getDireccion().getNombre());
                     lista.add(p);
                 }
-                for(Pedidos pe:lista){
-                    System.out.println("Esty dentro de lineas pedidos");
-                    //System.out.println(p.);
-                }
+                
                 
             } catch (Throwable producto) {
                 throwable = producto;
@@ -313,7 +307,6 @@ public class MysqlPedidosDAO implements IPedidosDAO {
             ex.printStackTrace();
         }
         closeConnection();
-        System.out.println("Vamos a salir del dao");
 
         System.out.println("El valor de la lista" + lista);
 

@@ -127,6 +127,7 @@
 //                //alert(document.formulario.nombre.value());
 //            }
         </script>
+        
 
 
 
@@ -142,7 +143,7 @@
                         <span class="icon-bar"></span>                        
                     </button>
 
-                    <a class="navbar-brand" href="#myPage"><img src="${pageContext.request.contextPath}/IMG/logo.png" alt="Chania" width="70" height="40"></a>
+                    <a class="navbar-brand" href="#myPage"><img src="${pageContext.request.contextPath}/IMG/logo.png" alt="Chania" width="100" height="30"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
@@ -155,6 +156,7 @@
                             </c:if>
                             <c:if  test="${usuario.tipo=='a'}">
                             <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?stock=stock">Mensajes de Stock</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ControllersAdministrador2?Catalogar=catalogar">Catalogar/Descatalogar</a></li>
                             </c:if>
 
                         <c:if test="${sessionScope.carrito=='abierto'}">

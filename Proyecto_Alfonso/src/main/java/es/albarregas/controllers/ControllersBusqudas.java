@@ -7,13 +7,10 @@ package es.albarregas.controllers;
 
 import es.albarregas.beans.Imagen;
 import es.albarregas.beans.ProductoCaracteristicas;
-import es.albarregas.dao.IClienteDAO;
 import es.albarregas.dao.IImagenesDAO;
 import es.albarregas.dao.IProductoDAO;
-import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,19 +25,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ControllersBusqudas", urlPatterns = {"/ControllersBusqudas"})
 public class ControllersBusqudas extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+
 
             
             
@@ -50,6 +38,7 @@ public class ControllersBusqudas extends HttpServlet {
             
             
             if(request.getParameter("nombre")!=null){
+                
                 IProductoDAO pdao = daof.getProductoDAO();
                 pdao.sacarIdProducto(request.getParameter("nombre"));
                 
@@ -60,8 +49,7 @@ public class ControllersBusqudas extends HttpServlet {
                 imagenes = idao.getImagenes(clausulaWhere);
 
                 request.setAttribute("imagenes", imagenes);
-
-               
+                
                 ArrayList<ProductoCaracteristicas> productoYCaracteristica;
                 String IdProducto = pdao.sacarIdProducto(request.getParameter("nombre"));
 
@@ -77,15 +65,10 @@ public class ControllersBusqudas extends HttpServlet {
 
                 request.setAttribute("imagen", pdao.sacarIdProducto(request.getParameter("nombre")));
                 request.getRequestDispatcher("/JSP/ProductoCaracteristicas.jsp").forward(request, response);
-                
-                
-                
-                out.println("<h1>Servlet ControllersBusqudas at " + request.getParameter("nombre") + "</h1>");  
+               
             }
           
-            out.println("</body>");
-            out.println("</html>");
-        }
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

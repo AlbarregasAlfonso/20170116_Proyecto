@@ -4,8 +4,12 @@
 
 <jsp:include page="../INI/Cabecera.jsp"/>
 
-
-        <div class="container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
            
             <h2>Productos <c:out value="${topventas}"/></h2>
             <p>¡Aqui tienes todo lo que necesitas!</p>
@@ -14,13 +18,13 @@
 
 
                 <c:forEach  items="${productosFraccionado}" var="pc">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="thumbnail">
                             <a href="${pageContext.request.contextPath}/Controllers?imagen=${pc.idProducto}">
                                 <img class="thumbnail" src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Lights" style="width:100%">
                                 <div class="caption">
-                                    <p><c:out value="${pc.denominacion}"/></p>
-                                    <p><c:out value="${pc.precioUnitario} €"/></p>
+                                    <h5><c:out value="${pc.denominacion}"/></h5>
+                                    <h3><c:out value="${pc.precioUnitario} €"/></h3>
                                 </div>
                             </a>
                         </div>
@@ -30,15 +34,19 @@
 
 
             </div>
-        </div>
+       
 
         <!--paginacion-->
         <div class="container">
 
 
             <ul class="pager">
-                <li class="previous"><a href="Controllers?valor=<c:out value="${valor-18}"/>">Previous</a></li>
-                <li class="next"><a href="Controllers?valor=<c:out value="${valor}"/>">Next</a></li>
+                <c:if test="${valor>10}">
+                <li class="previous"><a href="Controllers?valor=<c:out value="${valor-18}"/>">Anterior</a></li>    
+                </c:if>
+                
+                
+                <li class="next"><a href="Controllers?valor=<c:out value="${valor}"/>">Siguiente</a></li>
             </ul>
 
 

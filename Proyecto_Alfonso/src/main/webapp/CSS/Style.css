@@ -24,7 +24,7 @@ body {
   .carousel-inner img {
       -webkit-filter: grayscale(90%);
       filter: grayscale(70%); /* make all photos black and white */ 
-      width: 80%; /* Set width to 100% Tamaño del liderrrrrrrrrrrrrrrrrrrr*/ 
+      width: 30%; /* Set width to 100% Tamaño del liderrrrrrrrrrrrrrrrrrrr*/ 
       margin: auto;
   }
   .carousel-caption h3 {

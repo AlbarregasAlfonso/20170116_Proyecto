@@ -4,7 +4,8 @@
 <jsp:include page="../INI/Cabecera.jsp"/>
 <jsp:include page="../INI/RegistroCompra.jsp"/>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
@@ -100,23 +101,50 @@
                 <form action="ControllersPagar" class="form-horizontal" role="form">
                     <div class="form-group">
                         
-                            <button type="submit" name="Enviar2" class="btn btn-default">Finalizar</button>
-                       
+                        <a href="#demo" class="btn btn-info" data-toggle="collapse">Finalizar compra</a>
+                        <div id="demo" class="collapse">
+
+                            <div class="form-group">
+                                <label for="ejemplo_email_3" class="col-lg-2 control-label">Número de tarjeta</label>
+                                <div class="col-lg-4">
+                                    <input type="text" name="nombreDireccion" required class="form-control" id="ejemplo_email_3"
+                                           placeholder="XXXX XXXX XXXX XXXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ejemplo_email_3" class="col-lg-2 control-label">Fecha de caducidad</label>
+                                <div class="col-lg-2">
+                                    <input type="text" name="nombreDireccion" required class="form-control" id="ejemplo_email_3"
+                                           placeholder="MM/AA">
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="submit" name="Enviar2" value="Enviar2" class="btn btn-default">Finalizar</button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+                    <h2>Direcciones de envio</h2>
                     <c:forEach items="${direcciones}" var="di">
-                       
+
                         <li><input type="radio" name="direccionDeEnvio" value="${di.idDireccion}"/>
-                        <a href="#" data-toggle="tooltip" data-placement="<c:out value="${di.nombreDireccion}"/>" title="<c:out value="${di.nombreDireccion}"/>
+                            <a href="#" data-toggle="tooltip" data-placement="<c:out value="${di.nombreDireccion}"/>" title="<c:out value="${di.nombreDireccion}"/>
                                <c:out value="${di.nombre}"/>
                                <c:out value="${di.pueblo.nombre}"/>
                                <c:out value="${di.provincia.nombre}"/>
                                <c:out value="${di.pueblo.codigoPostal}"/>
                                <c:out value="${di.telefono}"/>"><c:out value="${di.nombreDireccion}"/></a></li>
-                                <br/>
+                        <br/>
                     </c:forEach>
-                    
+
                 </form>
-                
+
 
 
 
@@ -129,37 +157,19 @@
                             <form action="ControllersPagar" class="form-horizontal" role="form">
                                 <div class="form-group">
                                     <label for="ejemplo_email_3" class="col-lg-2 control-label">Nombre de la Direccion</label>
-                                    <div class="col-lg-10">
+                                    <div class="col-lg-5">
                                         <input type="text" name="nombreDireccion" class="form-control" id="ejemplo_email_3"
                                                placeholder="Casa..Trabajo..">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección</label>
-                                    <div class="col-lg-10">
+                                    <div class="col-lg-2">
                                         <input type="text" name="direccion" class="form-control" id="ejemplo_email_3"
                                                placeholder="Direccion">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" name="codigoPostal" id="searchField1" autocomplete="off" class="form-control" id="ejemplo_email_3"
-                                               placeholder="XXXXXX">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Telefono</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" name="telefono" class="form-control" id="ejemplo_email_3"
-                                               placeholder="XXX XX XX XX">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-10">
-                                        <button type="submit" name="EnviarDesdePago" class="btn btn-default">Enviar</button>
-                                    </div>
-                                </div>
+
                             </form>
                         </div>
 
@@ -170,6 +180,8 @@
 
             </ul>
         </div>
+
+
 
 
 
@@ -187,7 +199,7 @@
         </c:if>
 
 
- 
+
 
 
     </div>
@@ -223,9 +235,9 @@
                             <td><fmt:formatNumber value="${lp.producto.precioConIva-lp.producto.precioUnitario}" maxFractionDigits="2"/></td>
                             <td><fmt:formatNumber value="${lp.producto.precioConIva}" maxFractionDigits="2"/></td>
                             <td><c:out value="${lp.cantidad}"/></td>
-                            
+
                             <c:set var="totalPrecio" value="${totalPrecio+(lp.producto.precioConIva*lp.cantidad)}"/>
-                            
+
 
                         </tr>                    
                     </c:forEach>
@@ -245,7 +257,7 @@
 
 
                         <th><fmt:formatNumber value="${totalPrecio+5}" maxFractionDigits="2"/></th>
-                     
+
                     </tr>
                 </tbody>
             </table>

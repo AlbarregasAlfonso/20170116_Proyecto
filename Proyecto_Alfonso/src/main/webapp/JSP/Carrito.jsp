@@ -6,6 +6,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script>
     function cambiarCantidad(id, signo) {
+//alert($('#cantidad' + id).val());
+//alert($('#stock' + id).val());
+
+    if($('#cantidad' + id).val() != $('#stock' + id).val()){
 
         $.ajax({
             url: "ControllersCarrito",
@@ -30,7 +34,7 @@
                     alert('Algo fallo');
                 }
             }
-        });
+        })};
     }
     ;
     function cambiarCantidadMenos(id, signo) {
@@ -88,7 +92,7 @@
                     <td><c:out value="${lp.producto.denominacion}"/></td>
                     <td><c:out value="${lp.producto.precioUnitario}"/></td>
                     <td> 
-                        <input type="button" onclick="cambiarCantidadMenos(${contador}, 'menos');" value="menos"/>
+                        <input type="button" style="background-color: white; border:none" onclick="cambiarCantidadMenos(${contador}, 'menos');" value="-"/>
                     </td>
                     <td>
                         <input style="background-color: white; border:none" type="text" id="cantidad${contador}" value="${lp.cantidad}"/>
@@ -96,7 +100,7 @@
                     </td>
                     <td>
                         <c:if test="${lp.cantidad!=lp.producto.stock}">
-                            <input type="button"  onclick="cambiarCantidad(${contador}, 'mas');" value="mas"/>  
+                            <input type="button" style="background-color: white; border:none" onclick="cambiarCantidad(${contador}, 'mas');" value="+"/>  
 
                             <input type="hidden" value="${lp.producto.stock}" id="stock${contador}"/>
                         </c:if>                       

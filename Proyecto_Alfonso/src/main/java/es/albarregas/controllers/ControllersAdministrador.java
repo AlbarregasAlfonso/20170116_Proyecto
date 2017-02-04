@@ -12,7 +12,6 @@ import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,26 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ControllersAdministrador", urlPatterns = {"/ControllersAdministrador"})
 public class ControllersAdministrador extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControllersAdministrador</title>");
-            out.println("</head>");
-            out.println("<body>");
 
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IUsuarioDAO udao = daof.getUsuarioDAO();
@@ -65,7 +48,7 @@ public class ControllersAdministrador extends HttpServlet {
             }
             
             if (request.getParameter("bloquear") != null) {
-//                
+                
                 udao.BloquearDesbloquearUsuario(request.getParameter("idusuario"), request.getParameter("bloquear"));
                 request.setAttribute("TipoUsuario", udao.SacarTipoUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
                 request.setAttribute("mensaje", request.getParameter("mensaje"));
@@ -95,18 +78,15 @@ public class ControllersAdministrador extends HttpServlet {
                 request.setAttribute("ProductosSinStock",productosSinStock);    //actualizamos productos sin stock
                 
                 pedao.modificarEstadosDesPedidos();//actualiza el estado de los pedidos
-              //  pdao.disminuirProductosEnStock(u.getIdUsuario(),"s");
                 
                 url= "/JSP/StockAdmin.jsp";
             }
 
             request.getRequestDispatcher(url).forward(request, response);
 
-            out.println("<h1>Servlet ControllersAdministrador at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+      
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

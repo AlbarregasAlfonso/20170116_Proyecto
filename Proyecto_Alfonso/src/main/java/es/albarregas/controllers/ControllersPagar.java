@@ -19,9 +19,7 @@ import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,14 +46,7 @@ public class ControllersPagar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControllersPagar</title>");
-            out.println("</head>");
-            out.println("<body>");
+
 
             DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
             IPedidosDAO pedao = daof.getPedidosDAO();
@@ -84,7 +75,6 @@ public class ControllersPagar extends HttpServlet {
                 if (pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario()) != null) {
                     
                     request.getSession().setAttribute("carrito", "cerrado");
-                    System.out.println("No hay stock");
                     ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
                     
                     float precioTotal=0f;
@@ -118,7 +108,7 @@ public class ControllersPagar extends HttpServlet {
                     float cantidad1;
                     float precioUnitario;
                     String idPedido = "";
-                    
+                    System.out.println("Estamos disminuyendo el stock3");
                     for(LineasPedidos p:productosCarritoDesglose){
                         idPedido=p.getIdPedido();
                         cantidad1 = parseFloat(p.getCantidad()); 
@@ -134,37 +124,6 @@ public class ControllersPagar extends HttpServlet {
                 }
 
             }
-//            if (request.getParameter("direccionDeEnvio") != null) {
-//                
-//                //HAs reyenado todos los datos
-//                
-//                if (pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario()) != null) {
-//                
-//                    ArrayList<Producto> productosSinStock = pdao.obtenerProductosQueFaltanEnStock(u.getIdUsuario());
-//                    
-//                    for (Producto p : productosSinStock) {
-//                    
-//                         
-//                        request.setAttribute("mensaje", "del producto " + p.getDenominacion() + " no hay stock");
-//                    
-//                    } 
-//           
-//                }else{
-//                   
-//                    System.out.println("entramos en finalizar compra bien y quitar de stock");
-//                   
-//                    pdao.disminuirProductosEnStock(u.getIdUsuario());
-//                    
-//                }
-//                
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
-//                
-//            } else if(request.getParameter("Enviar2")!=null){
-//                
-//                request.setAttribute("mensaje", "Tienes que seleccionar donde enviaremos el pedido");
-//                request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
-//            
-//            }
 
             if (request.getParameter("Enviar") != null) {
            
@@ -173,7 +132,6 @@ public class ControllersPagar extends HttpServlet {
                 cdao.terminarRegistro(request.getParameter("nombre"), request.getParameter("apellidos"), request.getParameter("nif"), request.getParameter("fechaNac"), u.getIdUsuario());
              
                 String codigoYCiudad=(request.getParameter("codigoPostal"));
-                System.out.println("Este es el codigo "+codigoYCiudad.substring(0,5)+" y la direccion "+codigoYCiudad.substring(6, codigoYCiudad.length()));
                 String codigoPostal=codigoYCiudad.substring(0,5);
                 String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
                 
@@ -191,11 +149,8 @@ public class ControllersPagar extends HttpServlet {
             }
 
             if (request.getParameter("EnviarDesdePago") != null) {
-                
-       
-                
-                 String codigoYCiudad=(request.getParameter("codigoPostal"));
-                System.out.println("Este es el codigo "+codigoYCiudad.substring(0,5)+" y la direccion "+codigoYCiudad.substring(6, codigoYCiudad.length()));
+               
+                String codigoYCiudad=(request.getParameter("codigoPostal"));
                 String codigoPostal=codigoYCiudad.substring(0,5);
                 String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
                 
@@ -213,21 +168,10 @@ public class ControllersPagar extends HttpServlet {
                 request.setAttribute("mensaje", "Has añadido una nueva dirección");
                 request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
             }
-
-//            if(!pedao.obtenerApellidoDelClienteDeUnPedido(request.getParameter("idPedido"))){//si no esta registrado entramos aqui
-//                
-//                
-//                 
-//
-//                 
-//            }
            
             request.getRequestDispatcher("/JSP/Pagar.jsp").forward(request, response);
 
-            out.println("Esto va to perfe");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

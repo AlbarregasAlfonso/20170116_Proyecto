@@ -9,17 +9,12 @@ import es.albarregas.beans.Producto;
 import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IProvinciaDAO;
 import es.albarregas.daofactory.DAOFactory;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 
 /**
@@ -39,11 +34,8 @@ public class MyListener implements ServletContextListener {
         ArrayList<Producto> productosOferta = pdao.getProductos(" where Oferta='s'");
         sc.setAttribute("productosEnOferta",  productosOferta);
         IProvinciaDAO prodao = daof.getProvinciaDAO();
-        
-//        prodao.mostrarTodosLosPueblos();
-        
+      
         for(Producto p:productosOferta){
-            System.out.println(p.getIdProducto());
             
              sc.setAttribute("primeraOferta",p.getIdProducto());
              sc.setAttribute("denominacionOferta",p.getDenominacion());

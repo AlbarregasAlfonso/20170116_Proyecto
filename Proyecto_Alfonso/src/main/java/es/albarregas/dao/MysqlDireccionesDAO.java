@@ -40,7 +40,6 @@ public class MysqlDireccionesDAO implements IDireccionesDAO{
             }
 
             String sql = "insert into direcciones value("+idDireccion+","+idUsuario+",'"+nombreDireccion+"','"+direccion+"',"+codigoPostal+",(select IdPueblo from pueblos where CodigoPostal="+codigoPostal+" and Nombre='"+nombre+"'),"+telefono+")";
-            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
 

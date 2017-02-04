@@ -52,9 +52,11 @@
 
 
 
+
+
 <div class="modal fade" id="inicioSesion" role="dialog">
     <div class="modal-dialog">
-
+        
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header" style="padding:35px 50px;">

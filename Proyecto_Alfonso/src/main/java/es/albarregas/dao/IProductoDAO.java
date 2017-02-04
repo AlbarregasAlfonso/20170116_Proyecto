@@ -46,6 +46,8 @@ public interface IProductoDAO {
     
     public void anadirProducto (String denominacion,String descripcion, String precio, String stock, String oferta,String catalogo, String categoria);
     
+    public void descatalogarProductos(String idProducto, String fueraCatalogo);
+    
     public void closeConnection();
     
 }

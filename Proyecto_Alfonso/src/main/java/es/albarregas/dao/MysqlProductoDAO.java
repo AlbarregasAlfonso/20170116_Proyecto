@@ -337,9 +337,9 @@ public class MysqlProductoDAO implements IProductoDAO {
             ex.printStackTrace();
         }
         closeConnection();
-        System.out.println("Vamos a salir del dao");
+        
 
-        System.out.println("El valor de la lista" + lista);
+       
 
         return lista;
     }
@@ -584,6 +584,21 @@ public class MysqlProductoDAO implements IProductoDAO {
 
         } catch (SQLException ex) {
             System.out.println("Algo ha pasado al insertar");
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeConnection();
+    }
+
+    @Override
+    public void descatalogarProductos(String idProducto, String fueraCatalogo) {
+
+           try {
+            String sql = " UPDATE productos SET fueraCatalogo='"+fueraCatalogo+"' WHERE IdProducto="+idProducto+"";
+            PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
+       
+            preparada.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Algo ha pasado al actualizar");
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();

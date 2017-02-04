@@ -6,7 +6,20 @@
 
 
 <div class="col-sm-6" >
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+ 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -14,7 +27,7 @@
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
-
+        
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
 
@@ -85,7 +98,7 @@
 
         <c:if test="${sessionScope.usuario!=null}">
 
-            <a href="${pageContext.request.contextPath}/ControllersCarrito?cantidad=1&idProducto=${idProducto}&idusuario=${usuario.idUsuario}&productoCaracteristicas=productoCaracteristicas"><button type="button" class="btn btn-info">Añadir al carrito se</button></a>
+            <a href="${pageContext.request.contextPath}/ControllersCarrito?cantidad=1&idProducto=${idProducto}&idusuario=${usuario.idUsuario}&productoCaracteristicas=productoCaracteristicas"><button type="button" class="btn btn-info">Añadir al carrito</button></a>
 
         </c:if>
         <c:if test="${sessionScope.usuario==null}">
