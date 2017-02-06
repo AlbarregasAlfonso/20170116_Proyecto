@@ -127,7 +127,7 @@
 //                //alert(document.formulario.nombre.value());
 //            }
         </script>
-        
+
 
 
 
@@ -149,10 +149,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!--<li><h4><div id="message"></div></h4><li>-->
                         <li><a class="content" style="font-size:24px" class="fa" ><c:out value="${mensaje}"/></a></li>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">Inicio</a></li>
 
-                        <li><a href="${pageContext.request.contextPath}/ControllersBusquedaAvan?mas=0">Top Ventas</a></li>
-                            <c:if  test="${usuario.tipo!='a'}">
+                        <c:if  test="${usuario.tipo!='a'}">
                             <li><a href="Controllers?valor=0">Productos</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ControllersBusquedaAvan?mas=0">Top Ventas</a></li>
                             </c:if>
                             <c:if  test="${usuario.tipo=='a'}">
                             <li><a href="${pageContext.request.contextPath}/ControllersAdministrador?stock=stock">Mensajes de Stock</a></li>
@@ -160,7 +161,10 @@
                             </c:if>
 
                         <c:if test="${sessionScope.carrito=='abierto'}">
-                            <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
+                            <c:if  test="${usuario.tipo!='a'}">
+                                <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#Trabaja"><span ></span>Trabaja con nosotros</a></li>
+                                </c:if>
                             </c:if>
 
                         <c:if test="${sessionScope.usuario==null}">
@@ -174,7 +178,8 @@
 
                         <c:if test="${sessionScope.usuario!=null}">
 
-                            <li><a href="${pageContext.request.contextPath}/Controllers?cerrarsesion=cerrar" style="font-size:24px" class="fa" >&#xf011;</a></li>
+                            
+
 
 
                             <c:if  test="${usuario.tipo=='a'}">
@@ -189,6 +194,8 @@
                                 <li><a href="${pageContext.request.contextPath}/ControllersUsuario?editar=editar" >Panel de control</a></li>
                                 <li><a href="${pageContext.request.contextPath}/ControllersMisPedidos" >Mis Pedidos</a></li>
                                 </c:if>
+
+                            <li><a href="${pageContext.request.contextPath}/Controllers?cerrarsesion=cerrar" style="font-size:24px" class="fa" >&#xf011;</a></li>
 
                         </c:if>
 

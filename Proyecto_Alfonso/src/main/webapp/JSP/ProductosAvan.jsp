@@ -9,14 +9,14 @@
 
 <div class="row">
     <div class="col-sm-1"></div>
-    
+
     <div class="col-sm-2" >
         <br/> <br/> <br/> <br/> <br/> <br/>
 
 
 
         <form method="POST" action="ControllersBusquedaAvan">
-            <h3><c:out value="${categoria}"/></h3>
+
             <c:if test="${categoria==1 || categoria==9}">
 
 
@@ -382,8 +382,8 @@
             </c:if>
 
             <c:if test="${categoria==13}">
-                
-                
+
+
                 <h3>Marca</h3>
                 <select name="marca" class="form-control">
                     <option name="marca" value=""></option>
@@ -414,7 +414,7 @@
                     <option name="resolucion" value="1600 x 900">1600 x 900</option>
                     <option name="resolucion" value="1920 x 1080">1920 x 1080</option>
                 </select>
-                
+
                 <h3>Pulgadas</h3>
                 <select name="pulgadas" class="form-control">
                     <option name="pulgadas" value=""></option>
@@ -427,23 +427,96 @@
 
             </c:if>
 
-                <c:if test="${categoria==14}">
-                
-                
+            <c:if test="${categoria==14}">
+
+
                 <h3>Marca</h3>
                 <select name="marca" class="form-control">
                     <option name="marca" value=""></option>
-                    <option name="marca" value="Templarius">Templarius </option>
+                    <option name="marca" value="Aerocool">Aerocool</option>
                     <option name="marca" value="BG ">BG </option>
-                    <option name="marca" value="LG">LG</option>
-                    <option name="marca" value="HP">HP</option>
-                    <option name="marca" value="Asus">Asus</option>
-                    <option name="marca" value="BENQ">BENQ</option>
-                    <option name="marca" value="Apple">Apple</option>
+                    <option name="marca" value="Cherry">Cherry</option>
+                    <option name="marca" value="Lenovo">Lenovo</option>
+                    <option name="marca" value="Kloner">Kloner</option>
+                    <option name="marca" value="Logitech">Logitech</option>
+                    <option name="marca" value="Gigabyte">Gigabyte</option>
+
+                </select>
+                
+                <h3>Bluetooh</h3>
+                <select name="bluetooh" class="form-control">
+                    
+                    <option name="bluetooh" value=""></option>
+                    <option name="bluetooh" value="mbrica">Bluetooh</option>
+                    <option name="bluetooh" value="Cable">Cable</option>
+                    
+                </select>
+             
+
+
+
+            </c:if>
+
+
+             <c:if test="${categoria==15}">
+
+
+                <h3>Marca</h3>
+                <select name="marca" class="form-control">
+                    <option name="marca" value=""></option>
+                    <option name="marca" value="BG">BG</option>
+                    <option name="marca" value="Cherry">Cherry</option>
+                    <option name="marca" value="Energy">Energy</option>
+                    <option name="marca" value="Gigabyte">Gigabyte</option>
+                    <option name="marca" value="Lenovo">Lenovo</option>
+                    <option name="marca" value="Logitech">Logitech</option>
 
                 </select>
 
-           
+                <h3>Tipo</h3>
+                <select name="tipo" class="form-control">
+                    <option name="tipo" value=""></option>
+                    <option name="tipo" value="ser">Láser</option>
+                    <option name="tipo" value="ptico">Óptico</option>
+
+                </select>
+
+
+                <h3>Forma de conexión</h3>
+                <select name="conexion" class="form-control">
+                    <option name="conexion" value=""></option>
+                    <option name="conexion" value="Cable">Cable</option>
+                    <option name="conexion" value="mbrico">Inalámbrico</option>
+                    
+                </select>
+
+        
+
+
+            </c:if>
+                
+                <c:if test="${categoria==17}">
+
+
+                <h3>Marca</h3>
+                <select name="marca" class="form-control">
+                    <option name="marca" value=""></option>
+                    <option name="marca" value="Asus">Asus</option>
+                    <option name="marca" value="Edimax">Edimax</option>
+                    <option name="marca" value="StarTech">StarTech</option>
+                    <option name="marca" value="TP-LINK">TP-LINK</option>
+                    <option name="marca" value="Intel">Intel</option>
+
+                </select>
+
+                <h3>Velocidad</h3>
+                <select name="velocidad" class="form-control">
+                    <option name="velocidad" value=""></option>
+                    <option name="velocidad" value="10/100/1000Mbps">10/100/1000Mbps</option>
+                    <option name="velocidad" value="802.11 b/g/n">802.11 b/g/n</option>
+                    
+
+                </select>
 
             </c:if>
 
@@ -477,7 +550,7 @@
 
             <input type="hidden" name="categoria" value="${categoria}" />
             <input type="hidden" name="valor" value="0"/>
-
+            <br>
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-1">
                     <button type="submit" name="Buscar" class="btn btn-default" style="float:left">Buscar</button>
@@ -505,7 +578,7 @@
 
                 <c:forEach  items="${productosFraccionado}" var="pc">
                     <div class="col-md-3">
-                        <div class="thumbnail">
+                        
                             <a href="${pageContext.request.contextPath}/Controllers?imagen=${pc.idProducto}">
                                 <img class="thumbnail" src="${pageContext.request.contextPath}/IMG/${pc.idProducto}.1.jpg" alt="Lights" style="width:100%">
                                 <div class="caption">
@@ -513,7 +586,7 @@
                                     <p><c:out value="${pc.precioUnitario} €"/></p>
                                 </div>
                             </a>
-                        </div>
+                       
                     </div>
                 </c:forEach>
 

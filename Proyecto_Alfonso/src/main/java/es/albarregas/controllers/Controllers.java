@@ -13,6 +13,7 @@ import es.albarregas.beans.ProductoCaracteristicas;
 import es.albarregas.beans.Usuario;
 import es.albarregas.dao.IClienteDAO;
 import es.albarregas.dao.IImagenesDAO;
+import es.albarregas.dao.IPedidosDAO;
 import es.albarregas.dao.IProductoDAO;
 import es.albarregas.dao.IUsuarioDAO;
 import es.albarregas.daofactory.DAOFactory;
@@ -41,12 +42,14 @@ public class Controllers extends HttpServlet {
         DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
         IUsuarioDAO udao = daof.getUsuarioDAO();
         IClienteDAO cdao = daof.getRegistroDAO();
+        IPedidosDAO pedidosdao = daof.getPedidosDAO();
 
         if (request.getParameter("cerrarsesion") != null) {
 
             request.setAttribute("mensaje", "Hasta pronto!");
             request.getSession().removeAttribute("usuario");
             request.getSession().removeAttribute("carrito");
+            
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
         }
@@ -124,7 +127,13 @@ public class Controllers extends HttpServlet {
                     request.getSession().setAttribute("apellido", cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
 
                     response.getWriter().write("Bienvenido");
-
+                    
+                    if(pedidosdao.saberSiClienteTienePedidoAbierto(u.getIdUsuario())){
+                        request.getSession().setAttribute("carrito","abierto");
+                    }
+                        
+                   // request.getRequestDispatcher("index.jsp").forward(request, response);
+                  
                 }
             }
 

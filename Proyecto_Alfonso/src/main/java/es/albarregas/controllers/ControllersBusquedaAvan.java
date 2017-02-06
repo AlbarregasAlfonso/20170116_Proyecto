@@ -118,13 +118,28 @@ public class ControllersBusquedaAvan extends HttpServlet {
                         clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("formato") + "%' and c.descripcion LIKE '%" + request.getParameter("resolucion") + "%'  and c.descripcion LIKE '%" + request.getParameter("pulgadas") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";
 
                         break;
+                        
                     case "14":
+                        
+                         clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + "  and p.denominacion LIKE '%" + request.getParameter("marca") + "%' and c.descripcion LIKE '%" + request.getParameter("bluetooh") + "%'";
+                        
                         break;
+                        
                     case "15":
+                        
+                        clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("conexion") + "%' and c.descripcion LIKE '%" + request.getParameter("tipo") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";                        
+                        
                         break;
+                        
                     case "16":
+                        
+                        clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta");                        
+                        
                         break;
                     case "17":
+                        
+                        clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("velocidad") + "%'  and p.denominacion LIKE '%" + request.getParameter("marca") + "%'";                        
+
                         break;
 
                 }

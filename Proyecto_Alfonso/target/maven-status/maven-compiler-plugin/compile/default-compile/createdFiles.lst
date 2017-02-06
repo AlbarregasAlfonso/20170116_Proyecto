@@ -27,6 +27,7 @@ es\albarregas\beans\Imagen.class
 es\albarregas\beans\Provincia.class
 es\albarregas\dao\MysqlProvinciaDAO.class
 es\albarregas\daofactory\DAOFactory.class
+es\albarregas\controllers\ControllersAdministrador2.class
 es\albarregas\controllers\ControllersBusquedaAvan.class
 es\albarregas\dao\IProductoDAO.class
 es\albarregas\dao\IUsuarioDAO.class

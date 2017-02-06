@@ -316,4 +316,50 @@ public class MysqlPedidosDAO implements IPedidosDAO {
         return lista;
     }
 
+    @Override
+    public boolean saberSiClienteTienePedidoAbierto(String idCliente) {
+         boolean semaforo = true;
+     String re="";
+
+        try {
+            String aux = "select IdPedido from pedidos where IdCliente="+idCliente+" and estado='p'";
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(aux);
+            Throwable throwable = null;
+            try {
+                if (resultado.next()) {
+                    re = resultado.getString("IdPedido");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia obtenerApellidoDelClienteDeUnPedido(String idPedido)");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        
+        if(re != null){
+            semaforo=true;
+        }else{
+            semaforo=false;
+        }
+        
+        return semaforo;
+        
+    }
+
+    
 }

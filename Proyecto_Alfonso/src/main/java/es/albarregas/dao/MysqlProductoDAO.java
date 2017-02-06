@@ -461,7 +461,7 @@ public class MysqlProductoDAO implements IProductoDAO {
         }
         lista = new ArrayList<Producto>();
             String consulta = "select Distinct(p.IdProducto),p.IdCategoria,p.IdMarca,p.Denominacion,p.Descripcion,p.IdProveedor,p.PrecioUnitario*(select GastosEnvio from general),p.Stock,p.StockMinimo,p.FechaAlta,p.Oferta,p.FueraCatalogo,p.Rating from caracyprods c inner join productos p on p.idproducto=c.idproducto "+where;
-            System.out.println("Holaaaaaajiji");
+            
             System.out.println(consulta);
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();

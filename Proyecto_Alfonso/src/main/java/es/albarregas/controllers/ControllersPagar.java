@@ -92,7 +92,7 @@ public class ControllersPagar extends HttpServlet {
 
                     for (Producto p : productosSinStock) {
 
-                        request.setAttribute("mensaje", "El producto " + p.getDenominacion() + " no lo tenemos en Stock ahora mismo");
+                        request.setAttribute("mensaje", "Hay productos que aún no lo tenemos en stock");
                         pdao.insertarEnProductosSinStock( p.getDenominacion(), p.getCantidadQueFaltaEnStock(),p.getIdProducto());
 
                     }
@@ -108,7 +108,7 @@ public class ControllersPagar extends HttpServlet {
                     float cantidad1;
                     float precioUnitario;
                     String idPedido = "";
-                    System.out.println("Estamos disminuyendo el stock3");
+                   
                     for(LineasPedidos p:productosCarritoDesglose){
                         idPedido=p.getIdPedido();
                         cantidad1 = parseFloat(p.getCantidad()); 
@@ -119,6 +119,7 @@ public class ControllersPagar extends HttpServlet {
                     pedao.modificarEstadoDePedido("r", u.getIdUsuario(),request.getParameter("direccionDeEnvio"),precioTotal+5,"5",idPedido);
                     request.getSession().setAttribute("carrito", "cerrado");
                     pdao.disminuirProductosEnStock(u.getIdUsuario(),"r",idPedido);
+                   
                     request.getRequestDispatcher("index.jsp").forward(request, response);
 
                 }

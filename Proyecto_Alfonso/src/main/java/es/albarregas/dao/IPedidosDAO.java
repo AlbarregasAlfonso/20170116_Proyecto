@@ -27,6 +27,8 @@ public interface IPedidosDAO {
     public void modificarEstadoDePedido(String estado,String idCliente,String idDireccion,float totalprecio,String gastosEnvio, String idPedido);
     
     public void modificarEstadosDesPedidos();
+    
+    public boolean saberSiClienteTienePedidoAbierto(String idCliente);
 
     public void closeConnection();
 

@@ -6,63 +6,70 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script>
     function cambiarCantidad(id, signo) {
-//alert($('#cantidad' + id).val());
-//alert($('#stock' + id).val());
 
-    if($('#cantidad' + id).val() != $('#stock' + id).val()){
 
-        $.ajax({
-            url: "ControllersCarrito",
-            method: "GET",
-            data: {
-                idProducto: $('#prod' + id).val(),
-                signo: signo,
-            },
-            success: function (results) {
+        if ($('#cantidad' + id).val() != parseInt($('#stock' + id).val())) {
 
-                if (results != null) { //esto es lo que recibo del controlador, si ha ido bien o mal
 
-                    if ($('#cantidad' + id).val() < parseInt($('#stock' + id).val())) {
-                        $('#cantidad' + id).val(parseInt($('#cantidad' + id).val()) + parseInt(1));
-                        $('#total').val(parseInt($('#total').val()) + parseInt($('#precio' + id).val()));
+
+            $.ajax({
+                url: "ControllersCarrito",
+                method: "GET",
+                data: {
+                    idProducto: $('#prod' + id).val(),
+                    signo: signo,
+                },
+                success: function (results) {
+
+                    if (results != null) { //esto es lo que recibo del controlador, si ha ido bien o mal
+
+                        if ($('#cantidad' + id).val() < parseInt($('#stock' + id).val())) {
+                            $('#cantidad' + id).val(parseInt($('#cantidad' + id).val()) + parseInt(1));
+                            $('#total').val(parseInt($('#total').val()) + parseInt($('#precio' + id).val()));
+                        }
+
+
+
+
+                    } else {
+                        alert('Algo fallo');
                     }
-
-
-
-
-                } else {
-                    alert('Algo fallo');
                 }
-            }
-        })};
+            });
+        }
     }
     ;
     function cambiarCantidadMenos(id, signo) {
-        $.ajax({
-            
-            data: {
-                idProducto: $('#prod' + id).val(),
-                signo: signo,
-            },
-            url: "ControllersCarrito",
-            method: "GET",
-            success: function (results) {
 
-                if (results != null) { //esto es lo que recibo del controlador, si ha ido bien o mal
+        if ($('#cantidad' + id).val() > 1) {
 
-                    if ($('#cantidad' + id).val() > 1) {
-                        $('#cantidad' + id).val(parseInt($('#cantidad' + id).val()) - parseInt(1));
-                        $('#total').val(parseInt($('#total').val()) - parseInt($('#precio' + id).val()));
 
+            $.ajax({
+                data: {
+                    idProducto: $('#prod' + id).val(),
+                    signo: signo,
+                },
+                url: "ControllersCarrito",
+                method: "GET",
+                success: function (results) {
+
+                    if (results != null) { //esto es lo que recibo del controlador, si ha ido bien o mal
+
+                        if ($('#cantidad' + id).val() > 1) {
+                            $('#cantidad' + id).val(parseInt($('#cantidad' + id).val()) - parseInt(1));
+                            $('#total').val(parseInt($('#total').val()) - parseInt($('#precio' + id).val()));
+
+                        }
+
+                    } else {
+                        alert('Algo fallo');
                     }
-
-                } else {
-                    alert('Algo fallo');
                 }
-            }
-        });
+            });
+        }
     }
-    ;</script>
+    ;
+</script>
 
 <div class="container">
     <h2><c:out value="Carrito"/></h2>
@@ -127,8 +134,8 @@
 
 
             <c:if test="${sessionScope.apellido==false}">
-                
-                
+
+
 
                 <td><a href="" data-toggle="modal" data-target="#RegistroCompra"><button type="button" class="btn btn-info">Comprar</button></a></td>
 

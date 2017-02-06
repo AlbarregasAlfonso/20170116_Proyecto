@@ -69,8 +69,11 @@ public class ControllersAdministrador extends HttpServlet {
             if(request.getParameter("aumentarStock")!=null){
                 
                 int cantidad = Integer.parseInt(request.getParameter("HacenFalta"));
+                int cantidadIni = 0;
+                cantidadIni=cantidad;
                 cantidad=cantidad+10;
-                request.setAttribute("mensaje1", "se han comprado "+cantidad+" productos por lo que ahora mismo en stock hay 10 productos, "+request.getParameter("HacenFalta")+" para el cliente y 10 para el stock");
+                
+                request.setAttribute("mensaje1", "se han comprado "+cantidad+" , "+cantidadIni+" para el cliente y el resto para stock ");
                 pdao.aumentarStockProducto(request.getParameter("productoDenominacion"),request.getParameter("HacenFalta"));
                 pdao.eliminarDeProductosSinStock(request.getParameter("productoDenominacion"));
                 

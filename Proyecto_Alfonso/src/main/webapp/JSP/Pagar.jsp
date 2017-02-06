@@ -121,12 +121,12 @@
                             
                             
                             
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
+<!--                    <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">-->
                                     <button type="submit" name="Enviar2" value="Enviar2" class="btn btn-default">Finalizar</button>
                                 </div>
-                            </div>
-                        </div>
+<!--                        </div>
+                        </div>-->
 
 
                     </div>

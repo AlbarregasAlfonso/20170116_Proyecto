@@ -5,6 +5,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:include page="INI/Cabecera.jsp"/>
+<jsp:include page="INI/Trabaja.jsp"/>
 
 
 <!--
@@ -26,11 +27,11 @@
     <br>
 
 
-        <h2>Productos en oferta</h2>
-        <p>¡Aquí tenemos los precios mas baratos del mercado!</p>
-        <p>Compra todo lo que necesites</p>
+    <h2>Productos en oferta</h2>
+    <p>¡Aquí tenemos los precios mas baratos del mercado!</p>
+    <p>Compra todo lo que necesites</p>
 
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -77,7 +78,17 @@
             <span class="sr-only">Siguiente</span>
         </a>
     </div>
-
+     
+    <a title="Los Tejos" href="https://twitter.com/?lang=es"><img src="IMG/twitter.png" width="100" height="100" / alt="Los Tejos" /></a>
+    <a title="Los Tejos" href="https://es-es.facebook.com/"><img src="IMG/Facebook.png" width="100" height="100" / alt="Los Tejos" /></a>
+    <a title="Los Tejos" href="https://www.youtube.com/"><img src="IMG/youtube.png" width="100" height="100" / alt="Los Tejos" /></a>
+    <a title="Los Tejos" href="http://www.ebay.com/"><img src="IMG/ebay.png" width="100" height="100" / alt="Los Tejos" /></a>
+    <a title="Los Tejos" href="https://www.amazon.es/?tag=hydesnav-21&hvadid=24483849088&hvpos=1t1&hvnetw=g&hvrand=15709444381865574062&hvpone=&hvptwo=&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1005475&hvtargid=kwd-10573980&ref=pd_sl_781oit2196_e"><img src="IMG/amazon.ico" width="100" height="100" / alt="Los Tejos" /></a>
+    <a title="Los Tejos" href="https://www.instagram.com/?hl=es"><img src="IMG/Uiconstock-Socialmedia-Instagram.ico" width="100" height="100" / alt="Los Tejos" /></a>  
+    <a title="Los Tejos" href="https://www.google.com/intl/es/gmail/about/"><img src="IMG/Cornmanthe3rd-Plex-Communication-gmail.ico" width="100" height="100" / alt="Los Tejos" /></a>  
+    <a title="Los Tejos" href="https://www.google.es/?gws_rd=ssl"><img src="IMG/Google-Chrome-Google-Chrome.ico" width="100" height="100" / alt="Los Tejos" /></a>  
+    
+    
     <jsp:include page="INI/Pie.jsp"/>
 
 </c:if>
