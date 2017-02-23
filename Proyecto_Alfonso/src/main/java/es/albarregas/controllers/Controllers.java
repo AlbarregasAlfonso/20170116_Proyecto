@@ -5,7 +5,6 @@
  */
 package es.albarregas.controllers;
 
-
 import es.albarregas.beans.Cliente;
 import es.albarregas.beans.Imagen;
 import es.albarregas.beans.Producto;
@@ -25,7 +24,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 /**
  *
@@ -49,7 +47,7 @@ public class Controllers extends HttpServlet {
             request.setAttribute("mensaje", "Hasta pronto!");
             request.getSession().removeAttribute("usuario");
             request.getSession().removeAttribute("carrito");
-            
+
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
         }
@@ -99,41 +97,50 @@ public class Controllers extends HttpServlet {
         }
 
         if (request.getParameter("Enviar") != null) {
-            
+
             if (request.getParameter("Enviar").equals("registro")) {
 
+                System.out.println("Pasamos por aqui1");
                 Cliente cliente = new Cliente("nombre", "apellido", request.getParameter("email"), "nif", "0000-00-00");
+                System.out.println("Pasamos por aqui2");
                 request.getSession().setAttribute("apellido", false);
-
+                System.out.println("Pasamos por aqui3");
                 cdao.addCliente(cliente);
-
+                System.out.println("Pasamos por aqui4");
                 Usuario usuario = new Usuario(request.getParameter("user"), request.getParameter("clave"));
-                udao.addUsuario(usuario);
+                
+                if (udao.emailyautilizado(request.getParameter("user")).equals("OK")) {
+                    udao.addUsuario(usuario);
+                } else {
+
+                }
 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else if (request.getParameter("Enviar").equals("iniciarSesion")) {
 
-                if (udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSession(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
-                    
+                if (udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
+
                     response.getWriter().write("Usuario no registrado");
-                    request.setAttribute("mensaje", udao.inicioSession(request.getParameter("user"), request.getParameter("clave")));
+                    request.setAttribute("mensaje", udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")));
 
                 } else {
 
-                    request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user"))));
-                    Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(request.getParameter("user")));
+                    String username = udao.obtenerUsername(request.getParameter("user"));
+
+                    request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(username)));
+                    Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(username));
 
                     request.getSession().setAttribute("apellido", cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
 
-                    response.getWriter().write("Bienvenido");
-                    
-                    if(pedidosdao.saberSiClienteTienePedidoAbierto(u.getIdUsuario())){
-                        request.getSession().setAttribute("carrito","abierto");
+                     request.setAttribute("mensaje",u.getUserName()+" bienvenido ");
+                    //response.getWriter().write("Bienvenido");
+
+                    if (pedidosdao.saberSiClienteTienePedidoAbierto(u.getIdUsuario())) {
+                        request.getSession().setAttribute("carrito", "abierto");
                     }
-                        
-                   // request.getRequestDispatcher("index.jsp").forward(request, response);
-                  
+
+                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }
 

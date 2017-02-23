@@ -164,9 +164,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ejemplo_email_3" class="col-lg-2 control-label">Dirección</label>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-5">
                                         <input type="text" name="direccion" class="form-control" id="ejemplo_email_3"
                                                placeholder="Direccion">
+                                    </div>
+                                </div>
+                                  <div class="form-group">
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Codigo Postal</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" name="codigoPostal" id="searchField1" autocomplete="off" class="form-control" id="ejemplo_email_3"
+                                               placeholder="XXXXXX">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ejemplo_email_3" class="col-lg-2 control-label">Telefono</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" name="telefono" class="form-control" id="ejemplo_email_3"
+                                               placeholder="XXX XX XX XX">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                        <button type="submit" name="EnviarDesdePago" class="btn btn-default">Enviar</button>
                                     </div>
                                 </div>
 

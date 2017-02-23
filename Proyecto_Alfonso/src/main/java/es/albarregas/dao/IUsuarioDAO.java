@@ -11,7 +11,13 @@ public interface IUsuarioDAO {
     
     public String inicioSession (String correo, String clave);
     
+    public String emailyautilizado (String mail);
+    
+    public String inicioSessionConMail (String correo, String clave);
+    
     public String getSacarIdUsuario(String userName);
+    
+    public String obtenerUsername (String mail);
     
     public String SacarTipoUsuario(String idUsuario);
     

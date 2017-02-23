@@ -94,6 +94,7 @@ public class MysqlPedidosDAO implements IPedidosDAO {
 
         
         String consulta = "select estado from pedidos where IdCliente="+idusuario+" order by IdPedido desc limit 1";
+        System.out.println(consulta);
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);

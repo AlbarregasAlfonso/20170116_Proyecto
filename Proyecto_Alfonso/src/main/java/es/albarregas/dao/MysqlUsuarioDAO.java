@@ -17,6 +17,7 @@ import es.albarregas.dao.IClienteDAO;
 
 public class MysqlUsuarioDAO implements IUsuarioDAO {
 
+    @Override
     public String inicioSession(String username, String clave) {
 
         String mensaje = " ";
@@ -75,6 +76,67 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
         return mensaje;
     }
 
+    @Override
+    public String inicioSessionConMail(String correo, String clave) {
+         String mensaje = " ";
+
+        String consulta = "select c.Email,u.bloqueado, u.Clave from usuarios u inner join clientes c on c.IdCliente=u.IdUsuario";
+
+        try {
+
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+
+            try {
+
+                while (resultado.next()) {
+
+                    if (resultado.getString("c.Email").equals(correo) && resultado.getString("u.Clave").equals(clave)) {
+
+                        if (resultado.getString("u.bloqueado").equals("s")) {
+
+                            mensaje = "usuario bloqueado";
+                            break;
+
+                        } else {
+
+                            mensaje = "bienvenido ";
+                            break;
+                        }
+                    } else {
+
+                        mensaje = "Usuario o contraseña erroneos";
+
+                    }
+                }
+            } catch (Throwable equipo) {
+                throwable = equipo;
+                throw equipo;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable equipo) {
+                            throwable.addSuppressed(equipo);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        System.out.println("Este es el mensaje "+mensaje);
+        return mensaje;
+
+    }
+
+    @Override
     public void addUsuario(Usuario usuario) {
         try {
             String sqlAux = "select idCliente from clientes where IdCliente=(select max(IdCliente) from clientes);";
@@ -86,8 +148,8 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 idCliente = resultado.getString("idCliente");
             }
 
-            String sql = "insert into usuarios (IdUsuario,UserName,Clave,UltimoAcceso,Tipo,Bloqueado) values (?,?,?,now(),'u','n')";
-
+            String sql = "insert into usuarios (IdUsuario,UserName,Clave,UltimoAcceso,Tipo,Bloqueado) values (?,?,MD5(?),now(),'u','n')";
+            System.out.println(usuario.getUserName());
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, idCliente);
             preparada.setString(2, usuario.getUserName());
@@ -246,6 +308,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
 
     }
 
+    @Override
     public Usuario obtenerUsuario(String idUsuario) {
 
         Usuario u = new Usuario();
@@ -348,7 +411,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             String sql = " UPDATE usuarios u inner join clientes c on c.idcliente=u.idusuario SET u.UserName=?,u.clave=?,c.nombre=?,c.apellidos=?,c.email=? where idusuario=?";
             System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
-            
+
             preparada.setString(1, username);
             preparada.setString(2, clave);
             preparada.setString(3, nombre);
@@ -361,5 +424,97 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();
+    }
+
+    @Override
+    public String emailyautilizado(String mail) {
+        String mensaje = " ";
+
+        String consulta = "select Email from clientes";
+
+        try {
+
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+
+            try {
+
+                while (resultado.next()) {
+
+                    if (resultado.getString("Email").equals(mail)) {
+
+                        mensaje = "Este usuario ya existe";
+
+                    } else {
+
+                        mensaje = "OK";
+
+                    }
+                }
+            } catch (Throwable equipo) {
+                throwable = equipo;
+                throw equipo;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable equipo) {
+                            throwable.addSuppressed(equipo);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return mensaje;
+
+    }
+    
+    @Override
+    public String obtenerUsername (String mail){
+          String re = null;
+        if (mail == null) {
+            mail = "";
+        }
+
+        String consulta = "select u.username from usuarios u inner join clientes c on c.idcliente=u.idusuario where c.email='" + mail + "'";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {
+                    re = resultado.getString("u.username");
+                }
+
+            } catch (Exception e) {
+
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Exception e) {
+
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return re;
+        
     }
 }

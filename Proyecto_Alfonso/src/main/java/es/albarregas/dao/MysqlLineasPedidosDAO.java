@@ -122,7 +122,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
     }
 
     @Override
-    public void modificarValorCantidad(String signo, String idProducto) {
+    public void modificarValorCantidad(String signo, String idProducto,String IdPedido) {
 
         if (signo.equals("mas")) {
             signo = "+";
@@ -132,7 +132,8 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
 
         try {
             
-            String sql = " update lineaspedidos set cantidad =cantidad" + signo + "1 where IdProducto=" + idProducto + "";
+            String sql = " update lineaspedidos set cantidad =cantidad" + signo + "1 where IdProducto=" + idProducto + " and IdPedido="+IdPedido+"";
+            System.out.println(sql);
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
 

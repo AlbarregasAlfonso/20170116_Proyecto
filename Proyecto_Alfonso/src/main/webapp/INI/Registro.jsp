@@ -1,4 +1,5 @@
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="modal fade" id="Registro" role="dialog">
     <div class="modal-dialog">
@@ -15,7 +16,7 @@
                     <div class="form-group">
                         <label for="ejemplo_email_3" class="col-lg-2 control-label">UserName</label>
                         <div class="col-lg-10">
-                            <input type="text" name="user" pattern="[a-zA-Z]+" required title="Recuerda: solo puedes introducir letras" class="form-control" id="ejemplo_email_3"
+                            <input type="text" name="user"  required title="Recuerda: solo puedes introducir letras" class="form-control" id="ejemplo_email_3"
                                    placeholder="Nombre de uusario">
                         </div>
                     </div>

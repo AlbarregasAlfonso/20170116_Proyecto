@@ -107,15 +107,19 @@ public class ControllersPagar extends HttpServlet {
                     float precioTotal=0f;
                     float cantidad1;
                     float precioUnitario;
-                    String idPedido = "";
+                    String idPedido = "0";
                    
                     for(LineasPedidos p:productosCarritoDesglose){
+                        
                         idPedido=p.getIdPedido();
+                        System.out.println("Este for es el idPedido="+idPedido);
                         cantidad1 = parseFloat(p.getCantidad()); 
                         precioUnitario = parseFloat(p.getProducto().getPrecioConIva());
                         precioTotal=precioTotal+precioUnitario*cantidad1;
                     }
  
+                    System.out.println("Este es el idPedido="+idPedido);
+                    
                     pedao.modificarEstadoDePedido("r", u.getIdUsuario(),request.getParameter("direccionDeEnvio"),precioTotal+5,"5",idPedido);
                     request.getSession().setAttribute("carrito", "cerrado");
                     pdao.disminuirProductosEnStock(u.getIdUsuario(),"r",idPedido);
@@ -135,8 +139,7 @@ public class ControllersPagar extends HttpServlet {
                 String codigoYCiudad=(request.getParameter("codigoPostal"));
                 String codigoPostal=codigoYCiudad.substring(0,5);
                 String pueblo=codigoYCiudad.substring(6, codigoYCiudad.length());
-                
-                
+ 
                 ddao.introducirDireccion(request.getParameter("nombreDireccion"), request.getParameter("direccion"),codigoPostal, request.getParameter("telefono"), u.getIdUsuario(),pueblo);
 
                 Provincia p = new Provincia();

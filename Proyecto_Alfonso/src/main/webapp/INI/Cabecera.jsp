@@ -163,7 +163,7 @@
                         <c:if test="${sessionScope.carrito=='abierto'}">
                             <c:if  test="${usuario.tipo!='a'}">
                                 <li><a href="${pageContext.request.contextPath}/ControllersCarrito?Vercarrito=ver" style="font-size:24px" class="fa" >&#xf218;</a></li>
-                                <li><a href="" data-toggle="modal" data-target="#Trabaja"><span ></span>Trabaja con nosotros</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#Trabaja"><span ></span>ATPC</a></li>
                                 </c:if>
                             </c:if>
 
@@ -199,7 +199,7 @@
 
                         </c:if>
 
-                        <li><a href="#nada">-----</a></li>
+
                             <c:if  test="${usuario.tipo!='a'}">
                             <li class="dropdown">
                                 <a class="glyphicon glyphicon-search" data-toggle="dropdown" href="#">

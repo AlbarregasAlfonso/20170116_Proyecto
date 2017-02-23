@@ -72,7 +72,7 @@ public class ControllersCarrito extends HttpServlet {
             if (request.getParameter("signo") != null) {
 
                 
-                lpdao.modificarValorCantidad(request.getParameter("signo"), request.getParameter("idProducto"));
+                lpdao.modificarValorCantidad(request.getParameter("signo"), request.getParameter("idProducto"),pedao.idPedidoMaxDeUnCliente(u.getIdUsuario()));
                 productosCarrito = lpdao.getProductosEnCarrito(u.getIdUsuario());
                 request.setAttribute("productosCarrito", productosCarrito);
 

@@ -96,7 +96,7 @@ public class ControllersBusquedaAvan extends HttpServlet {
 
                         clausulaWhere = "where p.IdCategoria=" + request.getParameter("categoria") + " and p.PrecioUnitario>" + request.getParameter("desde") + " and p.PrecioUnitario<" + request.getParameter("hasta") + " and c.descripcion LIKE '%" + request.getParameter("tipo") + "%'";
 
-                        break;
+                        break;              
                     case "10":
 
                         break;

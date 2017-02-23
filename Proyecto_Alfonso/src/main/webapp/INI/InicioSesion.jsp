@@ -1,8 +1,8 @@
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>z
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<script >
+<!--<script >
     var request;
 
     function getRequestObject() {
@@ -47,7 +47,7 @@
     }
 
 
-</script>
+</script>-->
 
 
 
@@ -64,7 +64,7 @@
                 <h4><div id="message"></div></h4>
             </div>
             <div class="modal-body" style="padding:40px 50px;">
-                <form name="formulario">
+                <form action="Controllers" method="GET">
                     <div class="form-group">
                         <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
                         <input type="text" class="form-control" id="name" name="user" placeholder="Enter email">
@@ -74,8 +74,7 @@
                         <input type="password" class="form-control" id="name" name="clave" placeholder="Enter password">
                     </div>
        
-
-                    <button type="button" onclick="sendRequest()" name="Enviar" value="iniciarSesion" class="btn btn-success btn-block"><span class="glyphicon glyphicon-on"></span> Login</button>
+                    <input type="submit" name="Enviar" value="iniciarSesion">
                 </form>
             </div>
             <div class="modal-footer">
