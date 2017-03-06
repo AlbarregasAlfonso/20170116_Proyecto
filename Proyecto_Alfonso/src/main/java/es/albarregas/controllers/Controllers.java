@@ -91,57 +91,71 @@ public class Controllers extends HttpServlet {
             request.setAttribute("productosFraccionado", productosFraccionado);
             request.setAttribute("valor", Integer.parseInt(request.getParameter("valor")) + 9);
 
+            ArrayList<Integer> paginacion = new ArrayList<Integer>();
+            int contador = 0;
+
+            for (Producto p : productos) {
+                contador++;
+                if (contador % 9 == 0) {
+                    paginacion.add(contador);
+                }
+            }
+            request.setAttribute("paginacion", paginacion);
+
             url = "/JSP/Productos.jsp";
             request.getRequestDispatcher(url).forward(request, response);
-
+            
         }
 
         if (request.getParameter("Enviar") != null) {
 
             if (request.getParameter("Enviar").equals("registro")) {
 
-                System.out.println("Pasamos por aqui1");
+              
                 Cliente cliente = new Cliente("nombre", "apellido", request.getParameter("email"), "nif", "0000-00-00");
-                System.out.println("Pasamos por aqui2");
                 request.getSession().setAttribute("apellido", false);
-                System.out.println("Pasamos por aqui3");
-                cdao.addCliente(cliente);
-                System.out.println("Pasamos por aqui4");
+
                 Usuario usuario = new Usuario(request.getParameter("user"), request.getParameter("clave"));
-                
-                if (udao.emailyautilizado(request.getParameter("user")).equals("OK")) {
+
+
+                if (udao.userNameyautilizado(request.getParameter("user")).equals("OK") && udao.emailyautilizado(request.getParameter("email")).equals("OK")) {
+                 
+                    cdao.addCliente(cliente);
                     udao.addUsuario(usuario);
+                    request.setAttribute("mensaje", " Usuario " + request.getParameter("user") + " registrado");
+
                 } else {
 
+                    request.setAttribute("mensaje", " Correo " + request.getParameter("email") + " o Usuario " + request.getParameter("user") + " ya existe");
                 }
 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
             } else if (request.getParameter("Enviar").equals("iniciarSesion")) {
 
-                if (udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
+                if (udao.inicioSessionConMail2(request.getParameter("user"), request.getParameter("clave")).equals("usuario bloqueado") || udao.inicioSessionConMail2(request.getParameter("user"), request.getParameter("clave")).equals("Usuario o contraseña erroneos")) {
 
-                    response.getWriter().write("Usuario no registrado");
-                    request.setAttribute("mensaje", udao.inicioSessionConMail(request.getParameter("user"), request.getParameter("clave")));
+                    request.setAttribute("mensaje", udao.inicioSessionConMail2(request.getParameter("user"), request.getParameter("clave")));
 
                 } else {
 
                     String username = udao.obtenerUsername(request.getParameter("user"));
 
                     request.getSession().setAttribute("usuario", udao.obtenerUsuario(udao.getSacarIdUsuario(username)));
+
                     Usuario u = udao.obtenerUsuario(udao.getSacarIdUsuario(username));
 
                     request.getSession().setAttribute("apellido", cdao.verSiEstanTodosLosDatosDelRegistro(u.getIdUsuario()));//Si no esta el registro al completo el atributo de sesion se pondra a false
 
-                     request.setAttribute("mensaje",u.getUserName()+" bienvenido ");
-                    //response.getWriter().write("Bienvenido");
+                    request.setAttribute("mensaje", u.getUserName() + " bienvenido ");
 
                     if (pedidosdao.saberSiClienteTienePedidoAbierto(u.getIdUsuario())) {
                         request.getSession().setAttribute("carrito", "abierto");
                     }
 
-                     request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
         }

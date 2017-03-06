@@ -16,6 +16,7 @@ es\albarregas\dao\MysqlClienteDAO.class
 es\albarregas\beans\ProductoCaracteristicas.class
 es\albarregas\controllers\ControllersPagar.class
 es\albarregas\controllers\ControllersAdministrador.class
+es\albarregas\beans\MyLogger.class
 es\albarregas\dao\ConnectionFactory.class
 es\albarregas\dao\MysqlLineasPedidosDAO.class
 es\albarregas\controllers\ControllersBusqudas.class
@@ -23,6 +24,7 @@ es\albarregas\controllers\ControllersCarrito.class
 es\albarregas\dao\IProvinciaDAO.class
 es\albarregas\dao\MysqlUsuarioDAO.class
 es\albarregas\beans\Cliente.class
+es\albarregas\controllers\ControllersComprandoIniciandoSesion.class
 es\albarregas\beans\Imagen.class
 es\albarregas\beans\Provincia.class
 es\albarregas\dao\MysqlProvinciaDAO.class
@@ -33,6 +35,7 @@ es\albarregas\dao\IProductoDAO.class
 es\albarregas\dao\IUsuarioDAO.class
 es\albarregas\dao\MysqlPedidosDAO.class
 es\albarregas\dao\ICaracyprodsDAO.class
+es\albarregas\filters\UTF8Filter.class
 es\albarregas\beans\Caracteristicas.class
 es\albarregas\beans\Direccion.class
 es\albarregas\dao\ILineasPedidosDAO.class

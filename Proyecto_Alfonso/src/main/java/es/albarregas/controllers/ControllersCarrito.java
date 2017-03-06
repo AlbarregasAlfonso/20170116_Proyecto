@@ -87,9 +87,6 @@ public class ControllersCarrito extends HttpServlet {
                 }else{
                     request.setAttribute("mas", true);
                 }
-                
-                //response.getWriter().write("Ha ido bien");
-                //request.getRequestDispatcher("/JSP/Carrito_1.jsp").forward(request, response);
 
             }
 
@@ -100,7 +97,8 @@ public class ControllersCarrito extends HttpServlet {
                 request.getRequestDispatcher("/JSP/Carrito.jsp").forward(request, response);
             }
 
-            if (pedao.sacarEstadoUltimoPedido(request.getParameter("idusuario")).equals("p")) {
+          
+            if (pedao.sacarEstadoUltimoPedido(u.getIdUsuario()).equals("p")) {
 
                 if (lpdao.buscarProductoEnLineaPedidos(request.getParameter("idusuario"), request.getParameter("idProducto"))) {
 

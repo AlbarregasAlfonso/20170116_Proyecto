@@ -69,6 +69,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
             ex.printStackTrace();
         }
@@ -127,6 +128,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
             ex.printStackTrace();
         }
@@ -134,6 +136,63 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
         System.out.println("Este es el mensaje "+mensaje);
         return mensaje;
 
+    }
+    
+    @Override
+    public String inicioSessionConMail2 (String correo, String clave){
+    
+        String bloqueado="";
+        String mensaje=null;
+        String consulta = "select c.Email,u.bloqueado,u.Clave from usuarios u inner join clientes c on c.IdCliente=u.IdUsuario where c.Email='"+correo+"' and u.Clave=MD5('"+clave+"')";
+        try {
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+            try {
+                while (resultado.next()) {                   
+                    bloqueado=resultado.getString("u.bloqueado");
+                }
+                
+              
+                        if (bloqueado.equals("")){
+                            
+                            mensaje = "Usuario o contraseña erroneos";
+                            
+                        }else if (bloqueado.equals("s")) {
+
+                            mensaje = "usuario bloqueado";
+                          
+
+                        } else {
+
+                            mensaje = "bienvenido ";
+                           
+                        }
+
+            } catch (Throwable producto) {
+                
+                throwable = producto;
+                throw producto;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable producto) {
+                            throwable.addSuppressed(producto);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ejecutar la sentencia");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return mensaje;
+        
     }
 
     @Override
@@ -149,7 +208,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             }
 
             String sql = "insert into usuarios (IdUsuario,UserName,Clave,UltimoAcceso,Tipo,Bloqueado) values (?,?,MD5(?),now(),'u','n')";
-            System.out.println(usuario.getUserName());
+         
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, idCliente);
             preparada.setString(2, usuario.getUserName());
@@ -157,6 +216,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             preparada.executeUpdate();
 
         } catch (SQLException ex) {
+            
             System.out.println("Algo ha pasado al insertar");
             Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -187,7 +247,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
 
             } catch (Exception e) {
-
+Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
@@ -228,7 +288,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
 
             } catch (Exception e) {
-
+Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
             } finally {
                 if (resultado != null) {
                     if (throwable != null) {
@@ -285,6 +345,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia");
             ex.printStackTrace();
         }
@@ -345,6 +406,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia");
             System.out.println(ex.getMessage());
         }
@@ -372,11 +434,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                     c = new Cliente();
                     c = new Cliente(resultado.getString("c.nombre"), resultado.getString("c.apellidos"), resultado.getString("c.email"));
                     u = new Usuario(resultado.getString("u.UserName"), resultado.getString("u.clave"), c);
-                    System.out.println("Estamos ene l dao de usuario " + u.getUserName());
-                    System.out.println("Estamos ene l dao de usuario " + u.getClave());
-                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getApellidos());
-                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getNombre());
-                    System.out.println("Estamos ene l dao de usuario " + u.getCliente().getEmail());
+                 
 
                 }
             } catch (Throwable producto) {
@@ -397,19 +455,20 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia  getProductosEnCarrito");
             ex.printStackTrace();
         }
         closeConnection();
-        System.out.println("Justo antes de salirrr" + u.getClave());
+       
         return u;
     }
 
     @Override
     public void editarUsuarios(String nombre, String username, String clave, String apellidos, String mail, String idUsuario) {
         try {
-            String sql = " UPDATE usuarios u inner join clientes c on c.idcliente=u.idusuario SET u.UserName=?,u.clave=?,c.nombre=?,c.apellidos=?,c.email=? where idusuario=?";
-            System.out.println(sql);
+            String sql = " UPDATE usuarios u inner join clientes c on c.idcliente=u.idusuario SET u.UserName=?,u.clave=MD5(?),c.nombre=?,c.apellidos=?,c.email=? where idusuario=?";
+          
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
 
             preparada.setString(1, username);
@@ -441,7 +500,7 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
             try {
 
                 while (resultado.next()) {
-
+             
                     if (resultado.getString("Email").equals(mail)) {
 
                         mensaje = "Este usuario ya existe";
@@ -469,6 +528,61 @@ public class MysqlUsuarioDAO implements IUsuarioDAO {
                 }
             }
         } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return mensaje;
+
+    }
+    
+    
+    
+    @Override
+    public String userNameyautilizado(String username) {
+        String mensaje = " ";
+
+        String consulta = "select UserName from usuarios";
+
+        try {
+
+            Statement sentencia = ConnectionFactory.getConnection().createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            Throwable throwable = null;
+
+            try {
+
+                while (resultado.next()) {
+  
+                    if (resultado.getString("UserName").equals(username)) {
+
+                        mensaje = "Este usuario ya existe";
+
+                    } else {
+
+                        mensaje = "OK";
+
+                    }
+                }
+            } catch (Throwable equipo) {
+                throwable = equipo;
+                throw equipo;
+            } finally {
+                if (resultado != null) {
+                    if (throwable != null) {
+                        try {
+                            resultado.close();
+                        } catch (Throwable equipo) {
+                            throwable.addSuppressed(equipo);
+                        }
+                    } else {
+                        resultado.close();
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MysqlUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al ejecutar la sentencia de consulta inicioSession");
             ex.printStackTrace();
         }

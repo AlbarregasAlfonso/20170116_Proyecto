@@ -29,13 +29,8 @@ public class ControllersBusqudas extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-
-            
-            
             String url = "";
-            DAOFactory daof = DAOFactory.getDAOFactory((int) 1);
-          
-            
+            DAOFactory daof = DAOFactory.getDAOFactory((int) 1);           
             
             if(request.getParameter("nombre")!=null){
                 

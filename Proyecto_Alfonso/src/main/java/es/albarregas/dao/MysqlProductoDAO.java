@@ -312,7 +312,6 @@ public class MysqlProductoDAO implements IProductoDAO {
                 while (resultado.next()) {
                     lista = new ArrayList();
 
-                    System.out.println("Estamos en el dao " + resultado.getString("pro.Denominacion") + " y la cantidad " + resultado.getString("(lp.Cantidad-pro.Stock)"));
                     Producto producto = new Producto(resultado.getString("pro.IdProducto"),resultado.getString("pro.Denominacion"), resultado.getString("(lp.Cantidad-pro.Stock)"));
                     lista.add(producto);
                 }
@@ -348,8 +347,7 @@ public class MysqlProductoDAO implements IProductoDAO {
     public void disminuirProductosEnStock(String idCliente,String estado, String idPedido) {
         try {
             String sql = "UPDATE productos pro inner join lineaspedidos lp on lp.IdProducto=pro.IdProducto inner join pedidos pedi on pedi.IdPedido=lp.IdPedido SET Stock=(-(lp.Cantidad)+pro.Stock) where pedi.IdCliente=" + idCliente + " and pedi.estado='"+estado+"' and pedi.idpedido="+idPedido;
-            System.out.println(sql);
-            System.out.println("Estamos disminuyendo el stock");
+ 
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
 
             preparada.executeUpdate();
@@ -410,7 +408,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             
 
             String sql = "insert into productosSinStock values('"+denominacion+"','"+faltan+"','"+idProducto+"')";
-            System.out.println("Vamos a insertarrr!! "+sql);
+          
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
 
             preparada.executeUpdate();
@@ -462,7 +460,7 @@ public class MysqlProductoDAO implements IProductoDAO {
         lista = new ArrayList<Producto>();
             String consulta = "select Distinct(p.IdProducto),p.IdCategoria,p.IdMarca,p.Denominacion,p.Descripcion,p.IdProveedor,p.PrecioUnitario*(select GastosEnvio from general),p.Stock,p.StockMinimo,p.FechaAlta,p.Oferta,p.FueraCatalogo,p.Rating from caracyprods c inner join productos p on p.idproducto=c.idproducto "+where;
             
-            System.out.println(consulta);
+        
         try {
             Statement sentencia = ConnectionFactory.getConnection().createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
@@ -577,7 +575,7 @@ public class MysqlProductoDAO implements IProductoDAO {
             }
 
             String sql = "insert into productos value("+idpro+","+categoria+",1,'"+denominacion+"','"+descripcion+"',1,"+precio+","+stock+",1,now(),'"+oferta+"','"+catalogo+"',2)";
-            System.out.println(sql);
+          
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
    
             preparada.executeUpdate();

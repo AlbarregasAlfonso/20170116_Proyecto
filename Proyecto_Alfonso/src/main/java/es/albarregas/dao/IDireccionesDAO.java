@@ -18,5 +18,7 @@ public interface IDireccionesDAO {
     
     public  ArrayList<Direccion> obtenerDirecciones (String idCliente);
     
+    public boolean buscarNombreDireccion(String nombreDireccion);
+    
     public void closeConnection();
 }

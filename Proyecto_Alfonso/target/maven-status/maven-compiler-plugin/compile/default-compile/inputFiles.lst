@@ -32,7 +32,9 @@ C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\I
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IClienteDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlCaracyprodsDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IImagenesDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\filters\UTF8Filter.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlImagenDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\MyLogger.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Pedidos.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\beans\Provincia.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\MyListener.java
@@ -40,5 +42,6 @@ C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\M
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlProvinciaDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\IProvinciaDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlPedidosDAO.java
+C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\controllers\ControllersComprandoIniciandoSesion.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlProductoDAO.java
 C:\Repositorios\repo_proyecto\Proyecto_Alfonso\src\main\java\es\albarregas\dao\MysqlLineasPedidosDAO.java

@@ -23,19 +23,18 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
     public void insertarProductoACarrito(LineasPedidos lp) {
         try {
             String sql = "INSERT INTO `empresaweb`.`lineaspedidos` (`IdPedido`, `NumeroLinea`, `IdProducto`, `Cantidad`) VALUES (?,?,?,?)";
-
+            
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.setString(1, lp.getIdPedido());
             preparada.setInt(2, lp.getNumeroLinea());
             preparada.setString(3, lp.getIdProducto());
             preparada.setString(4, lp.getCantidad());
-       
-
+    
             preparada.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("Algo ha pasado al insertar en insertarProductoACarrito");
-            System.out.println(ex.getErrorCode());
+            //System.out.println("Algo ha pasado al insertar en insertarProductoACarrito");
+            //System.out.println(ex.getErrorCode());
             //Logger.getLogger(MysqlPedidosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         closeConnection();
@@ -133,7 +132,7 @@ public class MysqlLineasPedidosDAO implements ILineasPedidosDAO {
         try {
             
             String sql = " update lineaspedidos set cantidad =cantidad" + signo + "1 where IdProducto=" + idProducto + " and IdPedido="+IdPedido+"";
-            System.out.println(sql);
+           
             PreparedStatement preparada = ConnectionFactory.getConnection().prepareStatement(sql);
             preparada.executeUpdate();
 
